@@ -2,19 +2,9 @@ import React, { Component } from "react";
 
 class Thanks extends Component
 {
-
-    // constructor(props)
-    // {
-    //     super(props);
-    // }
-
     /*************************************************************************
- * 
- * @param {}:
- *************************************************************************/
-    /**
-    * Calls back to main component to store data.
-    */
+     * Calls back to main component to store data.
+     *************************************************************************/
     transferCallBack()
     {
         if (this.props.transferCallBack)
@@ -23,7 +13,9 @@ class Thanks extends Component
         }
     }
 
-    // Just in case someone never actually used the traditional routing.
+    /*************************************************************************
+     * Just in case someone never actually used the traditional routing.
+     *************************************************************************/
     componentDidMount()
     {
         this.transferCallBack();

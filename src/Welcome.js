@@ -4,20 +4,18 @@ import ReactDOM from "react-dom";
 import "./css/bootstrap.css";
 import "./css/style.css";
 import Info from "./Info.js";
-import { INFORMATION } from "./Utils.js";
+import { INFORMATION } from "./Settings.js";
 
 class Welcome extends Component
 {
-    /**
-     * Screen design that involves a simple form
-     * where users can insert an identifier. This identifier
-     * is used to store the data.
+    /************************************************************************ 
+     * Screen design that involves a simple form where users can insert an 
+     * identifier. This identifier is used to store the data.
      * 
      * References:
-     * 
      * For further information on forms in React check:
      * https://reactjs.org/docs/forms.html
-     */
+    *************************************************************************/
     collection = null
     constructor(props)
     {
@@ -27,7 +25,10 @@ class Welcome extends Component
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-
+    /************************************************************************
+     * Handles the checkbox change when the element is clicked. 
+     * @param {event} event: A click event.
+    *************************************************************************/
     handleChange = (event) =>
     {
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
@@ -38,15 +39,21 @@ class Welcome extends Component
         });
     }
 
-    /**
+    /************************************************************************ 
      * Renders informed consent page.
-     */
+    *************************************************************************/
     renderIFC = () =>
     {
         ReactDOM.render(<Info textDescription={INFORMATION} />,
             document.getElementById("root"))
     }
 
+    /************************************************************************ 
+    * The username submit function.
+    * Once clicked, the submit function checks if the session already exists, 
+    * and if it does, it returns it from session storage. Otherwise a new 
+    * session is created and added to starage.
+    *************************************************************************/
     handleSubmit = () =>
     {
 

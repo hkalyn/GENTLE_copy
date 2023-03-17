@@ -19,37 +19,41 @@ import
   SVGHEIGHT,
   SVGWIDTH,
   MOBILE,
-  // NODESIZE,
   NODERADIUS,
   AVBWIDTH,
-  // AVBHEIGHT
+  NODESIZE,
 } from "./Graph";
 
 // Descriptions & Layout functions
 import
 {
-  GENDERSETTINGS,
-  CATEGORIES,
-  BOXES,
-  SEPARATOR,
-  SCREENDESCRIPTIONS,
-  DELETEWARNING,
-  DUPLICATEWARNING,
-  SLIDERWARNING,
-  CATEGORYWARNING,
   rect_layout,
   box_layout,
   recalculate_foci,
   recalculate_nodes,
-  returnTemplateNode,
-  returnYouTemplate,
   hasLink,
   hasLinkAt,
   updateNodeRenderProps,
   removeNodeAt,
-  doesNameOverlap
+  doesNameOverlap,
+  filterNodes
 } from "./Utils";
 
+import 
+{
+  returnYouTemplate,
+  returnTemplateNode,
+  ACADEMICBOXES,
+  GENDERSETTINGS,
+  // CATEGORIES,
+  SEPARATOR,
+  SURVEYQUESTIONS,
+  DELETEWARNING,
+  DUPLICATEWARNING,
+  SLIDERWARNING,
+  CATEGORYWARNING,
+  ACADEMICSUBCATEGORIES
+} from "./Settings"
 
 const STORAGEURL = "/ajax";
 
@@ -90,7 +94,10 @@ class Main extends Component
     this.prevFoci = [];
 
   }
-
+  componentDidUpdate()
+  {
+    console.log("Main Update", this.state.nodes)
+  }
   //Callback functions
 
   /**************************************************************************
@@ -126,10 +133,10 @@ class Main extends Component
    * @param {any} criterion default value for that specific criterion
    * @returns {int} output The next node which still has a default value
    *************************************************************************/
-  determineCounterReturn = (key, criterion) =>
+  determineCounterReturn = (nodes, key, criterion) =>
   {
     let output = 1; // Skip "You" node
-    let nodes = this.state.nodes.slice(1);
+    // let nodes = this.state.nodes.slice(1);
 
     if (this.state.correction !== 0)
     {
@@ -140,7 +147,18 @@ class Main extends Component
     {
       if (nodes[i][key] !== criterion)
       {
-        ++output;
+        var current = nodes[i].key
+        if (nodes[i + 1])
+        {
+          var inc = nodes[i + 1].key
+          output = output + (inc - current);
+        }
+        else
+        {
+          inc = 0
+          output = output + (inc - current);
+        }
+
       }
     }
 
@@ -223,8 +241,6 @@ class Main extends Component
   genericNodesCallback = (counter) =>
   {
     this.setState({ correction: counter });
-
-
   }
 
   /************************************************************************
@@ -468,16 +484,28 @@ class Main extends Component
   }
 
   /*************************************************************************
-   * 
-   * @param {}:
+   * Function handles the cllback for node drag-and-drop functionality for
+   * boxes.
+   * @param {array} params: an array that should contain two elements:
+   *    a node key: The key you wish to change the value of when dragging a 
+   *    node into a box.
+   *    a Boxes object: The boxes should be a defined object in Settings.js
+   * @param {number} id: the Node ID that is being dragged.
+   * @param {number} x: the node X coordinate.
+   * @param {number} y: the node Y coordinate.
    *************************************************************************/
   placeBoxDragCallback = (params, id, x, y) =>
   {
     let key = params[0]
     let boxes = params[1]
+    let dependencies = params[2]
+
+    console.log("dependencies: ", dependencies)
     //collects final placement when drag has ended
     // let nodes = JSON.parse(JSON.stringify(this.state.nodes));
     let nodes = this.state.nodes
+
+    var initialKeyVal = nodes[id][key]
     for (let i = 0; i < boxes.length; ++i)
     {
       if (x >= boxes[i].x &&
@@ -489,6 +517,19 @@ class Main extends Component
         nodes[id].fixedPosX = x;
         nodes[id].fixedPosY = y;
         nodes[id][key] = boxes[i].text;
+        // If a node with an existing Key is set, any dependant fields should be cleared. 
+        // For example, If a node is changed from academic to non-academic, it should lose the academicSubCategory
+        if (initialKeyVal !== "")
+        {
+          if (nodes[id][key] !== initialKeyVal)
+          {
+            for (let i = 0; i < dependencies.length; i++)
+            {
+              nodes[id][dependencies[i]] = ''
+              nodes[id]['categoryColor'] = "#FFFFFF"
+            }
+          }
+        }
 
         // this.sendData(id, "node", nodes, ajax);
         this.transferData()
@@ -499,7 +540,6 @@ class Main extends Component
     }
 
   }
-
 
   render()
   {
@@ -531,8 +571,18 @@ class Main extends Component
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link"
-                    exact to="/NODEBOXES"
-                  >4) Assign nodes to boxes </NavLink>
+                    exact to="/Q4a"
+                  >4) Assign Alters Academic </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link"
+                    exact to="/Q4b"
+                  >4) Assign Categories for Academics </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link"
+                    exact to="/Q4a"
+                  >4) For Acedemic Box </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink className="nav-link"
@@ -579,7 +629,7 @@ class Main extends Component
                 callBackNodes={this.genericNodesCallback.bind(this)}
                 callBackButton={this.createNodesButtonCallback.bind(this)}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[0]}
+                textDescription={SURVEYQUESTIONS[0]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
             {/* Route for question 2: Selecting gender for your alters.
@@ -594,7 +644,7 @@ class Main extends Component
                 prevFoci={this.prevFoci}
                 callBackNodes={this.changeSexNodeCallback.bind(this)}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[1]}
+                textDescription={SURVEYQUESTIONS[1]}
                 transferCallBack={this.transferData.bind(this)}
                 legend={
                   <div>
@@ -611,18 +661,18 @@ class Main extends Component
               () => <NodeSliderComponent nodes={this.state.nodes.slice(1)}
                 route={"/Categories"}
                 prevNodes={this.prevNodes}
-                counter={this.determineCounterReturn("age", "")}
-                sliderUpdateValue={this.sliderUpdateValue("age", this.determineCounterReturn("age", ""))}
+                counter={this.determineCounterReturn(this.state.nodes.slice(1), "age", "")}
+                sliderUpdateValue={this.sliderUpdateValue("age", this.determineCounterReturn(this.state.nodes.slice(1), "age", ""))}
                 links={[]}
                 foci={this.state.foci.slice(1)}
                 prevFoci={this.prevFoci}
                 callBackNodes={this.genericNodesCallback.bind(this)}
                 callBackButton={[this.changeSliderButtonCallback.bind(this), "age"]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[2]}
+                textDescription={SURVEYQUESTIONS[2]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
-            <Route exact path="/NODEBOXES" component={
+            <Route exact path="/Q4a" component={
               () => <NodeComponent fixed={1}
                 nodes={this.state.nodes.slice(1).map((node, i) => (
                   {
@@ -634,26 +684,41 @@ class Main extends Component
                     sex: node.sex,
                     age: node.age,
                     categoryColor: node.categoryColor,
-                    x: node.fixedPosX,
-                    y: node.fixedPosY,
+                    fixedPosY: node.y,
+                    x: node.academic === -1 ? ((NODERADIUS * 2) + ((SVGWIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.academic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODERADIUS * 2)) + (NODERADIUS)) : node.fixedPosY,
                   }
                 ))}
-                route={"/Categories"}
+                route={"/Q4b"}
                 prevNodes={this.prevNodes}
                 counter={-1}
                 links={[]}
                 foci={this.state.foci.slice(1)}
                 prevFoci={this.prevFoci}
-                callBackNodes={[this.placeBoxDragCallback.bind(this), ['boxes1', BOXES]]}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['academic', ACADEMICBOXES, ["academicSubCategory"]]]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[3]}
+                textDescription={SURVEYQUESTIONS[3]}
                 transferCallBack={this.transferData.bind(this)}
                 legend={null}
-                categories={BOXES}
+                categories={ACADEMICBOXES}
               />
             } />
-
-            <Route exact path="/Categories" component={
+            <Route exact path="/Q4b" component={
+              () => <NodeCategoriesComponent nodes={filterNodes(this.state.nodes, 'academic', "Academic")}
+                route={"/Q4b"}
+                prevNodes={this.prevNodes}
+                counter={this.determineCounterReturn(filterNodes(this.state.nodes, 'academic', "Academic"), "academicSubCategory", "")}
+                links={[]}
+                categories={ACADEMICSUBCATEGORIES}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={this.genericNodesCallback.bind(this)}
+                callBackButton={[this.changeCategoryButtonCallback.bind(this), "academicSubCategory", "categoryColor", ACADEMICSUBCATEGORIES]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEYQUESTIONS[3]}
+                transferCallBack={this.transferData.bind(this)} />
+            } />
+            {/* <Route exact path="/Q4b" component={
               () => <NodeCategoriesComponent nodes={this.state.nodes.slice(1)}
                 route={"/Boolean"}
                 prevNodes={this.prevNodes}
@@ -665,9 +730,9 @@ class Main extends Component
                 callBackNodes={this.genericNodesCallback.bind(this)}
                 callBackButton={[this.changeCategoryButtonCallback.bind(this), "category", "categoryColor", CATEGORIES]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[3]}
+                textDescription={SURVEYQUESTIONS[3]}
                 transferCallBack={this.transferData.bind(this)} />
-            } />
+            } /> */}
 
             <Route exact path="/Boolean" component={
               () => <NodeComponent nodes={this.state.nodes.slice(1).map((node, i) => (
@@ -694,14 +759,14 @@ class Main extends Component
                 prevFoci={this.prevFoci}
                 callBackNodes={[this.booleanNodeCallback.bind(this), "booleanCondition"]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[4]}
+                textDescription={SURVEYQUESTIONS[4]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
 
             <Route exact path="/Continuous1" component={
               () => <NodeComponent fixed={1}
                 opac={"dynamic"}
-                nodes={this.state.nodes.slice(1, this.determineCounterReturn("continuous1", -1) + 1).map((node, i) => (
+                nodes={this.state.nodes.slice(1, this.determineCounterReturn(this.state.nodes.slice(1), "continuous1", -1) + 1).map((node, i) => (
                   {
                     key: node.key,
                     name: node.name,
@@ -724,7 +789,7 @@ class Main extends Component
                 categories={SEPARATOR}
                 callBackNodes={[this.continuousGenericCallback.bind(this), "continuous1"]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[5]}
+                textDescription={SURVEYQUESTIONS[5]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
 
@@ -732,7 +797,7 @@ class Main extends Component
             <Route exact path="/Continuous2" component={
               () => <NodeComponent fixed={1}
                 opac={"dynamic"}
-                nodes={this.state.nodes.slice(1, this.determineCounterReturn("continuous2", -1) + 1).map((node, i) => (
+                nodes={this.state.nodes.slice(1, this.determineCounterReturn(this.state.nodes, "continuous2", -1) + 1).map((node, i) => (
                   {
                     key: node.key,
                     name: node.name,
@@ -754,7 +819,7 @@ class Main extends Component
                 prevFoci={this.prevFoci}
                 callBackNodes={[this.continuousGenericCallback.bind(this), "continuous2"]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[6]}
+                textDescription={SURVEYQUESTIONS[6]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
 
@@ -788,7 +853,7 @@ class Main extends Component
                 prevFoci={this.prevFoci}
                 callBackNodes={this.networkNodesCallback.bind(this)}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SCREENDESCRIPTIONS[7]}
+                textDescription={SURVEYQUESTIONS[7]}
                 transferCallBack={this.transferData.bind(this)} />
 
                 :
@@ -826,11 +891,11 @@ class Main extends Component
                   prevFoci={this.prevFoci}
                   callBackNodes={this.networkNodesCallback.bind(this)}
                   collectHistory={this.collectHistory.bind(this)}
-                  textDescription={SCREENDESCRIPTIONS[7]}
+                  textDescription={SURVEYQUESTIONS[7]}
                   transferCallBack={this.transferData.bind(this)} />)
             } />
 
-            <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SCREENDESCRIPTIONS[8]} transferCallBack={this.transferData.bind(this)} />} />
+            <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SURVEYQUESTIONS[8]} transferCallBack={this.transferData.bind(this)} />} />
           </div>
         </div>
       </HashRouter>

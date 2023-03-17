@@ -12,18 +12,14 @@ import
   MOBILE
 } from "./Graph";
 
-/**
- * Screen design that involves a slider to assign
- * numeric values for each alter. For example useful to
- * assign age values to each alter.
+/************************************************************************
+ * Screen design that involves a slider to assign numeric values for each
+ * alter. For example useful to assign age values to each alter.
  * 
  * References:
- * 
  * For further information on forms in React check:
  * https://reactjs.org/docs/forms.html
- */
-
-
+ ************************************************************************/
 class NodeSliderComponent extends Component
 {
 
@@ -40,12 +36,8 @@ class NodeSliderComponent extends Component
   }
 
   /*************************************************************************
- * 
- * @param {}:
- *************************************************************************/
-  /**
    * Calls back to main component to store data.
-   */
+   *************************************************************************/
   transferCallBack()
   {
     if (this.props.transferCallBack)
@@ -55,9 +47,8 @@ class NodeSliderComponent extends Component
   }
 
   /*************************************************************************
- * 
- * @param {}:
- *************************************************************************/
+   * Sets slider position when component is mounted.
+   *************************************************************************/
   componentDidMount()
   {
     let updateValue = this.props.sliderUpdateValue;
@@ -72,18 +63,18 @@ class NodeSliderComponent extends Component
   }
 
   /*************************************************************************
- * 
- * @param {}:
- *************************************************************************/
+   * 
+   * @param {}:
+   *************************************************************************/
   componentWillUnmount()
   {
     document.removeEventListener("keydown", this.keypress_handler);
   }
 
   /*************************************************************************
- * 
- * @param {}:
- *************************************************************************/
+   * Checks node conditions based on the callback function.
+   * @param {event} event:
+   *************************************************************************/
   checkCondition(event)
   {
     let callbackMethod = this.props.callBackButton[0];
@@ -102,24 +93,20 @@ class NodeSliderComponent extends Component
   }
 
   /*************************************************************************
- * 
- * @param {}:
- *************************************************************************/
+   * Updates the slider postions
+   * @param {event}: event
+   *************************************************************************/
   updateSlider = (event) =>
   {
     this.setState({ value: event.target.value });
   }
 
   /*************************************************************************
- * 
- * @param {}:
- *************************************************************************/
-  /**
-   * Handles usage of the Enter key.
-   * see: https://newbedev.com/how-to-submit-a-form-using-enter-key-in-react-js
-   * To-Do: the example makes use of .code, which seems to be better.
-   * @param {event} event 
-   */
+  * Handles usage of the Enter key.
+  * see: https://newbedev.com/how-to-submit-a-form-using-enter-key-in-react-js
+  * To-Do: the example makes use of .code, which seems to be better.
+  * @param {event} event 
+  *************************************************************************/
   keypress_handler(event)
   {
     if (event.keyCode === 13)

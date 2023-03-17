@@ -7,27 +7,20 @@ import
   HashRouter
 } from "react-router-dom";
 
-/**
+/*************************************************************************
  * Screen design that is used when only nodes are to be depicted.
- */
-
+ *************************************************************************/
 class NodeComponent extends Component
 {
-
   constructor(props)
   {
     super(props);
     this.state = { counter: 0 };
-
   }
 
   /*************************************************************************
- * 
- * @param {}:
- *************************************************************************/
-  /**
    * Calls back to main component to store data.
-   */
+   *************************************************************************/
   transferCallBack()
   {
     if (this.props.transferCallBack)
@@ -36,6 +29,9 @@ class NodeComponent extends Component
     }
   }
 
+  /*************************************************************************
+   * Sets initial state when component is mounted.
+   *************************************************************************/
   componentDidMount()
   {
     this.setState(this.state);
