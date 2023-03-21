@@ -1,13 +1,13 @@
 // Constant imports
 import
 {
-  SVGHEIGHT,
-  SVGWIDTH,
+  SVG_HEIGHT,
+  SVG_WIDTH,
   MOBILE,
-  NODESIZE,
-  NODERADIUS,
-  AVBWIDTH,
-  AVBHEIGHT
+  NODE_SIZE,
+  NODE_RADIUS,
+  AVB_WIDTH,
+  AVB_HEIGHT
 } from "./Graph";
 
 /**
@@ -23,8 +23,8 @@ export function rect_layout(counter)
 {
   let adjC = counter - 1;
 
-  let y = NODERADIUS + (AVBHEIGHT * 0.15) * Math.floor(adjC / 4);
-  let x = NODERADIUS + (AVBWIDTH * 0.33) * (adjC % 4);
+  let y = NODE_RADIUS + (AVB_HEIGHT * 0.15) * Math.floor(adjC / 4);
+  let x = NODE_RADIUS + (AVB_WIDTH * 0.33) * (adjC % 4);
   return [x, y];
 }
 
@@ -36,14 +36,14 @@ export function box_layout(counter)
 {
   let n = 25;
   // start x & y
-  var x = NODERADIUS;
-  var y = NODERADIUS;
+  var x = NODE_RADIUS;
+  var y = NODE_RADIUS;
 
   let ints = n / 4; // Interval
   let x_ints = Math.floor(MOBILE ? ints - 2 : ints + 2);
   let y_ints = Math.floor(MOBILE ? ints + 3 : ints - 1);
-  let avb_width_ratio = AVBWIDTH / x_ints;
-  let avb_height_ratio = AVBHEIGHT / y_ints;
+  let avb_width_ratio = AVB_WIDTH / x_ints;
+  let avb_height_ratio = AVB_HEIGHT / y_ints;
   let corrected_counter = counter - 1;
 
   if (corrected_counter < x_ints)
@@ -51,12 +51,12 @@ export function box_layout(counter)
     return [x + corrected_counter * avb_width_ratio, y];
   } else if (corrected_counter < (x_ints + y_ints))
   {
-    return [AVBWIDTH, y + (corrected_counter - x_ints) * avb_height_ratio];
+    return [AVB_WIDTH, y + (corrected_counter - x_ints) * avb_height_ratio];
   } else if (corrected_counter < (2 * x_ints + y_ints))
   {
-    return [AVBWIDTH - (corrected_counter - (x_ints + y_ints)) * avb_width_ratio, AVBHEIGHT];
+    return [AVB_WIDTH - (corrected_counter - (x_ints + y_ints)) * avb_width_ratio, AVB_HEIGHT];
   }
-  return [x, AVBHEIGHT - (corrected_counter - (2 * x_ints + y_ints)) * avb_height_ratio];
+  return [x, AVB_HEIGHT - (corrected_counter - (2 * x_ints + y_ints)) * avb_height_ratio];
 }
 
 /*************************************************************************
@@ -73,8 +73,8 @@ export function recalculate_foci(foci)
       //console.log("f==0")
       recalculated_f.push({
         key: foci[f].key,
-        x: SVGWIDTH / 2,
-        y: SVGHEIGHT / 2
+        x: SVG_WIDTH / 2,
+        y: SVG_HEIGHT / 2
       })
     } else
     {
@@ -103,12 +103,12 @@ export function recalculate_nodes(nodes, foci)
     if (nodes[n].key === 0)
     {
       // set position of new node if device was changed
-      nodes[n].floatX = SVGWIDTH / 2;
-      nodes[n].floatY = SVGHEIGHT / 2;
+      nodes[n].floatX = SVG_WIDTH / 2;
+      nodes[n].floatY = SVG_HEIGHT / 2;
       continue;
     }
-    nodes[n].size = NODESIZE;
-    nodes[n].fixedPosY = SVGHEIGHT * 0.1 + (Math.random() * (SVGHEIGHT * 0.8))
+    nodes[n].size = NODE_SIZE;
+    nodes[n].fixedPosY = SVG_HEIGHT * 0.1 + (Math.random() * (SVG_HEIGHT * 0.8))
 
     if (nodes[n].link && n !== 0)
     {
@@ -205,8 +205,8 @@ export function updateNodeRenderProps(nodes, forceNodes)
     {
       if (i === 0)
       {
-        nodes[i].floatX = SVGWIDTH / 2;
-        nodes[i].floatY = SVGHEIGHT / 2;
+        nodes[i].floatX = SVG_WIDTH / 2;
+        nodes[i].floatY = SVG_HEIGHT / 2;
         nodes[i].shouldFloat = false;
       } else
       {

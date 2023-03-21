@@ -5,14 +5,14 @@ import { isEqual } from 'underscore';
 
 
 // Important consts:
-export const SVGHEIGHT = window.innerHeight * 0.75;
-export const SVGWIDTH = (window.innerWidth > 1140 ? 1140 : window.innerWidth) - 60;
+export const SVG_HEIGHT = window.innerHeight * 1;
+export const SVG_WIDTH = (window.innerWidth > 1140 ? window.innerWidth - 15 : window.innerWidth) - 60;
 export const MOBILE = (window.innerWidth < 500 || window.innerHeight < 500 ? true : false) // to detect small displays, requiring different render
-export const NODESIZE = MOBILE ? 20 : 30; // just internal size of node
-export const OUTERSTROKE = MOBILE ? 5 : 10;
-export const NODERADIUS = NODESIZE + 1 + (OUTERSTROKE / 2.0); // node size + colored circle
-export const AVBWIDTH = SVGWIDTH - 2 * NODERADIUS;
-export const AVBHEIGHT = SVGHEIGHT - 2 * NODERADIUS;
+export const NODE_SIZE = MOBILE ? 20 : 30; // just internal size of node
+export const OUTER_STROKE = MOBILE ? 5 : 10;
+export const NODE_RADIUS = NODE_SIZE + 1 + (OUTER_STROKE / 2.0); // node size + colored circle
+export const AVB_WIDTH = SVG_WIDTH - 2 * NODE_RADIUS;
+export const AVB_HEIGHT = SVG_HEIGHT - 2 * NODE_RADIUS;
 
 /*************************************************************************
  * Graph class handling dynamic and static rendering for networks.
@@ -47,7 +47,7 @@ class Graph extends Component
       .gravity(0.01)
       .linkDistance(150)
       .linkStrength(MOBILE ? 0.5 : 0.1)
-      .size([SVGWIDTH, SVGHEIGHT]);
+      .size([SVG_WIDTH, SVG_HEIGHT]);
     this.conditionNode = 1;
     this.force.drag()
       .on("dragend", (e) => this.dragCallBack(e))
@@ -105,7 +105,7 @@ class Graph extends Component
     {
       v3d.classed('node', true)
         .call(this.force.drag)
-        .style("opacity", (d) => (d.x / SVGWIDTH + 0.1)); //opacity depends on x coordinate
+        .style("opacity", (d) => (d.x / SVG_WIDTH + 0.1)); //opacity depends on x coordinate
     } else if (this.props.opac === "conditional")
     {
       v3d.classed('node', true)
@@ -123,7 +123,10 @@ class Graph extends Component
       .attr("id", (d) => d.key)
       .attr("r", (d) => d.size)
       .style("fill", (d) => d.color)
+      .style("stroke", (d) => d.border)
+      .style("stroke-width", "10px")
       //.on("touchstart", function(d){d3.event.preventDefault(); console.log(d)})
+
       .on("touchstart", (d) => { d3.event.preventDefault(); })
       .on("touchend", (d) => { this.callback(d); })
       .on("click", (d) => { this.callback(d); });
@@ -134,7 +137,7 @@ class Graph extends Component
       .attr("id", (d) => 'rel_' + d.key)
       .attr("r", (d) => (d.size + 1))
       .style("stroke", (d) => d.categoryColor)
-      .style("stroke-width", (d) => (OUTERSTROKE))
+      .style("stroke-width", (d) => (OUTER_STROKE))
       .style("fill", "none");
 
 
@@ -176,6 +179,7 @@ class Graph extends Component
     //update Node position determined by foci
     var k = this.force.alpha();
 
+
     this.force.nodes().forEach(function (d, i)
     {
       if ((!d.fixed && !d.float))
@@ -190,18 +194,18 @@ class Graph extends Component
        */
       if (d.x < 0)
       {
-        d.x = NODERADIUS;
-      } else if (d.x > SVGWIDTH)
+        d.x = NODE_RADIUS;
+      } else if (d.x > SVG_WIDTH)
       {
-        d.x = SVGWIDTH - NODERADIUS;
+        d.x = SVG_WIDTH - NODE_RADIUS;
       }
 
       if (d.y < 0)
       {
-        d.y = NODERADIUS;
-      } else if (d.y > SVGHEIGHT)
+        d.y = NODE_RADIUS;
+      } else if (d.y > SVG_HEIGHT)
       {
-        d.y = SVGHEIGHT - NODERADIUS;
+        d.y = SVG_HEIGHT - NODE_RADIUS;
       }
 
     });
@@ -212,6 +216,10 @@ class Graph extends Component
       .attr("name", (d) => d.name)
       .attr("id", (d) => d.key)
       .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
+
+    v3d.selectAll('.Node_center')
+      .attr("stroke", (d) => d.border)
+      .attr("stroke-width", "18px")
 
     v3d.selectAll('.link')
       .attr("x1", (d) => d.source.x)
@@ -311,6 +319,8 @@ class Graph extends Component
       vd3Nodes.select(".node_text").text((d) => d.name);
       vd3Nodes.select(".Node").style("fill", (d) => d.color);
       vd3Nodes.select(".Node_rel").style("stroke", (d) => d.categoryColor);
+      vd3Nodes.select(".Node_center").style("stroke", (d) => d.border);
+      vd3Nodes.select(".Node_center").style("stroke-width", "18px");
 
       vd3Nodes.enter().append('g').call(this.enterCycleNodes);
       vd3Nodes.exit().remove();
@@ -396,7 +406,7 @@ class Graph extends Component
   {
     return (
       <div className="container">
-        <svg width="100%" height="75VH" ref={(e) => this.graphRef = e}>
+        <svg width="100%" height="100%" ref={(e) => this.graphRef = e}>
           <g id="boxes">
             {(this.props.categories ? this.props.categories.map((category, i) => (
               <text key={category.key} x={category.x} y={category.y - 10}>{category.text}</text>
@@ -410,11 +420,13 @@ class Graph extends Component
                 y={category.y}
                 fill="transparent"
                 stroke={category.color}
-                strokeWidth="5" />
+                strokeWidth="5">
+
+              </rect>
             )) : <g />)}
           </g>
         </svg>
-      </div>
+      </div >
     );
   }
 };

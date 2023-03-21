@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Graph from "./Graph";
 import
 {
@@ -36,7 +37,11 @@ class NodeCategoriesComponent extends Component
   componentDidMount()
   {
     this.setState(this.state);
-
+    console.log("props nodes", this.props)
+    if (this.props.nodes.length === 0)
+    {
+      document.getElementById("confirm_next").click();
+    }
   }
 
   /*************************************************************************
@@ -56,44 +61,66 @@ class NodeCategoriesComponent extends Component
 
   render()
   {
-    return (
-      <HashRouter>
-        <div>
-          <div className="textBox">
-            <p>{this.props.textDescription}</p>
-          </div>
-          <Graph fixed={this.props.fixed}
-            float={(this.props.float ? 1 : 0)}
-            opac={(this.props.opac ? 1 : 0)}
-            counter={this.props.counter}
-            nodes={this.props.nodes}
-            prevNodes={this.props.prevNodes}
-            links={this.props.links}
-            foci={this.props.foci}
-            prevFoci={this.props.prevFoci}
-            callBack={this.props.callBackNodes}
-            collectHistory={this.props.collectHistory}
-            categories={[]} />
-          <div className="container" id="userInputStd">
-            {this.props.categories.map((category, i) => (
-              <button className="categoryButton"
-                key={category.key}
-                type="button"
-                style={{ background: category.color }}
-                value={category.text}
-                onClick={() => this.updateCounter(category.key, category.text)}>
-                {category.text}
-              </button>
-            ))}
-          </div>
+    // If there are no nodes, we propt users to navigate to the next question
+    if (this.props.nodes.length === 0)
+    {
+      return (
+        <HashRouter>
           <div>
-            {this.props.route ? <NavLink exact to={this.props.route} onClick={() => this.transferCallBack()}>
-              <button id="confirm_next">Confirm & Next</button>
-            </NavLink> : <div />}
+            <div className="textBox">
+              You have not assigned any nodes for this question. You can click "Confirm and Next" to proceed to the next question.
+            </div>
+            <div>
+              {this.props.route ? <NavLink exact to={this.props.route} onClick={() => this.transferCallBack()}>
+                <button id="confirm_next">Confirm & Next</button>
+              </NavLink> : <div />}
+            </div>
           </div>
-        </div>
-      </HashRouter>
-    );
+        </HashRouter>
+      )
+    }
+    else
+    {
+      return (
+        <HashRouter>
+          <div>
+            <div className="textBox">
+              {this.props.textDescription}
+            </div>
+            <Graph fixed={this.props.fixed}
+              float={(this.props.float ? 1 : 0)}
+              opac={(this.props.opac ? 1 : 0)}
+              counter={this.props.counter}
+              nodes={this.props.nodes}
+              prevNodes={this.props.prevNodes}
+              links={this.props.links}
+              foci={this.props.foci}
+              prevFoci={this.props.prevFoci}
+              callBack={this.props.callBackNodes}
+              collectHistory={this.props.collectHistory}
+              categories={[]} />
+
+            <div className="container" id="userInputStd">
+              {this.props.categories.map((category, i) => (
+                <button className="categoryButton"
+                  key={category.key}
+                  type="button"
+                  style={{ background: category.color }}
+                  value={category.text}
+                  onClick={() => this.updateCounter(category.key, category.text)}>
+                  {category.text}
+                </button>
+              ))}
+            </div>
+            <div className="usrInput">
+              {this.props.route ? <NavLink exact to={this.props.route} onClick={() => this.transferCallBack()}>
+                <button id="confirm_next">Confirm & Next</button>
+              </NavLink> : <div />}
+            </div>
+          </div>
+        </HashRouter>
+      );
+    }
   }
 }
 

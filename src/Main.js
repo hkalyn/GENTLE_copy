@@ -16,12 +16,12 @@ import $ from "jquery";
 // Constant imports
 import
 {
-  SVGHEIGHT,
-  SVGWIDTH,
+  SVG_HEIGHT,
+  SVG_WIDTH,
   MOBILE,
-  NODERADIUS,
-  AVBWIDTH,
-  NODESIZE,
+  NODE_RADIUS,
+  AVB_WIDTH,
+  NODE_SIZE,
 } from "./Graph";
 
 // Descriptions & Layout functions
@@ -43,16 +43,29 @@ import
 {
   returnYouTemplate,
   returnTemplateNode,
-  ACADEMICBOXES,
-  GENDERSETTINGS,
+  ACADEMIC_BOXES,
+  LAB_MEMBER_BOX,
+  GENDER_SETTINGS,
   // CATEGORIES,
   SEPARATOR,
-  SURVEYQUESTIONS,
-  DELETEWARNING,
-  DUPLICATEWARNING,
-  SLIDERWARNING,
-  CATEGORYWARNING,
-  ACADEMICSUBCATEGORIES
+  SURVEY_QUESTIONS,
+  DELETE_WARNING,
+  DUPLICATE_WARNING,
+  SLIDER_WARNING,
+  CATEGORY_WARNING,
+  ACADEMIC_SUBCATEGORIES,
+  NONACADEMIC_SUBCATEGORIES,
+  COLLABORATOR_BOXES,
+  PROVIDES_ME_TECHNICAL_SUPPORT,
+  WOULD_LIKE_MORE_TECHNICAL_SUPPORT,
+  I_PROVIDE_TECHNICAL_SUPPORT,
+  PROVIDES_ME_SUPPORT_ACADEMIC,
+  I_PROVIDE_SUPPORT_ACADEMIC,
+  I_AM_COMFORTABLE_NONACADEMIC,
+  DIFFICULT_INTERACTION_BOXES,
+  I_PROVIDE_SUPPORT_NONACADEMIC,
+  SIMILAR_ANSWER_BOXES
+
 } from "./Settings"
 
 const STORAGEURL = "/ajax";
@@ -86,7 +99,7 @@ class Main extends Component
       nodes: (this.props.nodes.length === 0 ? [returnYouTemplate()] :
         recalculate_nodes(this.props.nodes, recalculate_foci(this.props.foci))),
       links: this.props.links,
-      foci: (this.props.foci.length === 0 ? [{ key: 0, x: SVGWIDTH / 2, y: SVGHEIGHT / 2 }] : recalculate_foci(this.props.foci)),
+      foci: (this.props.foci.length === 0 ? [{ key: 0, x: SVG_WIDTH / 2, y: SVG_HEIGHT / 2 }] : recalculate_foci(this.props.foci)),
       source: -1,
       correction: 0
     };
@@ -135,34 +148,41 @@ class Main extends Component
    *************************************************************************/
   determineCounterReturn = (nodes, key, criterion) =>
   {
-    let output = 1; // Skip "You" node
-    // let nodes = this.state.nodes.slice(1);
-
-    if (this.state.correction !== 0)
+    if (nodes.length === 0 || nodes === null || nodes === undefined)
     {
-      return this.state.correction
+      console.log("Nodes are null or undefined")
+      return;
     }
-
-    for (let i = 0; i < nodes.length; ++i)
+    else
     {
-      if (nodes[i][key] !== criterion)
+      let output = nodes[0].key // Skip "You" node
+      //  let nodes = this.state.nodes.slice(1);
+
+      if (this.state.correction !== 0)
       {
-        var current = nodes[i].key
-        if (nodes[i + 1])
-        {
-          var inc = nodes[i + 1].key
-          output = output + (inc - current);
-        }
-        else
-        {
-          inc = 0
-          output = output + (inc - current);
-        }
-
+        return this.state.correction
       }
-    }
 
-    return output
+      for (let i = 0; i < nodes.length; i++)
+      {
+        if (nodes[i][key] !== criterion)
+        {
+          var current = nodes[i].key
+          if (nodes[i + 1])
+          {
+            var inc = nodes[i + 1].key
+            output = output + (inc - current);
+          }
+          else
+          {
+            inc = 0
+            output = output + (inc - current);
+          }
+        }
+      }
+
+      return output
+    }
   }
 
   /*************************************************************************
@@ -180,7 +200,7 @@ class Main extends Component
       // Plan to delete
       if (this.state.links.length > 0)
       {
-        alert(DELETEWARNING);
+        alert(DELETE_WARNING);
         this.setState({ correction: 0 });
       } else
       {
@@ -216,7 +236,7 @@ class Main extends Component
       let counter = this.state.nodes.length;
       if (doesNameOverlap(name, nodes))
       {
-        alert(DUPLICATEWARNING);
+        alert(DUPLICATE_WARNING);
       }
       else
       {
@@ -255,18 +275,18 @@ class Main extends Component
   {
     let nodes = this.state.nodes;
 
-    if (nodes[counter].sex === GENDERSETTINGS.female.name)
+    if (nodes[counter].sex === GENDER_SETTINGS.female.name)
     {
-      nodes[counter].sex = GENDERSETTINGS.male.name;
-      nodes[counter].color = GENDERSETTINGS.male.color;
-    } else if (nodes[counter].sex === GENDERSETTINGS.male.name)
+      nodes[counter].sex = GENDER_SETTINGS.male.name;
+      nodes[counter].color = GENDER_SETTINGS.male.color;
+    } else if (nodes[counter].sex === GENDER_SETTINGS.male.name)
     {
-      nodes[counter].sex = GENDERSETTINGS.other.name;
-      nodes[counter].color = GENDERSETTINGS.other.color;
+      nodes[counter].sex = GENDER_SETTINGS.other.name;
+      nodes[counter].color = GENDER_SETTINGS.other.color;
     } else
     {
-      nodes[counter].sex = GENDERSETTINGS.female.name;
-      nodes[counter].color = GENDERSETTINGS.female.color;
+      nodes[counter].sex = GENDER_SETTINGS.female.name;
+      nodes[counter].color = GENDER_SETTINGS.female.color;
     }
     this.setState({ nodes: nodes });
   }
@@ -300,7 +320,7 @@ class Main extends Component
     //updates background associated with node
     if (counter >= this.state.nodes.length)
     {
-      alert(SLIDERWARNING);
+      alert(SLIDER_WARNING);
     } else
     {
       let nodes = JSON.parse(JSON.stringify(this.state.nodes));
@@ -323,7 +343,7 @@ class Main extends Component
     //updates background associated with node
     if (counter >= this.state.nodes.length)
     {
-      alert(CATEGORYWARNING);
+      alert(CATEGORY_WARNING);
     } else
     {
       let nodes = JSON.parse(JSON.stringify(this.state.nodes));
@@ -344,7 +364,7 @@ class Main extends Component
   {
     //collects final placement when drag has ended
 
-    let value = (x - NODERADIUS) / AVBWIDTH;
+    let value = (x - NODE_RADIUS) / AVB_WIDTH;
     value = Math.max(0.00, value);
     value = Math.min(1.00, value);
     let nodes = this.state.nodes;
@@ -474,7 +494,7 @@ class Main extends Component
   continuousGenericCallback = (key, id, x, y) =>
   {
     //collects final placement when drag has ended
-    let value = (x - NODERADIUS) / AVBWIDTH;
+    let value = (x - NODE_RADIUS) / AVB_WIDTH;
     value = Math.max(0.00, value);
     value = Math.min(1.00, value);
     let nodes = this.state.nodes;
@@ -500,7 +520,6 @@ class Main extends Component
     let boxes = params[1]
     let dependencies = params[2]
 
-    console.log("dependencies: ", dependencies)
     //collects final placement when drag has ended
     // let nodes = JSON.parse(JSON.stringify(this.state.nodes));
     let nodes = this.state.nodes
@@ -516,7 +535,17 @@ class Main extends Component
 
         nodes[id].fixedPosX = x;
         nodes[id].fixedPosY = y;
-        nodes[id][key] = boxes[i].text;
+        if (boxes[i].value)
+        {
+          nodes[id][key] = boxes[i].value;
+          nodes[id].border = boxes[i].color
+        }
+        else
+        {
+          nodes[id][key] = boxes[i].text;
+          nodes[id].border = boxes[i].color
+        }
+
         // If a node with an existing Key is set, any dependant fields should be cleared. 
         // For example, If a node is changed from academic to non-academic, it should lose the academicSubCategory
         if (initialKeyVal !== "")
@@ -534,11 +563,14 @@ class Main extends Component
         // this.sendData(id, "node", nodes, ajax);
         this.transferData()
         this.setState({ nodes: nodes });
-
+        return;
       }
-      console.log("moving", nodes[id])
     }
-
+    console.log("Not in a box", nodes[id])
+    nodes[id].fixedPosX = x;
+    nodes[id].fixedPosY = y;
+    nodes[id].border = "#FFFFFF"
+    this.setState({ nodes: nodes });
   }
 
   render()
@@ -551,66 +583,95 @@ class Main extends Component
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
-
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/"
-                  >1) Name generation example screen.</NavLink>
-                </NavItem>
-
-                <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Click"
-                  >2) Clicking on Nodes to cycle through multiple options. </NavLink>
-                </NavItem>
-
-                <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Numerical"
-                  >3) Assign numerical features. </NavLink>
+                  <NavLink className="nav-link" exact to="/">
+                    Q1. Name generation example screen.
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Q4a"
-                  >4) Assign Alters Academic </NavLink>
+                  <NavLink className="nav-link" exact to="/Question_2">
+                    Q2. Select a Gender For Each Individual
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Q4b"
-                  >4) Assign Categories for Academics </NavLink>
+                  <NavLink className="nav-link" exact to="/Question_3">
+                    Q3. Assign an Age for Each Individual
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Q4a"
-                  >4) For Acedemic Box </NavLink>
+                  <NavLink className="nav-link" exact to="/Question_4_a">
+                    Q4. a) Assign Alters Academic or Non-academic
+                  </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Categories"
-                  >4) Assign categorical features. </NavLink>
+                  <NavLink className="nav-link" exact to="/Question_4_b">
+                    Q4. b) Assign Categories for Academics
+                  </NavLink>
                 </NavItem>
-
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Boolean"
-                  >5) Assign boolean features. </NavLink>
+                  <NavLink className="nav-link" exact to="/Question_4_c">
+                    Q4. c) Assign Categories for Non-Academics
+                  </NavLink>
                 </NavItem>
-
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Continuous1"
-                  >6) Assign continuous relative values 1. </NavLink>
+                  <NavLink className="nav-link" exact to="/Question_5">
+                    Q5. Select Lab Members
+                  </NavLink>
                 </NavItem>
-
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Continuous2"
-                  >7) Assign continuous relative values 2. </NavLink>
+                  <NavLink className="nav-link" exact to="/Question_6">
+                    Q6. Select Collaborators
+                  </NavLink>
                 </NavItem>
-
                 <NavItem>
-                  <NavLink className="nav-link"
-                    exact to="/Interconnection">6) Assign connections between nodes. </NavLink>
+                  <NavLink className="nav-link" exact to="/Question_7">
+                    Q7. Select Individuals That Provide You With Technical Support
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_8">
+                    Q8. Select Individuals Who You Would Like More Technical Support From
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_9">
+                    Q9. Select Individuals Who You Provide Technical Support For
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_10">
+                    Q10. Who Do You Feel Comfortable Talking To About Personal Failure, Disappointment, or Struggle in Your Academic Work?
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_11">
+                    Q11. Do You Provide Support To Individuals About Personal Failure, Disappointment, or Struggle in Their Academic Work?
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_12">
+                    Q12. Is There Anyone You Feel Comfortable Talking With About Personal Non-Academic Matters?
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_13">
+                    Q13. Do You Provide Support To Help Others With Personal Non-Academic Matters?
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_14">
+                    Q14. Who Do You Feel Uncomfortable Interacting With?
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_15">
+                    Q15. Who Do You Think Would Closely Match Your Responses To This Survey?
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink className="nav-link" exact to="/Question_16">
+                    Q16. Assign Social Network Connections
+                  </NavLink>
                 </NavItem>
               </Nav>
             </Navbar.Collapse>
@@ -619,7 +680,7 @@ class Main extends Component
             {/* Route for question 1: Creating alters */}
             <Route exact path="/" component={
               () => <NodeButtonComponent nodes={this.state.nodes.slice(1)}
-                route={"/Click"}
+                route={"/Question_2"}
                 max={25}
                 prevNodes={this.prevNodes}
                 counter={this.state.nodes.length}
@@ -629,14 +690,14 @@ class Main extends Component
                 callBackNodes={this.genericNodesCallback.bind(this)}
                 callBackButton={this.createNodesButtonCallback.bind(this)}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[0]}
+                textDescription={SURVEY_QUESTIONS[0]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
             {/* Route for question 2: Selecting gender for your alters.
             */}
-            <Route exact path="/Click" component={
+            <Route exact path="/Question_2" component={
               () => <NodeComponent nodes={this.state.nodes.slice(1)}
-                route={"/Numerical"}
+                route={"/Question_3"}
                 prevNodes={this.prevNodes}
                 counter={-1}
                 links={[]}
@@ -644,35 +705,31 @@ class Main extends Component
                 prevFoci={this.prevFoci}
                 callBackNodes={this.changeSexNodeCallback.bind(this)}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[1]}
+                textDescription={SURVEY_QUESTIONS[1]}
                 transferCallBack={this.transferData.bind(this)}
                 legend={
-                  <div>
-                    <h3>Legend</h3>
-                    <div className="legendNode" style={{ backgroundColor: GENDERSETTINGS.female.color }}><p>Female</p></div>
-                    <div className="legendNode" style={{ backgroundColor: GENDERSETTINGS.male.color }}><p>Male</p></div>
-                    <div className="legendNode" style={{ backgroundColor: GENDERSETTINGS.other.color }}><p>Other</p></div>
-                  </div>
+                  null
                 }
               />
             } />
-
-            <Route exact path="/Numerical" component={
+            {/* Route for Question 3: Assigning Age */}
+            <Route exact path="/Question_3" component={
               () => <NodeSliderComponent nodes={this.state.nodes.slice(1)}
-                route={"/Categories"}
+                route={"/Question_4_a"}
                 prevNodes={this.prevNodes}
                 counter={this.determineCounterReturn(this.state.nodes.slice(1), "age", "")}
-                sliderUpdateValue={this.sliderUpdateValue("age", this.determineCounterReturn(this.state.nodes.slice(1), "age", ""))}
+                sliderUpdateValue={this.sliderUpdateValue("age", 1)}
                 links={[]}
                 foci={this.state.foci.slice(1)}
                 prevFoci={this.prevFoci}
                 callBackNodes={this.genericNodesCallback.bind(this)}
                 callBackButton={[this.changeSliderButtonCallback.bind(this), "age"]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[2]}
+                textDescription={SURVEY_QUESTIONS[2]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
-            <Route exact path="/Q4a" component={
+            {/* Route for Question 4a: Assigning academic/non-academic */}
+            <Route exact path="/Question_4_a" component={
               () => <NodeComponent fixed={1}
                 nodes={this.state.nodes.slice(1).map((node, i) => (
                   {
@@ -684,57 +741,438 @@ class Main extends Component
                     sex: node.sex,
                     age: node.age,
                     categoryColor: node.categoryColor,
+                    border: node.academic === -1 ? "#FFFFFF" : node.border,
                     fixedPosY: node.y,
-                    x: node.academic === -1 ? ((NODERADIUS * 2) + ((SVGWIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                    y: node.academic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODERADIUS * 2)) + (NODERADIUS)) : node.fixedPosY,
+                    x: node.academic === -1 ? ((NODE_RADIUS * 2) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.academic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                   }
                 ))}
-                route={"/Q4b"}
+                route={"/Question_4_b"}
                 prevNodes={this.prevNodes}
                 counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
                 links={[]}
                 foci={this.state.foci.slice(1)}
                 prevFoci={this.prevFoci}
-                callBackNodes={[this.placeBoxDragCallback.bind(this), ['academic', ACADEMICBOXES, ["academicSubCategory"]]]}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['academic', ACADEMIC_BOXES, ["academicSubCategory"]]]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[3]}
+                textDescription={SURVEY_QUESTIONS[3]}
                 transferCallBack={this.transferData.bind(this)}
                 legend={null}
-                categories={ACADEMICBOXES}
+                categories={ACADEMIC_BOXES}
               />
             } />
-            <Route exact path="/Q4b" component={
-              () => <NodeCategoriesComponent nodes={filterNodes(this.state.nodes, 'academic', "Academic")}
-                route={"/Q4b"}
+            {/* Route for Question 4 b, Academic Subcategory */}
+            <Route exact path="/Question_4_b" component={
+              () =>
+                <NodeCategoriesComponent nodes={filterNodes(this.state.nodes, 'academic', "academic")}
+                  route={"/Question_4_c"}
+                  prevNodes={this.prevNodes}
+                  counter={this.determineCounterReturn(filterNodes(this.state.nodes, 'academic', "academic"), "academicSubCategory", "")}
+                  links={[]}
+                  categories={ACADEMIC_SUBCATEGORIES}
+                  foci={this.state.foci.slice(1)}
+                  prevFoci={this.prevFoci}
+                  callBackNodes={this.genericNodesCallback.bind(this)}
+                  callBackButton={[this.changeCategoryButtonCallback.bind(this), "academicSubCategory", "categoryColor", ACADEMIC_SUBCATEGORIES]}
+                  collectHistory={this.collectHistory.bind(this)}
+                  textDescription={SURVEY_QUESTIONS[4]}
+                  transferCallBack={this.transferData.bind(this)} />
+            } />
+            {/* Route for Question 4 c, non-academic subcategory */}
+            <Route exact path="/Question_4_c" component={
+              () => <NodeCategoriesComponent nodes={filterNodes(this.state.nodes, 'academic', "non-academic")}
+                route={"/Question_5"}
                 prevNodes={this.prevNodes}
-                counter={this.determineCounterReturn(filterNodes(this.state.nodes, 'academic', "Academic"), "academicSubCategory", "")}
+                counter={this.determineCounterReturn(filterNodes(this.state.nodes, 'academic', "non-academic"), "nonAcademicSubCategory", "")}
                 links={[]}
-                categories={ACADEMICSUBCATEGORIES}
+                categories={NONACADEMIC_SUBCATEGORIES}
                 foci={this.state.foci.slice(1)}
                 prevFoci={this.prevFoci}
                 callBackNodes={this.genericNodesCallback.bind(this)}
-                callBackButton={[this.changeCategoryButtonCallback.bind(this), "academicSubCategory", "categoryColor", ACADEMICSUBCATEGORIES]}
+                callBackButton={[this.changeCategoryButtonCallback.bind(this), "nonAcademicSubCategory", "categoryColor", NONACADEMIC_SUBCATEGORIES]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[3]}
+                textDescription={SURVEY_QUESTIONS[5]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
-            {/* <Route exact path="/Q4b" component={
-              () => <NodeCategoriesComponent nodes={this.state.nodes.slice(1)}
-                route={"/Boolean"}
+            {/* Route for Question 5: Assigning Lab Members */}
+            <Route exact path="/Question_5" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.isLabMember === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.isLabMember === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.isLabMember === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_6"}
                 prevNodes={this.prevNodes}
-                counter={this.determineCounterReturn("category", "")}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
                 links={[]}
-                categories={CATEGORIES}
                 foci={this.state.foci.slice(1)}
                 prevFoci={this.prevFoci}
-                callBackNodes={this.genericNodesCallback.bind(this)}
-                callBackButton={[this.changeCategoryButtonCallback.bind(this), "category", "categoryColor", CATEGORIES]}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['isLabMember', LAB_MEMBER_BOX, []]]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[3]}
-                transferCallBack={this.transferData.bind(this)} />
-            } /> */}
+                textDescription={SURVEY_QUESTIONS[6]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={LAB_MEMBER_BOX}
+              />
+            } />
+            {/* Route for Question 6: Who would you like to colaborate with */}
+            <Route exact path="/Question_6" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.collaboration === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.collaboration === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.collaboration === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_7"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['collaboration', COLLABORATOR_BOXES, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[7]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={COLLABORATOR_BOXES}
+              />
+            } />
 
-            <Route exact path="/Boolean" component={
+            {/* Question 7: Who Provides you with Technical Support */}
+            <Route exact path="/Question_7" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.providesMeSupport_Technical === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.providesMeSupport_Technical === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.providesMeSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_8"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['providesMeSupport_Technical', PROVIDES_ME_TECHNICAL_SUPPORT, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[8]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={PROVIDES_ME_TECHNICAL_SUPPORT}
+              />
+            } />
+            {/* Question 8: Who would you like more support from? */}
+            <Route exact path="/Question_8" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.iWouldLikeMoreTechnicalSupport === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.iWouldLikeMoreTechnicalSupport === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.iWouldLikeMoreTechnicalSupport === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_9"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['iWouldLikeMoreTechnicalSupport', WOULD_LIKE_MORE_TECHNICAL_SUPPORT, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[9]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={WOULD_LIKE_MORE_TECHNICAL_SUPPORT}
+              />
+            } />
+            {/* Question 9: Who do you provide technical support for? */}
+            <Route exact path="/Question_9" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.iProvideSupport_Technical === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.iProvideSupport_Technical === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.iProvideSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_10"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['iProvideSupport_Technical', I_PROVIDE_TECHNICAL_SUPPORT, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[10]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={I_PROVIDE_TECHNICAL_SUPPORT}
+              />
+            } />
+            {/* Question 10: Do you feel comfortable talking with anyone below about personal failure, disappointment, or struggle in your academic work?  */}
+            <Route exact path="/Question_10" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.iAmComfortable_PersonalFailure_Disappointment_Struggle_Academic === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.iAmComfortable_PersonalFailure_Disappointment_Struggle_Academic === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.iAmComfortable_PersonalFailure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_11"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['iAmComfortable_PersonalFailure_Disappointment_Struggle_Academic', PROVIDES_ME_SUPPORT_ACADEMIC, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[11]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={PROVIDES_ME_SUPPORT_ACADEMIC}
+              />
+            } />
+            {/* Question 11: Do you provide support for individuals regarding personal failure, disappointment, or struggle in their
+            academic work? */}
+            <Route exact path="/Question_11" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.iProvideSupport_PersonalFailure_Disappointment_Struggle_Academic === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.iProvideSupport_PersonalFailure_Disappointment_Struggle_Academic === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.iProvideSupport_PersonalFailure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_12"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['iProvideSupport_PersonalFailure_Disappointment_Struggle_Academic', I_PROVIDE_SUPPORT_ACADEMIC, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[12]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={I_PROVIDE_SUPPORT_ACADEMIC}
+              />
+            } />
+            {/* Question 12: Is there anyone below that you feel comfortable talking with about personal, non-academic matters? */}
+            <Route exact path="/Question_12" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.iAmComfortable_Personal_NonAcademic === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.iAmComfortable_Personal_NonAcademic === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.iAmComfortable_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_13"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['iAmComfortable_Personal_NonAcademic', I_AM_COMFORTABLE_NONACADEMIC, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[13]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={I_AM_COMFORTABLE_NONACADEMIC}
+              />
+            } />
+            {/* Question 13: Do you provide (or would be willing to provide) support to help others with personal, non-academic matters? */}
+            <Route exact path="/Question_13" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.iProvideSupport_Personal_NonAcademic === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.iProvideSupport_Personal_NonAcademic === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.iProvideSupport_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_14"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['iProvideSupport_Personal_NonAcademic', I_PROVIDE_SUPPORT_NONACADEMIC, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[14]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={I_PROVIDE_SUPPORT_NONACADEMIC}
+              />
+            } />
+            {/* Question 14: Is there anyone below with whom you find it difficult to interact? */}
+            <Route exact path="/Question_14" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.difficultToInteractWith === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.difficultToInteractWith === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.difficultToInteractWith === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_15"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['difficultToInteractWith', DIFFICULT_INTERACTION_BOXES, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[15]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={DIFFICULT_INTERACTION_BOXES}
+              />
+            } />
+
+            {/* Question 15: If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you? */}
+            <Route exact path="/Question_15" component={
+              () => <NodeComponent fixed={1}
+                nodes={this.state.nodes.slice(1).map((node, i) => (
+                  {
+                    key: node.key,
+                    name: node.name,
+                    size: node.size,
+                    fixed: true,
+                    color: node.color,
+                    sex: node.sex,
+                    age: node.age,
+                    categoryColor: node.categoryColor,
+                    border: node.wouldAnswerSimilarToMe === -1 ? "#FFFFFF" : node.border,
+                    fixedPosY: node.y,
+                    x: node.wouldAnswerSimilarToMe === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
+                    y: node.wouldAnswerSimilarToMe === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                  }
+                ))}
+                route={"/Question_16"}
+                prevNodes={this.prevNodes}
+                counter={-1}
+                // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
+                links={[]}
+                foci={this.state.foci.slice(1)}
+                prevFoci={this.prevFoci}
+                callBackNodes={[this.placeBoxDragCallback.bind(this), ['wouldAnswerSimilarToMe', SIMILAR_ANSWER_BOXES, []]]}
+                collectHistory={this.collectHistory.bind(this)}
+                textDescription={SURVEY_QUESTIONS[16]}
+                transferCallBack={this.transferData.bind(this)}
+                legend={null}
+                categories={SIMILAR_ANSWER_BOXES}
+              />
+            } />
+            {/* <Route exact path="/Boolean" component={
               () => <NodeComponent nodes={this.state.nodes.slice(1).map((node, i) => (
                 {
                   key: node.key,
@@ -745,6 +1183,7 @@ class Main extends Component
                   sex: node.sex,
                   age: node.age,
                   categoryColor: node.categoryColor,
+                  border: node.border,
                   x: node.fixedPosX,
                   y: node.fixedPosY,
                   opac: (node.booleanCondition ? true : false)
@@ -759,7 +1198,7 @@ class Main extends Component
                 prevFoci={this.prevFoci}
                 callBackNodes={[this.booleanNodeCallback.bind(this), "booleanCondition"]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[4]}
+                textDescription={SURVEY_QUESTIONS[4]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
 
@@ -776,7 +1215,8 @@ class Main extends Component
                     sex: node.sex,
                     age: (node.continuous1 !== -1 ? node.continuous1.toFixed(2) : 0.5),
                     categoryColor: node.categoryColor,
-                    x: (node.continuous1 !== -1 ? node.continuous1 * AVBWIDTH + NODERADIUS : SVGWIDTH / 2),
+                    border: node.border,
+                    x: (node.continuous1 !== -1 ? node.continuous1 * AVB_WIDTH + NODE_RADIUS : SVG_WIDTH / 2),
                     y: node.fixedPosY
                   }
                 ))}
@@ -789,7 +1229,7 @@ class Main extends Component
                 categories={SEPARATOR}
                 callBackNodes={[this.continuousGenericCallback.bind(this), "continuous1"]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[5]}
+                textDescription={SURVEY_QUESTIONS[5]}
                 transferCallBack={this.transferData.bind(this)} />
             } />
 
@@ -807,7 +1247,8 @@ class Main extends Component
                     sex: node.sex,
                     age: (node.continuous2 !== -1 ? node.continuous2.toFixed(2) : 0.5),
                     categoryColor: node.categoryColor,
-                    x: (node.continuous2 !== -1 ? node.continuous2 * AVBWIDTH + NODERADIUS : SVGWIDTH / 2),
+                    border: node.border,
+                    x: (node.continuous2 !== -1 ? node.continuous2 * AVB_WIDTH + NODE_RADIUS : SVG_WIDTH / 2),
                     y: node.fixedPosY
                   }
                 ))}
@@ -819,12 +1260,12 @@ class Main extends Component
                 prevFoci={this.prevFoci}
                 callBackNodes={[this.continuousGenericCallback.bind(this), "continuous2"]}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[6]}
+                textDescription={SURVEY_QUESTIONS[6]}
                 transferCallBack={this.transferData.bind(this)} />
-            } />
+            } /> */}
 
 
-            <Route exact path="/Interconnection" component={
+            <Route exact path="/Question_16" component={
               () => (MOBILE ? <NodeComponent nodes={this.state.nodes.slice(1).map((node, i) => (
                 {
                   key: node.key,
@@ -835,6 +1276,7 @@ class Main extends Component
                   sex: node.sex,
                   age: node.age,
                   categoryColor: node.categoryColor,
+                  border: node.border,
                   x: node.fixedPosX,
                   y: node.fixedPosY,
                   opac: (this.state.source === -1 ? node.link > 0 : hasLink(this.state.links, this.state.source, node.key)),
@@ -853,7 +1295,7 @@ class Main extends Component
                 prevFoci={this.prevFoci}
                 callBackNodes={this.networkNodesCallback.bind(this)}
                 collectHistory={this.collectHistory.bind(this)}
-                textDescription={SURVEYQUESTIONS[7]}
+                textDescription={SURVEY_QUESTIONS[17]}
                 transferCallBack={this.transferData.bind(this)} />
 
                 :
@@ -869,6 +1311,7 @@ class Main extends Component
                     sex: node.sex,
                     age: node.name,
                     categoryColor: node.categoryColor,
+                    border: node.border,
                     x: node.floatX,
                     y: node.floatY,
                     link: node.link,
@@ -891,11 +1334,11 @@ class Main extends Component
                   prevFoci={this.prevFoci}
                   callBackNodes={this.networkNodesCallback.bind(this)}
                   collectHistory={this.collectHistory.bind(this)}
-                  textDescription={SURVEYQUESTIONS[7]}
+                  textDescription={SURVEY_QUESTIONS[17]}
                   transferCallBack={this.transferData.bind(this)} />)
             } />
 
-            <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SURVEYQUESTIONS[8]} transferCallBack={this.transferData.bind(this)} />} />
+            <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SURVEY_QUESTIONS[18]} transferCallBack={this.transferData.bind(this)} />} />
           </div>
         </div>
       </HashRouter>

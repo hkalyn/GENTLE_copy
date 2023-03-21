@@ -57,10 +57,7 @@ class NodeComponent extends Component
             callBack={this.props.callBackNodes}
             collectHistory={this.props.collectHistory}
             categories={(this.props.categories ? this.props.categories : [])} />
-          <div className="legend">
-            {this.props.legend}
-          </div>
-          <div>
+          <div className="usrInput">
             {this.props.route ? <NavLink exact to={this.props.route} onClick={() => this.transferCallBack()}>
               <button id="confirm_next">Confirm & Next</button>
             </NavLink> : <div />}
