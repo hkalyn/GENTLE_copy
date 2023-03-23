@@ -23,6 +23,16 @@ export const SLIDER_WARNING = "You provided a value for every person, thank you.
 export const CATEGORY_WARNING = "You provided the category for every person, thank you. Click on a node to change their category!";
 export const CATEGORY_CHANGED = "You have changed the category for an individual. Please ensure that any dependant subcategories are updated as well."
 
+/*************************************************************************
+ * Constants for creating alters
+ *************************************************************************/
+// The maximum number of individuals that participants can add.
+export const MAX_ALTERS = 25
+
+// The minimum number of alters that participants can add. Having this value higher than 0 will prevent users from 
+//navigating the site and skipping the name generation screen. Participants MUST add 
+//<MIN_ALTERS> individuals in order to proceed to subsequent questions.
+export const MIN_ALTERS = 0
 
 /*************************************************************************
  * Object contains the settings for Gender. You can add additional values
@@ -32,15 +42,15 @@ export const CATEGORY_CHANGED = "You have changed the category for an individual
 export const GENDER_SETTINGS = {
     female: {
         name: "female",
-        color: "#7030a0"
+        color: "#C8A4DB"
     },
     male: {
         name: "male",
-        color: "#ffc002"
+        color: "#FECC80"
     },
     other: {
         name: "other",
-        color: "#92d050"
+        color: "#80FED0"
     }
 }
 /*************************************************************************
@@ -186,7 +196,7 @@ export const SURVEY_QUESTIONS = [
     // Question 11 (now 10)
     <div>
         <p>
-            Q10. Do you feel comfortable talking with anyone below about <b>personal failure, disappointment, or struggle in your academic work</b>?
+            Q10. Do you feel comfortable talking with anyone below about <b>failure, disappointment, or struggle in your academic work</b>?
         </p>
         <p>
             Click and drag individuals into the appropriate box.
@@ -195,8 +205,7 @@ export const SURVEY_QUESTIONS = [
     // Question 12 (now 11)
     <div>
         <p>
-            Q11. <b>Do you provide</b> (or would be willing to provide) support to any individuals below about
-            <b>personal failure, disappointment, or struggle in their academic work</b>?
+            Q11. <b>Do you provide</b> (or would be willing to provide) support to any individuals below about <b>failure, disappointment, or struggle in their academic work</b>?
         </p>
         <p>
             Click and drag individuals into the appropriate box.
@@ -241,11 +250,11 @@ export const SURVEY_QUESTIONS = [
     // Question 6 (now 16)
     <div>
         <p>
-            For each individual listed below, create links between individuals that could identify each other by either face or name. It's ok if you have
-            individuals that cannot name anyone else.
+            Q16. Create a detailed social network by linking individuals that know eachother by face or name. It's ok if you have
+            individuals that cannot identify anyone else.
         </p>
         <p>
-            This can be done by clicking one individual, and then clicking another individual to create a link between them. Please take your time to ensure the most complete social network.
+            Create links by clicking one individual, and then clicking another individual. Please take your time to ensure the most complete social network. You can also unlink individuals by clicking on one individual, and clicking another individual that they are already linked to.
         </p>
     </div>
 ];
@@ -296,8 +305,8 @@ export function returnTemplateNode(counter, name)
         providesMeSupport_Technical: -1,
         iWouldLikeMoreTechnicalSupport: -1,
         iProvideSupport_Technical: -1,
-        iAmComfortable_PersonalFailure_Disappointment_Struggle_Academic: -1,
-        iProvideSupport_PersonalFailure_Disappointment_Struggle_Academic: -1,
+        iAmComfortable_Failure_Disappointment_Struggle_Academic: -1,
+        iProvideSupport_Failure_Disappointment_Struggle_Academic: -1,
         iAmComfortable_Personal_NonAcademic: -1,
         iProvideSupport_Personal_NonAcademic: -1,
         difficultToInteractWith: -1,
@@ -361,27 +370,28 @@ export const INFORMATION = "Place-holder for informed consent sheet.";
 // ];
 
 export const ACADEMIC_SUBCATEGORIES = [
-    { key: 0, text: "Undergraduate Student", color: "#400080" },
-    { key: 1, text: "Masters Student", color: "#0000cc" },
-    { key: 2, text: "PhD Student", color: "#29a329" },
-    { key: 3, text: "Post-doctoral Fellow", color: "#ffff00" },
-    { key: 4, text: "Technician", color: "#e65c00" },
-    { key: 5, text: "Instructor", color: "#ff0000" },
-    { key: 6, text: "Professor", color: "#800040" },
-    { key: 7, text: "Committee Member", color: "#ff4dd2" },
-    { key: 8, text: "Other", color: "#000080" }
+    { key: 0, text: "Undergraduate Student", color: "#FEEDB3" },
+    { key: 1, text: "Masters Student", color: "#FDE4B5" },
+    { key: 2, text: "PhD Student", color: "#FBDBB7" },
+    { key: 3, text: "Post-doctoral Fellow", color: "#FAD4B8" },
+    { key: 4, text: "Technician", color: "#F8CEB9" },
+    { key: 5, text: "Instructor", color: "#F7C4BA" },
+    { key: 6, text: "Professor", color: "#F6BBBB" },
+    { key: 7, text: "Committee Member", color: "#F9B9CD" },
+    { key: 8, text: "Other", color: "#FEB4E3" }
 
 ];
 
 export const NONACADEMIC_SUBCATEGORIES = [
-    { key: 0, text: "Mentor", color: "#400080" },
-    { key: 1, text: "Employer", color: "#0000cc" },
-    { key: 2, text: "Co-worker", color: "#29a329" },
-    { key: 3, text: "Friend", color: "#ffff00" },
-    { key: 4, text: "Family", color: "#e65c00" },
-    { key: 5, text: "Partner", color: "#ff0000" },
-    { key: 6, text: "Other", color: "#800040" },
+    { key: 0, text: "Mentor", color: "#CACEE7" },
+    { key: 1, text: "Employer", color: "#C6D4EC" },
+    { key: 2, text: "Co-worker", color: "#C1DBF0" },
+    { key: 3, text: "Friend", color: "#BBE4F6" },
+    { key: 4, text: "Family", color: "#B5EDFC" },
+    { key: 5, text: "Partner", color: "#B4FDF9" },
+    { key: 6, text: "Other", color: "#B3FFE3" },
 ];
+
 
 /*************************************************************************
  * A Boxes oject used to define the drag and drop boxes for a single 
@@ -392,6 +402,14 @@ export const NONACADEMIC_SUBCATEGORIES = [
  * template, and give it a new name. Then reference that object in the 
  * callback 
  *************************************************************************/
+
+/*************************************************************************
+ * Defining Box Colors to avoid repetition
+ *************************************************************************/
+export const BOX_COLORS = [
+    "#E9621F", "#0795BB", "#F4E401", "#6D3A8A"
+]
+
 // Boxes for Q4a
 export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
     // desktop sized boxes.
@@ -400,7 +418,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
             key: 0,
             text: "Academic:",
             value: "academic",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -410,7 +428,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
             key: 1,
             text: "Non-Academic:",
             value: "non-academic",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -420,7 +438,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
             key: 2,
             text: "Other:",
             value: "other",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -432,7 +450,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
         {
             key: 0,
             text: "Acedemic",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -441,7 +459,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
         {
             key: 1,
             text: "Non-Acedemic",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -449,7 +467,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
         {
             key: 2,
             text: "Other",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -465,7 +483,7 @@ export const LAB_MEMBER_BOX = (window.innerWidth > 700 ?
             key: 0,
             text: "Lab Members",
             value: "true",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: SVG_WIDTH - 30,
@@ -478,7 +496,7 @@ export const LAB_MEMBER_BOX = (window.innerWidth > 700 ?
             key: 0,
             text: "Lab Members",
             value: "true",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: SVG_WIDTH - 30,
@@ -495,7 +513,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             key: 0,
             text: "I am collaborating with:",
             value: "current collaborator",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 2) - 15),
@@ -505,7 +523,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             key: 1,
             text: "I would like to collaborate with:",
             value: "would like to",
-            color: "#ffc20d",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 2) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 2) - 30),
@@ -518,7 +536,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             key: 0,
             text: "I am collaborating with:",
             value: "current collaborator",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -528,7 +546,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             key: 1,
             text: "I would like to collaborate with:",
             value: "I would like to",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -544,7 +562,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 0,
             text: "A lot of technical support:",
             value: "a lot",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -554,7 +572,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 1,
             text: "A little technical support:",
             value: "a little",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -564,7 +582,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 2,
             text: "No technical support:",
             value: "none",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -577,7 +595,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 0,
             text: "A lot of technical support:",
             value: "a lot",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -587,7 +605,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 1,
             text: "A little technical support:",
             value: "a little",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -596,7 +614,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 2,
             text: "No technical support:",
             value: "none",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -612,7 +630,7 @@ export const WOULD_LIKE_MORE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 0,
             text: "I would like more technical support from:",
             value: "true",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: SVG_WIDTH - 30,
@@ -625,7 +643,7 @@ export const WOULD_LIKE_MORE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 0,
             text: "I would like more technical support from:",
             value: "true",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: SVG_WIDTH - 30,
@@ -642,7 +660,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 0,
             text: "I provide a lot of technical support for:",
             value: "a lot",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -652,7 +670,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 1,
             text: "I provide a little technical support for:",
             value: "a little",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -662,7 +680,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 2,
             text: "I provide no technical support for:",
             value: "none",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -675,7 +693,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 0,
             text: "I provide a lot of technical support for:",
             value: "a lot",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -685,7 +703,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 1,
             text: "I provide a little technical support for:",
             value: "a little",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -694,7 +712,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             key: 2,
             text: "I provide no technical support for:",
             value: "none",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -710,7 +728,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 0,
             text: "I feel very comfortable talking with:",
             value: "very comfortable",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -720,7 +738,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 1,
             text: "I feel a little comfortable talking with:",
             value: "a little comfortable",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -730,7 +748,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 2,
             text: "I do not feel comfortable talking with:",
             value: "not comfortable",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -743,7 +761,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 0,
             text: "I feel very comfortable talking with:",
             value: "very comfortable",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -753,7 +771,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 1,
             text: "I feel a little comfortable talking with:",
             value: "a little comfortable",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -762,7 +780,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 2,
             text: "I do not feel comfortable talking with:",
             value: "not comfortable",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -778,7 +796,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 0,
             text: "I feel very comfortable providing support for:",
             value: "very comfortable",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -788,7 +806,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 1,
             text: "I feel a little comfortable providing support for:",
             value: "a little comfortable",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -798,7 +816,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 2,
             text: "I would not provide support for:",
             value: "not comfortable",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -811,7 +829,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 0,
             text: "I feel very comfortable providing support for:",
             value: "very comfortable",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -821,7 +839,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 1,
             text: "I feel a little comfortable providing support for:",
             value: "a little comfortable",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -830,7 +848,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             key: 2,
             text: "I would not provide support for:",
             value: "not comfortable",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -846,7 +864,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             key: 0,
             text: "I feel very comfortable talking to:",
             value: "very comfortable",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -856,7 +874,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             key: 1,
             text: "I feel a little comfortable talking to:",
             value: "a little comfortable",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -866,7 +884,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             key: 2,
             text: "I would not feel comfortable talking to:",
             value: "not comfortable",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -879,7 +897,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             key: 0,
             text: "I feel very comfortable talking to:",
             value: "very comfortable",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -889,7 +907,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             key: 1,
             text: "I feel a little comfortable talking to:",
             value: "a little comfortable",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -898,7 +916,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             key: 2,
             text: "I would not feel comfortable talking to:",
             value: "not comfortable",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -914,7 +932,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             key: 0,
             text: "I feel very comfortable providing support for:",
             value: "very comfortable",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -924,7 +942,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             key: 1,
             text: "I feel a little comfortable providing support for:",
             value: "a little comfortable",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -934,7 +952,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             key: 2,
             text: "I would not provide support for:",
             value: "not comfortable",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 3) - 30),
@@ -947,7 +965,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             key: 0,
             text: "I feel very comfortable providing support for:",
             value: "very comfortable",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -957,7 +975,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             key: 1,
             text: "I feel a little comfortable providing support for:",
             value: "a little comfortable",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -966,7 +984,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             key: 2,
             text: "I would not provide support for:",
             value: "not comfortable",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -982,7 +1000,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             key: 0,
             text: "I find these individuals very difficult to interact with:",
             value: "very difficult",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 4) - 30),
@@ -992,7 +1010,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             key: 1,
             text: "I find these individuals a little difficult to interact with:",
             value: "a little difficult",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 4) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 4) - 30),
@@ -1002,7 +1020,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             key: 2,
             text: "I find these individuals are not difficult to interact with at all:",
             value: "not difficult",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 4) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 4) - 30),
@@ -1012,7 +1030,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             key: 3,
             text: "I'm not sure about these individuals:",
             value: "not sure",
-            color: "#7030a0",
+            color: BOX_COLORS[3],
             x: ((SVG_WIDTH / 4) * 3 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 4) - 30),
@@ -1025,7 +1043,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             key: 0,
             text: "I find these individuals very difficult to interact with:",
             value: "very difficult",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -1035,7 +1053,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             key: 1,
             text: "I find these individuals a little difficult to interact with:",
             value: "a little difficult",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -1044,7 +1062,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             key: 2,
             text: "I find these individuals are not difficult to interact with at all:",
             value: "not difficult",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -1053,7 +1071,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             key: 3,
             text: "I'm not sure about these individuals:",
             value: "not sure",
-            color: "#7030a0",
+            color: BOX_COLORS[3],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -1069,7 +1087,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             key: 0,
             text: "I think our answers would be very similar:",
             value: "very similar",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 4) - 30),
@@ -1079,7 +1097,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             key: 1,
             text: "I think our answers would be somewhat similar:",
             value: "somewhat similar",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 4) + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 4) - 30),
@@ -1089,7 +1107,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             key: 2,
             text: "I don't think our answers would be similar at all:",
             value: "not similar",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 4) * 2 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 4) - 30),
@@ -1099,7 +1117,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             key: 3,
             text: "I'm not sure about these individuals:",
             value: "not sure",
-            color: "#7030a0",
+            color: BOX_COLORS[3],
             x: ((SVG_WIDTH / 4) * 3 + 15),
             y: (window.innerHeight * 0.9 - 200),
             width: ((SVG_WIDTH / 4) - 30),
@@ -1112,7 +1130,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             key: 0,
             text: "I think our answers would be very similar:",
             value: "very similar",
-            color: "#c00000",
+            color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725,
@@ -1122,7 +1140,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             key: 1,
             text: "I think our answers would be somewhat similar:",
             value: "somewhat similar",
-            color: "#0070c0",
+            color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -1131,7 +1149,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             key: 2,
             text: "I don't think our answers would be similar at all:",
             value: "not similar",
-            color: "#548235",
+            color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
@@ -1140,7 +1158,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             key: 3,
             text: "I'm not sure about these individuals:",
             value: "not sure",
-            color: "#7030a0",
+            color: BOX_COLORS[3],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
