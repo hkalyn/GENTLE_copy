@@ -88,6 +88,11 @@ body {
   stroke-width: 1.5px;
 }
 
+.link.highlighted {
+  stroke: #999;
+  stroke-width: 1.5px;
+}
+
 #shadow {
   box-shadow: 0 0 6px grey;
 }

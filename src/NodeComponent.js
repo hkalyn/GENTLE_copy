@@ -35,6 +35,7 @@ class NodeComponent extends Component
   componentDidMount()
   {
     this.setState(this.state);
+    // this.props.lastClickedNodeCallback(2)
   }
 
   render()
@@ -46,6 +47,8 @@ class NodeComponent extends Component
             {this.props.textDescription}
           </div>
           <Graph fixed={this.props.fixed}
+            lastClickedNodeCallback={this.props.lastClickedNodeCallback.bind(this)}
+            lastClickedNode={this.props.lastClickedNode}
             float={(this.props.float ? 1 : 0)}
             opac={(this.props.opac)}
             counter={this.props.counter}

@@ -53,6 +53,7 @@ class Graph extends Component
       .on("dragend", (e) => this.dragCallBack(e))
   }
 
+
   /*************************************************************************
    * Handles callbacks for views that allow for node dragging
    * @param {event}: d3.js event
@@ -166,8 +167,22 @@ class Graph extends Component
   {
     //optional data driven style paramaters can be included here, e.g. stroke-width
     v3d.classed('link', true);
+    // v3d.style("stroke", "blue")
   };
 
+  nodeClicked = (props) =>
+  {
+    // var node = vd3.select(this)
+    // console.log("clicked node", node[0][0].virtualD3)
+    console.log("clicked node", d3.event.target.id)
+    var nodeID = d3.event.target.id
+    // this.setState({ lastClickedNode: nodeID })asd
+    // this.lastClickedNode = nodeID
+    // this.state.lastClickedNode = nodeID
+    // console.log("this", this.state)
+    props.lastClickedNodeCallback(nodeID)
+
+  }
   /*************************************************************************
    * Update positions of nodes using foci and alpha to gradually move nodes 
    * to their designated foci points.
@@ -217,15 +232,38 @@ class Graph extends Component
       .attr("id", (d) => d.key)
       .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
 
+    v3d.selectAll(".node").on("click", () => this.nodeClicked(this.props))
+    // {
+    //   elem.on("click", () => this.nodeClicked())
+    // })
     v3d.selectAll('.Node_center')
       .attr("stroke", (d) => d.border)
       .attr("stroke-width", "18px")
 
+    // if (d.source === 1)
+    // {
+    //   v3d.selectAll('.link')
+    //     .attr("x1", (d) => d.source.x)
+    //     .attr("y1", (d) => d.source.y)
+    //     .attr("x2", (d) => d.target.x)
+    //     .attr("y2", (d) => d.target.y);
+    // }
+    // else
+    // {
+    //   v3d.selectAll('.link')
+    //     .attr("x1", (d) => d.source.x)
+    //     .attr("y1", (d) => d.source.y)
+    //     .attr("x2", (d) => d.target.x)
+    //     .attr("y2", (d) => d.target.y)
+    //     .attr("stroke", "red");
+    // }
     v3d.selectAll('.link')
       .attr("x1", (d) => d.source.x)
       .attr("y1", (d) => d.source.y)
       .attr("x2", (d) => d.target.x)
-      .attr("y2", (d) => d.target.y);
+      .attr("y2", (d) => d.target.y)
+      .style("stroke", (d) => d.source.key === this.props.lastClickedNode ||
+        d.target.key === this.props.lastClickedNode ? "red" : "#999");
   };
 
   /*************************************************************************
@@ -260,6 +298,7 @@ class Graph extends Component
     {
       this.virtualD3.call(this.updateVirtualD3, JSON.parse(JSON.stringify(this.props.foci)));
     });
+    this.lastClickedNode = 0
   }
 
   /*************************************************************************
@@ -302,6 +341,8 @@ class Graph extends Component
   {
     //Props need to remain Pure in React, Force would manipulate props, thus deep copy.
 
+    console.log("Graph Props to check: ", this.props)
+    console.log("Graph State to check: ", this.props.lastClickedNode)
     let nodes = JSON.parse(JSON.stringify(this.props.nodes));
     let links = JSON.parse(JSON.stringify(this.props.links));
     let foci = JSON.parse(JSON.stringify(this.props.foci));
@@ -330,6 +371,11 @@ class Graph extends Component
       vd3Links.enter().insert('line', '.node').call(this.enterCycleLinks);
       vd3Links.exit().remove();
 
+      var n = document.getElementsByClassName("node")
+      for (var i = 0; i < n.length; i++)
+      {
+        console.log("a node", n[i].id)
+      }
       //If data changed but positions remained the same use static rendering as well
       //to prevent "fading in"
       let conditionFoci = this.areSequenceObjectsUnEqual(this.props.prevFoci, this.props.foci);
@@ -387,6 +433,8 @@ class Graph extends Component
         .data(nodes);
       vd3Links = this.virtualD3.selectAll('.link')
         .data(links);
+
+
       vd3Nodes.enter().append('g').call(this.enterCycleNodes);
       vd3Links.enter().insert('line', '.node').call(this.enterCycleLinks);
       this.force.nodes(nodes).links(links);

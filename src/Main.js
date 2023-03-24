@@ -103,7 +103,8 @@ class Main extends Component
       links: this.props.links,
       foci: (this.props.foci.length === 0 ? [{ key: 0, x: SVG_WIDTH / 2, y: SVG_HEIGHT / 2 }] : recalculate_foci(this.props.foci)),
       source: -1,
-      correction: 0
+      correction: 0,
+      lastClickedNode: 1
     };
     this.prevNodes = [];
     this.prevFoci = [];
@@ -575,6 +576,12 @@ class Main extends Component
     this.setState({ nodes: nodes });
   }
 
+  setLastClickedNode = (val) =>
+  {
+    console.log("setting last Clicked Node: ", typeof (Number(val)))
+
+    this.setState({ lastClickedNode: Number(val) })
+  }
   render()
   {
     return (
@@ -1297,6 +1304,8 @@ class Main extends Component
                     links={[]}
                     foci={this.state.foci.slice(1)}
                     prevFoci={this.prevFoci}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                     callBackNodes={this.networkNodesCallback.bind(this)}
                     collectHistory={this.collectHistory.bind(this)}
                     textDescription={SURVEY_QUESTIONS[17]}
@@ -1320,7 +1329,8 @@ class Main extends Component
                         y: node.floatY,
                         link: node.link,
                         floatX: node.floatX,
-                        floatY: node.floatY
+                        floatY: node.floatY,
+
                       }
                     ))}
                       prevNodes={this.prevNodes}
@@ -1328,6 +1338,8 @@ class Main extends Component
                       counter={-1}
                       float={1}
                       links={this.state.links}
+                      lastClickedNodeCallback={this.setLastClickedNode}
+                      lastClickedNode={this.state.lastClickedNode}
                       foci={this.state.foci.map((focus, i) => (
                         {
                           key: focus.key,
