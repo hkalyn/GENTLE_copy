@@ -721,6 +721,8 @@ class Main extends Component
                     legend={
                       null
                     }
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Route for Question 3: Assigning Age */}
@@ -771,6 +773,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={ACADEMIC_BOXES}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Route for Question 4 b, Academic Subcategory */}
@@ -838,6 +842,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={LAB_MEMBER_BOX}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Route for Question 6: Who would you like to colaborate with */}
@@ -872,6 +878,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={COLLABORATOR_BOXES}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
 
@@ -906,6 +914,8 @@ class Main extends Component
                     textDescription={SURVEY_QUESTIONS[8]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                     categories={PROVIDES_ME_TECHNICAL_SUPPORT}
                   />
                 } />
@@ -941,6 +951,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={WOULD_LIKE_MORE_TECHNICAL_SUPPORT}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Question 9: Who do you provide technical support for? */}
@@ -975,6 +987,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={I_PROVIDE_TECHNICAL_SUPPORT}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Question 10: Do you feel comfortable talking with anyone below about personal failure, disappointment, or struggle in your academic work?  */}
@@ -1009,6 +1023,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={PROVIDES_ME_SUPPORT_ACADEMIC}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Question 11: Do you provide support for individuals regarding personal failure, disappointment, or struggle in their
@@ -1044,6 +1060,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={I_PROVIDE_SUPPORT_ACADEMIC}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Question 12: Is there anyone below that you feel comfortable talking with about personal, non-academic matters? */}
@@ -1078,6 +1096,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={I_AM_COMFORTABLE_NONACADEMIC}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Question 13: Do you provide (or would be willing to provide) support to help others with personal, non-academic matters? */}
@@ -1112,6 +1132,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={I_PROVIDE_SUPPORT_NONACADEMIC}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* Question 14: Is there anyone below with whom you find it difficult to interact? */}
@@ -1146,6 +1168,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={DIFFICULT_INTERACTION_BOXES}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
 
@@ -1181,6 +1205,8 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={SIMILAR_ANSWER_BOXES}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
                   />
                 } />
                 {/* <Route exact path="/Boolean" component={
