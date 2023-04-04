@@ -11,7 +11,7 @@ Simple node server that can call to MONGODB ATLAS
 
 //Setup
 const port = process.env.PORT || 3002;
-const location = process.env.URI || `mongodb+srv://super_admin:JustinIsNice123@cluster0.luzii.mongodb.net/?retryWrites=true&w=majority`;
+const location = process.env.URI || `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.luzii.mongodb.net/?retryWrites=true&w=majority`;
 const local = process.env.LOCAL_DEVELOPMENT || 'true';
 
 //create app
