@@ -71,7 +71,7 @@ class NodeCategoriesComponent extends Component
               You have not assigned any nodes for this question. You can click "Confirm and Next" to proceed to the next question.
             </div>
             <div>
-              {this.props.route ? <NavLink exact to={this.props.route} onClick={() => this.transferCallBack()}>
+              {this.props.route ? <NavLink exact to={this.props.route} onClick={this.transferCallBack()}>
                 <button id="confirm_next">Confirm & Next</button>
               </NavLink> : <div />}
             </div>
@@ -113,7 +113,7 @@ class NodeCategoriesComponent extends Component
               ))}
             </div>
             <div className="usrInput">
-              {this.props.route ? <NavLink exact to={this.props.route} onClick={() => this.transferCallBack()}>
+              {this.props.route ? <NavLink exact to={this.props.route} onClick={this.transferCallBack()}>
                 <button id="confirm_next">Confirm & Next</button>
               </NavLink> : <div />}
             </div>

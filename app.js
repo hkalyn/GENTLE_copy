@@ -15,7 +15,7 @@ const local = process.env.LOCAL_DEVELOPMENT || 'true';
 
 //create app
 let app = express();
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 // Connect db
 if (local === 'true') {
@@ -24,7 +24,7 @@ if (local === 'true') {
 } else {
     var db = monk(location);
 }
-let collection = db.collection(`GENTLE_COLLECT_DEMO`);
+let collection = db.collection(process.env.COLLECTION_NAME);
 
 
 //show all entries in collection

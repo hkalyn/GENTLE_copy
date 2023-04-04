@@ -61,7 +61,7 @@ class NodeComponent extends Component
             collectHistory={this.props.collectHistory}
             categories={(this.props.categories ? this.props.categories : [])} />
           <div className="usrInput">
-            {this.props.route ? <NavLink exact to={this.props.route} onClick={() => this.transferCallBack()}>
+            {this.props.route ? <NavLink exact to={this.props.route} onClick={this.transferCallBack()}>
               <button id="confirm_next">Confirm & Next</button>
             </NavLink> : <div />}
           </div>
