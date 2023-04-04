@@ -2,7 +2,6 @@
   "name": "GENTLE",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
   "dependencies": {
     "ajax": "0.0.4",
     "body-parser": "^1.19.0",
@@ -20,8 +19,8 @@
     "underscore": "^1.9.1"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "npm install && react-scripts --openssl-legacy-provider build",
+    "start": "react-scripts start",
+    "build": "npm install && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

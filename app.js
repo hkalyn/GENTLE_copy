@@ -1,7 +1,6 @@
 let express = require('express');
 let monk = require("monk");
-// let bodyParser = require('body-parser')
-let path = require("path")
+let bodyParser = require('body-parser')
 require('dotenv').config();
 
 /* Content:
@@ -25,7 +24,7 @@ if (local === 'true') {
 } else {
     var db = monk(location);
 }
-let collection = db.collection(`GENTLE_DB`);
+let collection = db.collection(`GENTLE_COLLECT_DEMO`);
 
 
 //show all entries in collection
@@ -40,7 +39,7 @@ app.use(express.static(__dirname + "/build"));
 //serve react app
 app.get('/', (req, res) => {
     console.log("SERVING APP")
-    res.sendFile(path.join(__dirname , "index.html"));
+    res.sendFile(__dirname + "/index.html");
 })
 
 /**
@@ -52,10 +51,9 @@ app.post("/ajax",(req,res) => {
     
     data = JSON.parse(data);
     collection.find({ID:ID}).then((doc) =>{if(doc.length == 0){
-                                                        console.log("User does not exist. Inserting New User: ", collection);
+                                                        console.log("User does not exist");
                                                         collection.insert({ID:ID,data:data}).then(() =>{res.send("Success")})
                                                     } else {
-                                                        console.log("User Exists, retrieving data: ", collection)
                                                         collection.findOneAndUpdate({ID:ID},
                                                         {$set:{ID:ID,data:data}}).then(() =>{res.send("Success")})
                                                     }}
