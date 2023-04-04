@@ -1,6 +1,7 @@
 let express = require('express');
 let monk = require("monk");
-let bodyParser = require('body-parser')
+// let bodyParser = require('body-parser')
+let path = require("path")
 require('dotenv').config();
 
 /* Content:
@@ -10,7 +11,7 @@ Simple node server that can call to MONGODB ATLAS
 
 //Setup
 const port = process.env.PORT || 3002;
-const location = process.env.URI || `super_admin:DbPassword@gentle_db:27017/GENTLE_DEMO`;
+const location = process.env.URI || `mongodb+srv://super_admin:JustinIsNice123@cluster0.luzii.mongodb.net/?retryWrites=true&w=majority`;
 const local = process.env.LOCAL_DEVELOPMENT || 'true';
 
 //create app
@@ -24,7 +25,7 @@ if (local === 'true') {
 } else {
     var db = monk(location);
 }
-let collection = db.collection(`GENTLE_COLLECT_DEMO`);
+let collection = db.collection(`GENTLE_DB`);
 
 
 //show all entries in collection
@@ -39,7 +40,7 @@ app.use(express.static(__dirname + "/build"));
 //serve react app
 app.get('/', (req, res) => {
     console.log("SERVING APP")
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(path.join(__dirname , "index.html"));
 })
 
 /**
@@ -51,9 +52,10 @@ app.post("/ajax",(req,res) => {
     
     data = JSON.parse(data);
     collection.find({ID:ID}).then((doc) =>{if(doc.length == 0){
-                                                        console.log("User does not exist");
+                                                        console.log("User does not exist. Inserting New User: ", collection);
                                                         collection.insert({ID:ID,data:data}).then(() =>{res.send("Success")})
                                                     } else {
+                                                        console.log("User Exists, retrieving data: ", collection)
                                                         collection.findOneAndUpdate({ID:ID},
                                                         {$set:{ID:ID,data:data}}).then(() =>{res.send("Success")})
                                                     }}
