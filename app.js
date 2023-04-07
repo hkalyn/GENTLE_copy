@@ -1,6 +1,8 @@
 let express = require('express');
 let monk = require("monk");
 let bodyParser = require('body-parser')
+
+let bcrypt = require('bcrypt')
 require('dotenv').config();
 
 /* Content:
@@ -18,17 +20,20 @@ let app = express();
 app.use(express.urlencoded({ extended: true }));
 
 // Connect db
-if (local === 'true') {
+if (local === 'true')
+{
     console.log('Building for local environment...');
-    var db = monk(location,{authSource:'admin'});
-} else {
+    var db = monk(location, { authSource: 'admin' });
+} else
+{
     var db = monk(location);
 }
 let collection = db.collection(process.env.COLLECTION_NAME);
 
 
 //show all entries in collection
-collection.find().then((docs) =>{
+collection.find().then((docs) =>
+{
     console.log("Connected to data")
     console.log(docs.length);
 })
@@ -37,7 +42,8 @@ app.use(express.static(__dirname + "/build"));
 
 
 //serve react app
-app.get('/', (req, res) => {
+app.get('/', (req, res) =>
+{
     console.log("SERVING APP")
     res.sendFile(__dirname + "/index.html");
 })
@@ -45,19 +51,57 @@ app.get('/', (req, res) => {
 /**
  * Sends data to db
  */
-app.post("/ajax",(req,res) => {
+// app.post("/ajax", (req, res) =>
+// {
+//     let ID = req.body.ID;
+//     let data = req.body.data;
+
+//     data = JSON.parse(data);
+//     collection.find({ ID: ID }).then((doc) =>
+//     {
+//         if (doc.length === 0)
+//         {
+//             console.log("User does not exist");
+//             collection.insert({ ID: ID, data: data }).then(() => { res.send("Success") })
+//         } else
+//         {
+//             collection.findOneAndUpdate({ ID: ID },
+//                 { $set: { ID: ID, data: data } }).then(() => { res.send("Success") })
+//         }
+//     }
+//     )
+// })
+function generateHash(password)
+{
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+}
+
+function checkValidPassword(password) 
+{
+    return bcrypt.compareSync(password, this.password);
+}
+app.post("/ajax", (req, res) =>
+{
     let ID = req.body.ID;
     let data = req.body.data;
-    
+    let password = req.body.password;
     data = JSON.parse(data);
-    collection.find({ID:ID}).then((doc) =>{if(doc.length == 0){
-                                                        console.log("User does not exist");
-                                                        collection.insert({ID:ID,data:data}).then(() =>{res.send("Success")})
-                                                    } else {
-                                                        collection.findOneAndUpdate({ID:ID},
-                                                        {$set:{ID:ID,data:data}}).then(() =>{res.send("Success")})
-                                                    }}
-                                            )
+    collection.find({ ID: ID }).then((doc) =>
+    {
+        if (doc.length === 0)
+        {
+            console.log("User does not exist");
+            collection.insert({ ID: ID, password: generateHash(password), data: data }).then(() => { res.send("Success") })
+        } else
+        {
+
+            collection.findOneAndUpdate({ ID: ID },
+                { $set: { ID: ID, data: data } }).then(() => { res.send("Success") })
+        }
+    }
+    )
 })
+
+
 
 app.listen(port);

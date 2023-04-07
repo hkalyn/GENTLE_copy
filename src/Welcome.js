@@ -92,7 +92,7 @@ class Welcome extends Component
                         className="loginInput"
                         type="text"
                         name="id"
-                        placeholder="Enter ID"
+                        placeholder="Enter Email"
                         value={this.state.id}
                         onChange={this.handleChange}
                         required
