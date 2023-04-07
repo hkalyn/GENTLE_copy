@@ -56,13 +56,13 @@ app.post("/ajax", (req, res) =>
     data = JSON.parse(data);
     collection.find({ ID: ID }).then((doc) =>
     {
-        if (doc.length === 0)
+        if (doc.length == 0)
         {
             console.log("User does not exist");
             collection.insert({ ID: ID, data: data }).then(() => { res.send("Success") })
         } else
         {
-
+            console.log("User exists. Updating.");
             collection.findOneAndUpdate({ ID: ID },
                 { $set: { ID: ID, data: data } }).then(() => { res.send("Success") })
         }
