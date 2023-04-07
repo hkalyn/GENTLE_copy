@@ -205,8 +205,10 @@ class Graph extends Component
     // this.lastClickedNode = nodeID
     // this.state.lastClickedNode = nodeID
     // console.log("this", this.state)
-    props.lastClickedNodeCallback(nodeID)
-
+    if (props.lastClickedNodeCallback)
+    {
+      props.lastClickedNodeCallback(nodeID)
+    }
   }
   /*************************************************************************
    * Update positions of nodes using foci and alpha to gradually move nodes 

@@ -700,7 +700,9 @@ class Main extends Component
                 callBackButton={this.createNodesButtonCallback.bind(this)}
                 collectHistory={this.collectHistory.bind(this)}
                 textDescription={SURVEY_QUESTIONS[0]}
-                transferCallBack={this.transferData.bind(this)} />
+                transferCallBack={this.transferData.bind(this)}
+                lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+              />
             } />
             {/* Route for question 2: Selecting gender for your alters.
             */}
@@ -739,7 +741,9 @@ class Main extends Component
                     callBackButton={[this.changeSliderButtonCallback.bind(this), "age"]}
                     collectHistory={this.collectHistory.bind(this)}
                     textDescription={SURVEY_QUESTIONS[2]}
-                    transferCallBack={this.transferData.bind(this)} />
+                    transferCallBack={this.transferData.bind(this)}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                  />
                 } />
                 {/* Route for Question 4a: Assigning academic/non-academic */}
                 <Route exact path="/Question_4_a" component={
@@ -792,7 +796,9 @@ class Main extends Component
                       callBackButton={[this.changeCategoryButtonCallback.bind(this), "academicSubCategory", "categoryColor", ACADEMIC_SUBCATEGORIES]}
                       collectHistory={this.collectHistory.bind(this)}
                       textDescription={SURVEY_QUESTIONS[4]}
-                      transferCallBack={this.transferData.bind(this)} />
+                      transferCallBack={this.transferData.bind(this)}
+                      lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    />
                 } />
                 {/* Route for Question 4 c, non-academic subcategory */}
                 <Route exact path="/Question_4_c" component={
@@ -808,7 +814,9 @@ class Main extends Component
                     callBackButton={[this.changeCategoryButtonCallback.bind(this), "nonAcademicSubCategory", "categoryColor", NONACADEMIC_SUBCATEGORIES]}
                     collectHistory={this.collectHistory.bind(this)}
                     textDescription={SURVEY_QUESTIONS[5]}
-                    transferCallBack={this.transferData.bind(this)} />
+                    transferCallBack={this.transferData.bind(this)}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                  />
                 } />
                 {/* Route for Question 5: Assigning Lab Members */}
                 <Route exact path="/Question_5" component={

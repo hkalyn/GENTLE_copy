@@ -121,7 +121,7 @@ class NodeSliderComponent extends Component
       <HashRouter>
         <div>
           <div className="textBox">
-            <p>{this.props.textDescription}</p>
+            {this.props.textDescription}
           </div>
           <Graph counter={this.props.counter}
             nodes={this.props.nodes}
@@ -130,7 +130,8 @@ class NodeSliderComponent extends Component
             foci={this.props.foci}
             prevFoci={this.props.prevFoci}
             callBack={this.props.callBackNodes}
-            collectHistory={this.props.collectHistory} />
+            collectHistory={this.props.collectHistory}
+          />
 
           <div className="container" id="userInputStd">
             {MOBILE ? <div>
