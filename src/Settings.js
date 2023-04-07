@@ -65,21 +65,14 @@ export const SURVEY_QUESTIONS = [
     // Question 1 Instructions (appearing in text-box)
     <div>
         <p>
-            Q1. Please start by listing your supervisor(s), lab members, and committee members.
+            Name <b>25 individuals</b> that you interact with <u>most frequently</u> in your academic program (e.g., supervisor(s), committee
+            members, lab members, other fellow students/classmates, professors, instructors, teaching assistants, or staff members). Feel
+            free to name individuals from non-academic environments if you interact with them as a student (e.g., professional affiliates,
+            employers, community members, elders, family, friends, or partners).
+
         </p>
         <p>
-            Next, consider listing other members of your academic community that you frequently interact with as a student. These could include other non-lab students or classmates, previous supervisors or mentors, other professors, instructors, or departmental staff. You are also free to list individuals from your non-academic environment that you interact with as a student (e.g., non-academic mentors, professional affiliates, employers, family, friends, or partners).
-        </p>
-        <p>
-            You can include individuals that you interact with either in-person, phone, email, or other online platforms.
-        </p>
-        <p>
-            <b>You should be able to recognize all these individuals by face or name, and they should be able to recognize you by face or name.</b>
-        </p>
-        <p>
-            Give everyone a name that is unique and easily recognizable to you (e.g., nicknames, initials, or pseudonyms). It is important that you will be
-            able to easily identify all 25 individuals by their name in a future survey. Note that you must list 25 individuals to proceed through the survey,
-            so please continue listing individuals until you reach 25. It’s ok if those individuals at the end of your list are only minimally connected to you.
+            *You should be able to recognize all these individuals by face or name, and they should recognize you by face or name via inperson or online interactions.
         </p>
     </div>,
     // Question 2 Instructions (appearing in text-box)
@@ -103,10 +96,10 @@ export const SURVEY_QUESTIONS = [
     // Question 3 Instructions
     <div>
         <p>
-            Q3. Please enter an age for each individual. If you do not know it, an approximation is acceptable.
+            Q3. Please enter an age for each individual. If you are unsure, an approximate is acceptable.
         </p>
         <p>
-            You can do this by clicking an individual, and entering an age below.
+            You can do this by clicking an individual and entering an age below.
         </p>
     </div>,
     // Question 4a Instructions
@@ -141,10 +134,7 @@ export const SURVEY_QUESTIONS = [
     //Question 5 Instructions and message
     <div>
         <p>
-            Q5. Please indicate which of these individuals are lab members.
-        </p>
-        <p>
-            Click and drag lab members into the box.
+            Q5. Place all individuals that are YOUR lab mates in the box below.
         </p>
     </div>,
     // Question 6 (Network linking supposed to go here, but I want to move it ot the end.)
@@ -378,18 +368,20 @@ export const ACADEMIC_SUBCATEGORIES = [
     { key: 5, text: "Instructor", color: "#F7C4BA" },
     { key: 6, text: "Professor", color: "#F6BBBB" },
     { key: 7, text: "Committee Member", color: "#F9B9CD" },
-    { key: 8, text: "Other", color: "#FEB4E3" }
+    { key: 8, text: "Administration", color: "#fEB4E3" },
+    { key: 9, text: "Other", color: "#F2BFEA" }
 
 ];
 
 export const NONACADEMIC_SUBCATEGORIES = [
-    { key: 0, text: "Mentor", color: "#CACEE7" },
+    { key: 0, text: "Professional Affiliate", color: "#CACEE7" },
     { key: 1, text: "Employer", color: "#C6D4EC" },
-    { key: 2, text: "Co-worker", color: "#C1DBF0" },
+    { key: 2, text: "Community Member", color: "#C1DBF0" },
     { key: 3, text: "Friend", color: "#BBE4F6" },
     { key: 4, text: "Family", color: "#B5EDFC" },
     { key: 5, text: "Partner", color: "#B4FDF9" },
-    { key: 6, text: "Other", color: "#B3FFE3" },
+    { key: 6, text: "Elder", color: "#B3FFE3" },
+    { key: 7, text: "Other", color: "#CAEAC8" },
 ];
 
 
@@ -411,7 +403,7 @@ export const BOX_COLORS = [
 ]
 
 // Boxes for Q4a
-export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
+export var ACADEMIC_BOXES = (window.innerWidth > 700 ?
     // desktop sized boxes.
     [
         {
@@ -420,7 +412,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
             value: "academic",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -430,7 +422,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
             value: "non-academic",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -440,7 +432,7 @@ export const ACADEMIC_BOXES = (window.innerWidth > 700 ?
             value: "other",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -485,7 +477,7 @@ export const LAB_MEMBER_BOX = (window.innerWidth > 700 ?
             value: "true",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: SVG_WIDTH - 30,
             height: window.innerHeight * 0.17
         }
@@ -515,7 +507,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             value: "current collaborator",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 2) - 15),
             height: window.innerHeight * 0.17
         },
@@ -525,7 +517,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             value: "would like to",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 2) + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 2) - 30),
             height: window.innerHeight * 0.17
         },
@@ -564,7 +556,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a lot",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -574,7 +566,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a little",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -584,7 +576,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "none",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -622,7 +614,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
     ]
 )
 
-// Box for Question 9
+// Box for Question 8
 export const WOULD_LIKE_MORE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
     // desktop sized boxes.
     [
@@ -632,7 +624,7 @@ export const WOULD_LIKE_MORE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "true",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: SVG_WIDTH - 30,
             height: window.innerHeight * 0.17
         }
@@ -658,31 +650,31 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I provide a lot of technical support for:",
+            text: "A lot of technical support:",
             value: "a lot",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 1,
-            text: "I provide a little technical support for:",
+            text: "A little technical support:",
             value: "a little",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 2,
-            text: "I provide no technical support for:",
+            text: "No technical support for:",
             value: "none",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -691,7 +683,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I provide a lot of technical support for:",
+            text: "A lot of technical support:",
             value: "a lot",
             color: BOX_COLORS[0],
             x: 15,
@@ -701,7 +693,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "I provide a little technical support for:",
+            text: "A little technical support:",
             value: "a little",
             color: BOX_COLORS[1],
             x: 15,
@@ -710,7 +702,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "I provide no technical support for:",
+            text: "No technical support:",
             value: "none",
             color: BOX_COLORS[2],
             x: 15,
@@ -726,31 +718,31 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I feel very comfortable talking with:",
+            text: "Very comfortable:",
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 1,
-            text: "I feel a little comfortable talking with:",
+            text: "A little comfortable:",
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 2,
-            text: "I do not feel comfortable talking with:",
+            text: "Not comfortable:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -759,7 +751,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I feel very comfortable talking with:",
+            text: "Very comfortable:",
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
@@ -769,7 +761,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "I feel a little comfortable talking with:",
+            text: "A little comfortable:",
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: 15,
@@ -778,7 +770,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "I do not feel comfortable talking with:",
+            text: "Not comfortable:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: 15,
@@ -794,31 +786,31 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I feel very comfortable providing support for:",
+            text: "Very comfortable:",
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 1,
-            text: "I feel a little comfortable providing support for:",
+            text: "A little comfortable:",
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 2,
-            text: "I would not provide support for:",
+            text: "Not comfortable:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -827,7 +819,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I feel very comfortable providing support for:",
+            text: "Very comfortable:",
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
@@ -837,7 +829,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "I feel a little comfortable providing support for:",
+            text: "A little comfortable:",
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: 15,
@@ -846,7 +838,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "I would not provide support for:",
+            text: "Not Comfortable:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: 15,
@@ -862,31 +854,31 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I feel very comfortable talking to:",
+            text: "Very comfortable:",
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 1,
-            text: "I feel a little comfortable talking to:",
+            text: "A little comfortable:",
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 2,
-            text: "I would not feel comfortable talking to:",
+            text: "Not comfortable:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -895,7 +887,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I feel very comfortable talking to:",
+            text: "Very comfortable:",
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
@@ -905,7 +897,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "I feel a little comfortable talking to:",
+            text: "A little comfortable:",
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: 15,
@@ -914,7 +906,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "I would not feel comfortable talking to:",
+            text: "Not  comfortable:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: 15,
@@ -930,31 +922,31 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I feel very comfortable providing support for:",
+            text: "Very comfortable:",
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 1,
-            text: "I feel a little comfortable providing support for:",
+            text: "A little comfortable:",
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 2,
-            text: "I would not provide support for:",
+            text: "Not comfortable:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -963,7 +955,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I feel very comfortable providing support for:",
+            text: "Very comfortable:",
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
@@ -973,7 +965,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "I feel a little comfortable providing support for:",
+            text: "A little comfortable:",
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: 15,
@@ -982,7 +974,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "I would not provide support for:",
+            text: "Not comfortable:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: 15,
@@ -998,50 +990,50 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "I find these individuals very difficult to interact with:",
+            text: "Very difficult:",
             value: "very difficult",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
-            width: ((SVG_WIDTH / 4) - 30),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 1,
-            text: "I find these individuals a little difficult to interact with:",
+            text: "A little difficult:",
             value: "a little difficult",
             color: BOX_COLORS[1],
-            x: ((SVG_WIDTH / 4) + 15),
-            y: (window.innerHeight * 0.9 - 200),
-            width: ((SVG_WIDTH / 4) - 30),
+            x: ((SVG_WIDTH / 3) + 15),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 2,
-            text: "I find these individuals are not difficult to interact with at all:",
+            text: "Not difficult at all:",
             value: "not difficult",
             color: BOX_COLORS[2],
-            x: ((SVG_WIDTH / 4) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
-            width: ((SVG_WIDTH / 4) - 30),
+            x: ((SVG_WIDTH / 3) * 2 + 15),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
-        {
-            key: 3,
-            text: "I'm not sure about these individuals:",
-            value: "not sure",
-            color: BOX_COLORS[3],
-            x: ((SVG_WIDTH / 4) * 3 + 15),
-            y: (window.innerHeight * 0.9 - 200),
-            width: ((SVG_WIDTH / 4) - 30),
-            height: window.innerHeight * 0.17
-        }
+        // {
+        //     key: 3,
+        //     text: "I'm not sure about these individuals:",
+        //     value: "not sure",
+        //     color: BOX_COLORS[3],
+        //     x: ((SVG_WIDTH / 4) * 3 + 15),
+        //     y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+        //     width: ((SVG_WIDTH / 4) - 30),
+        //     height: window.innerHeight * 0.17
+        // }
     ] :
     // Mobile Considerations. If the screensize is less than 700px, return the bollowing boxes
     [
         {
             key: 0,
-            text: "I find these individuals very difficult to interact with:",
+            text: "Very difficult:",
             value: "very difficult",
             color: BOX_COLORS[0],
             x: 15,
@@ -1051,7 +1043,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "I find these individuals a little difficult to interact with:",
+            text: "A little difficult:",
             value: "a little difficult",
             color: BOX_COLORS[1],
             x: 15,
@@ -1060,75 +1052,75 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "I find these individuals are not difficult to interact with at all:",
+            text: "Not difficult at all:",
             value: "not difficult",
             color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
         },
-        {
-            key: 3,
-            text: "I'm not sure about these individuals:",
-            value: "not sure",
-            color: BOX_COLORS[3],
-            x: 15,
-            y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
-            width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
-        },
+        // {
+        //     key: 3,
+        //     text: "I'm not sure about these individuals:",
+        //     value: "not sure",
+        //     color: BOX_COLORS[3],
+        //     x: 15,
+        //     y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
+        //     width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
+        // },
     ]
 )
 
-// Boxes for Question 14
+// Boxes for Question 15
 export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
     // desktop sized boxes.
     [
         {
             key: 0,
-            text: "I think our answers would be very similar:",
+            text: "Very similar:",
             value: "very similar",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight * 0.9 - 200),
-            width: ((SVG_WIDTH / 4) - 30),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 1,
-            text: "I think our answers would be somewhat similar:",
+            text: "Somewhat similar:",
             value: "somewhat similar",
             color: BOX_COLORS[1],
-            x: ((SVG_WIDTH / 4) + 15),
-            y: (window.innerHeight * 0.9 - 200),
-            width: ((SVG_WIDTH / 4) - 30),
+            x: ((SVG_WIDTH / 3) + 15),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
         {
             key: 2,
-            text: "I don't think our answers would be similar at all:",
+            text: "Not similar at all:",
             value: "not similar",
             color: BOX_COLORS[2],
-            x: ((SVG_WIDTH / 4) * 2 + 15),
-            y: (window.innerHeight * 0.9 - 200),
-            width: ((SVG_WIDTH / 4) - 30),
+            x: ((SVG_WIDTH / 3) * 2 + 15),
+            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
-        {
-            key: 3,
-            text: "I'm not sure about these individuals:",
-            value: "not sure",
-            color: BOX_COLORS[3],
-            x: ((SVG_WIDTH / 4) * 3 + 15),
-            y: (window.innerHeight * 0.9 - 200),
-            width: ((SVG_WIDTH / 4) - 30),
-            height: window.innerHeight * 0.17
-        }
+        // {
+        //     key: 3,
+        //     text: "I'm not sure about these individuals:",
+        //     value: "not sure",
+        //     color: BOX_COLORS[3],
+        //     x: ((SVG_WIDTH / 4) * 3 + 15),
+        //     y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+        //     width: ((SVG_WIDTH / 4) - 30),
+        //     height: window.innerHeight * 0.17
+        // }
     ] :
     // Mobile Considerations. If the screensize is less than 700px, return the bollowing boxes
     [
         {
             key: 0,
-            text: "I think our answers would be very similar:",
+            text: "Very similar:",
             value: "very similar",
             color: BOX_COLORS[0],
             x: 15,
@@ -1138,7 +1130,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "I think our answers would be somewhat similar:",
+            text: "Somewhat similar:",
             value: "somewhat similar",
             color: BOX_COLORS[1],
             x: 15,
@@ -1147,22 +1139,22 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "I don't think our answers would be similar at all:",
+            text: "Not similar at all:",
             value: "not similar",
             color: BOX_COLORS[2],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
         },
-        {
-            key: 3,
-            text: "I'm not sure about these individuals:",
-            value: "not sure",
-            color: BOX_COLORS[3],
-            x: 15,
-            y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
-            width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
-        },
+        // {
+        //     key: 3,
+        //     text: "I'm not sure about these individuals:",
+        //     value: "not sure",
+        //     color: BOX_COLORS[3],
+        //     x: 15,
+        //     y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
+        //     width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
+        // },
     ]
 )
 

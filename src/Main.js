@@ -756,8 +756,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.academic === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.academic === -1 ? ((NODE_RADIUS * 2) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.academic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.academic === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_4_b"}
@@ -825,8 +825,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.isLabMember === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.isLabMember === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.isLabMember === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.isLabMember === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.isLabMember === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_6"}
@@ -861,8 +861,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.collaboration === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.collaboration === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.collaboration === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.collaboration === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.collaboration === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_7"}
@@ -898,8 +898,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.providesMeSupport_Technical === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.providesMeSupport_Technical === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.providesMeSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.providesMeSupport_Technical === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.providesMeSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_8"}
@@ -934,8 +934,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.iWouldLikeMoreTechnicalSupport === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.iWouldLikeMoreTechnicalSupport === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.iWouldLikeMoreTechnicalSupport === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.iWouldLikeMoreTechnicalSupport === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.iWouldLikeMoreTechnicalSupport === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_9"}
@@ -970,8 +970,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.iProvideSupport_Technical === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.iProvideSupport_Technical === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.iProvideSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.iProvideSupport_Technical === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.iProvideSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_10"}
@@ -1006,8 +1006,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.iAmComfortable_Failure_Disappointment_Struggle_Academic === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.iAmComfortable_Failure_Disappointment_Struggle_Academic === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.iAmComfortable_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.iAmComfortable_Failure_Disappointment_Struggle_Academic === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.iAmComfortable_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_11"}
@@ -1043,8 +1043,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.iProvideSupport_Failure_Disappointment_Struggle_Academic === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.iProvideSupport_Failure_Disappointment_Struggle_Academic === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.iProvideSupport_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.iProvideSupport_Failure_Disappointment_Struggle_Academic === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.iProvideSupport_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_12"}
@@ -1079,8 +1079,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.iAmComfortable_Personal_NonAcademic === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.iAmComfortable_Personal_NonAcademic === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.iAmComfortable_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.iAmComfortable_Personal_NonAcademic === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.iAmComfortable_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_13"}
@@ -1115,8 +1115,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.iProvideSupport_Personal_NonAcademic === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.iProvideSupport_Personal_NonAcademic === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.iProvideSupport_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.iProvideSupport_Personal_NonAcademic === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.iProvideSupport_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_14"}
@@ -1151,8 +1151,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.difficultToInteractWith === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.difficultToInteractWith === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.difficultToInteractWith === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.difficultToInteractWith === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.difficultToInteractWith === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_15"}
@@ -1188,8 +1188,8 @@ class Main extends Component
                         categoryColor: node.categoryColor,
                         border: node.wouldAnswerSimilarToMe === -1 ? "#FFFFFF" : node.border,
                         fixedPosY: node.y,
-                        x: node.wouldAnswerSimilarToMe === -1 ? ((NODE_RADIUS * 1) + ((SVG_WIDTH / 3) * ((node.key - 1) % 4))) : node.fixedPosX,
-                        y: node.wouldAnswerSimilarToMe === -1 ? ((Math.floor((node.key - 1) / 4) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
+                        x: node.wouldAnswerSimilarToMe === -1 ? (SVG_WIDTH * 0.1 - NODE_RADIUS) + ((NODE_RADIUS * 2) + ((SVG_WIDTH * 0.8 / 4) * ((node.key - 1) % 5))) : node.fixedPosX,
+                        y: node.wouldAnswerSimilarToMe === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
                     route={"/Question_16"}

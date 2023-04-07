@@ -5,14 +5,14 @@ import { isEqual } from 'underscore';
 
 
 // Important consts:
-export const SVG_HEIGHT = window.innerHeight * 1;
-export const SVG_WIDTH = (window.innerWidth > 1140 ? window.innerWidth - 15 : window.innerWidth) - 60;
-export const MOBILE = (window.innerWidth < 500 || window.innerHeight < 500 ? true : false) // to detect small displays, requiring different render
-export const NODE_SIZE = MOBILE ? 20 : 30; // just internal size of node
-export const OUTER_STROKE = MOBILE ? 5 : 10;
-export const NODE_RADIUS = NODE_SIZE + 1 + (OUTER_STROKE / 2.0); // node size + colored circle
-export const AVB_WIDTH = SVG_WIDTH - 2 * NODE_RADIUS;
-export const AVB_HEIGHT = SVG_HEIGHT - 2 * NODE_RADIUS;
+export var SVG_HEIGHT = window.innerHeight * 1;
+export var SVG_WIDTH = (window.innerWidth > 1140 ? window.innerWidth - 15 : window.innerWidth) - 60;
+export var MOBILE = (window.innerWidth < 500 || window.innerHeight < 500 ? true : false) // to detect small displays, requiring different render
+export var NODE_SIZE = MOBILE ? 20 : 30; // just internal size of node
+export var OUTER_STROKE = MOBILE ? 5 : 10;
+export var NODE_RADIUS = NODE_SIZE + 1 + (OUTER_STROKE / 2.0); // node size + colored circle
+export var AVB_WIDTH = SVG_WIDTH - 2 * NODE_RADIUS;
+export var AVB_HEIGHT = SVG_HEIGHT - 2 * NODE_RADIUS;
 
 /*************************************************************************
  * Graph class handling dynamic and static rendering for networks.
@@ -53,7 +53,32 @@ class Graph extends Component
       .on("dragend", (e) => this.dragCallBack(e))
   }
 
+  /*************************************************************************
+ * D3 takes over to render node parts, independet of REACT
+ *************************************************************************/
+  componentDidMount()
+  {
+    this.virtualD3 = d3.select(ReactDOM.findDOMNode(this.graphRef));
+    this.force.on('tick', (e) =>
+    {
+      this.virtualD3.call(this.updateVirtualD3, JSON.parse(JSON.stringify(this.props.foci)));
+    });
+    this.lastClickedNode = 0
+    // window.addEventListener("resize", this.handleCanvasResize)
+  }
 
+  // handleCanvasResize = () =>
+  // {
+  //   SVG_HEIGHT = window.innerHeight * 1;
+  //   SVG_WIDTH = (window.innerWidth > 1140 ? window.innerWidth - 15 : window.innerWidth) - 60;
+  //   MOBILE = (window.innerWidth < 500 || window.innerHeight < 500 ? true : false) // to detect small displays, requiring different render
+  //   NODE_SIZE = MOBILE ? 20 : 30; // just internal size of node
+  //   OUTER_STROKE = MOBILE ? 5 : 10;
+  //   NODE_RADIUS = NODE_SIZE + 1 + (OUTER_STROKE / 2.0); // node size + colored circle
+  //   AVB_WIDTH = SVG_WIDTH - 2 * NODE_RADIUS;
+  //   AVB_HEIGHT = SVG_HEIGHT - 2 * NODE_RADIUS;
+  //   console.log("Resizing")
+  // }
   /*************************************************************************
    * Handles callbacks for views that allow for node dragging
    * @param {event}: d3.js event
@@ -288,18 +313,6 @@ class Graph extends Component
   }
 
 
-  /*************************************************************************
-   * D3 takes over to render node parts, independet of REACT
-   *************************************************************************/
-  componentDidMount()
-  {
-    this.virtualD3 = d3.select(ReactDOM.findDOMNode(this.graphRef));
-    this.force.on('tick', (e) =>
-    {
-      this.virtualD3.call(this.updateVirtualD3, JSON.parse(JSON.stringify(this.props.foci)));
-    });
-    this.lastClickedNode = 0
-  }
 
   /*************************************************************************
    * Checks whether two sequences of objects are equal.
@@ -454,7 +467,7 @@ class Graph extends Component
   {
     return (
       <div className="container">
-        <svg width="100%" height="100%" ref={(e) => this.graphRef = e}>
+        <svg width="100%" height="100%" id="graphCanvas" ref={(e) => this.graphRef = e}>
           <g id="boxes">
             {(this.props.categories ? this.props.categories.map((category, i) => (
               <text key={category.key} x={category.x} y={category.y - 10}>{category.text}</text>
