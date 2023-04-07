@@ -1,8 +1,6 @@
 let express = require('express');
 let monk = require("monk");
 let bodyParser = require('body-parser')
-
-let bcrypt = require('bcrypt')
 require('dotenv').config();
 
 /* Content:
@@ -51,47 +49,17 @@ app.get('/', (req, res) =>
 /**
  * Sends data to db
  */
-// app.post("/ajax", (req, res) =>
-// {
-//     let ID = req.body.ID;
-//     let data = req.body.data;
-
-//     data = JSON.parse(data);
-//     collection.find({ ID: ID }).then((doc) =>
-//     {
-//         if (doc.length === 0)
-//         {
-//             console.log("User does not exist");
-//             collection.insert({ ID: ID, data: data }).then(() => { res.send("Success") })
-//         } else
-//         {
-//             collection.findOneAndUpdate({ ID: ID },
-//                 { $set: { ID: ID, data: data } }).then(() => { res.send("Success") })
-//         }
-//     }
-//     )
-// })
-function generateHash(password)
-{
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-}
-
-function checkValidPassword(password) 
-{
-    return bcrypt.compareSync(password, this.password);
-}
 app.post("/ajax", (req, res) =>
 {
     let ID = req.body.ID;
     let data = req.body.data;
-    let password = req.body.password;
     data = JSON.parse(data);
     collection.find({ ID: ID }).then((doc) =>
     {
         if (doc.length === 0)
         {
             console.log("User does not exist");
-            collection.insert({ ID: ID, password: generateHash(password), data: data }).then(() => { res.send("Success") })
+            collection.insert({ ID: ID, data: data }).then(() => { res.send("Success") })
         } else
         {
 
