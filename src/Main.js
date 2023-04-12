@@ -56,6 +56,7 @@ import
   SLIDER_WARNING,
   CATEGORY_WARNING,
   ACADEMIC_SUBCATEGORIES,
+  AGE_CATEGORIES,
   NONACADEMIC_SUBCATEGORIES,
   COLLABORATOR_BOXES,
   PROVIDES_ME_TECHNICAL_SUPPORT,
@@ -356,6 +357,28 @@ class Main extends Component
     }
   }
 
+    /*************************************************************************
+   * Changes specific category key of a node
+   * @param {string} key key of node property
+   * @param {object} categories object containing categories and colors  
+   * @param {number} counter that identifies node
+   * @param {number} id of category
+   * @param {string} category category name
+   *************************************************************************/
+    changeAgeCategoryButtonCallback = (key, keyColor, categories, counter, id, category) =>
+    {
+      //updates background associated with node
+      if (counter >= this.state.nodes.length)
+      {
+        alert(CATEGORY_WARNING);
+      } else
+      {
+        let nodes = JSON.parse(JSON.stringify(this.state.nodes));
+        nodes[counter][key] = category;
+        // nodes[counter][keyColor] = categories[id].color;
+        this.setState({ nodes: nodes, correction: 0 });
+      }
+    }
   /*************************************************************************
    * Changes specific continuous key of a node
    * @param {string} key key of node property
@@ -728,7 +751,7 @@ class Main extends Component
                   />
                 } />
                 {/* Route for Question 3: Assigning Age */}
-                <Route exact path="/Question_3" component={
+                {/* <Route exact path="/Question_3" component={
                   () => <NodeSliderComponent nodes={this.state.nodes.slice(1)}
                     route={"/Question_4_a"}
                     prevNodes={this.prevNodes}
@@ -744,6 +767,29 @@ class Main extends Component
                     transferCallBack={this.transferData.bind(this)}
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                   />
+                } /> */}
+                {/* Question 3 has been re-done to use the category components to assign age, rather than an input field. 
+                  Now matches the question format for GENTLE_question_format_v5
+                */}
+                  <Route exact path="/Question_3" component={
+                  () =>
+                    <NodeCategoriesComponent nodes={this.state.nodes.slice(1)}
+                      route={"/Question_4_a"}
+                      prevNodes={this.prevNodes}
+                      counter={this.determineCounterReturn(this.state.nodes.slice(1), "age", "")}
+                      sliderUpdateValue={this.sliderUpdateValue("age", 1)}
+                      links={[]}
+                      categories={AGE_CATEGORIES}
+                      foci={this.state.foci.slice(1)}
+                      prevFoci={this.prevFoci}
+                      callBackNodes={this.genericNodesCallback.bind(this)}
+                      callBackButton={[this.changeAgeCategoryButtonCallback.bind(this), "age", AGE_CATEGORIES]}
+                      // callBackButton={[this.changeSliderButtonCallback.bind(this), "age"]}
+                      collectHistory={this.collectHistory.bind(this)}
+                      textDescription={SURVEY_QUESTIONS[2]}
+                      transferCallBack={this.transferData.bind(this)}
+                      lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    />
                 } />
                 {/* Route for Question 4a: Assigning academic/non-academic */}
                 <Route exact path="/Question_4_a" component={
