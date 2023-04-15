@@ -373,6 +373,20 @@ export const ACADEMIC_SUBCATEGORIES = [
 
 ];
 
+export const AGE_CATEGORIES = [
+    { key: 0, text: "<20", color: "#FFE699" },
+    { key: 1, text: "20-24", color: "#FFE699" },
+    { key: 2, text: "25-29", color: "#FFE699" },
+    { key: 3, text: "30-34", color: "#FFE699" },
+    { key: 4, text: "35-39", color: "#FFE699" },
+    { key: 5, text: "40-44", color: "#FFE699" },
+    { key: 6, text: "45-49", color: "#FFE699" },
+    { key: 7, text: "50-59", color: "#FFE699" },
+    { key: 8, text: "60+", color: "#FFE699" },
+    { key: 9, text: "Other", color: "#FFE699" }
+
+];
+
 export const NONACADEMIC_SUBCATEGORIES = [
     { key: 0, text: "Professional Affiliate", color: "#CACEE7" },
     { key: 1, text: "Employer", color: "#C6D4EC" },
