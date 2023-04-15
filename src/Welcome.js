@@ -5,6 +5,7 @@ import "./css/bootstrap.css";
 import "./css/style.css";
 import Info from "./Info.js";
 import { INFORMATION } from "./Settings.js";
+import $ from "jquery";
 
 class Welcome extends Component
 {
@@ -48,6 +49,15 @@ class Welcome extends Component
             document.getElementById("root"))
     }
 
+    login = (username, password, data) =>
+    {
+        //   sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
+        $.ajax({
+            url: "/",
+            method: "Post",
+            data: { "ID": username, "password": password, "data": data },
+        })
+    }
     /************************************************************************ 
     * The username submit function.
     * Once clicked, the submit function checks if the session already exists, 
@@ -67,11 +77,13 @@ class Welcome extends Component
                 console.log("existing session")
                 let data = JSON.parse(sessionStorage.getItem("nodeData"));
                 console.log(data)
+                this.login(this.state.id, this.state.password, data)
                 ReactDOM.render(<Main ID={this.state.id} nodes={data.nodes} links={data.links} foci={data.foci} />,
                     document.getElementById("root"))
             } else
             {
                 console.log("New Session")
+                this.login(this.state.id, this.state.password, null)
                 ReactDOM.render(<Main ID={this.state.id} nodes={[]} links={[]} foci={[]} />,
                     document.getElementById("root"))
             }

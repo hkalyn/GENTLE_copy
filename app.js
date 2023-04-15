@@ -2,7 +2,7 @@ let express = require('express');
 let monk = require("monk");
 let bodyParser = require('body-parser')
 require('dotenv').config();
-
+let bcrypt = require('bcrypt')
 /* Content:
 Simple node server that can call to MONGODB ATLAS
 */
@@ -56,7 +56,7 @@ app.post("/ajax", (req, res) =>
     data = JSON.parse(data);
     collection.find({ ID: ID }).then((doc) =>
     {
-        if (doc.length == 0)
+        if (doc.length === 0)
         {
             console.log("User does not exist");
             collection.insert({ ID: ID, data: data }).then(() => { res.send("Success") })
@@ -69,6 +69,67 @@ app.post("/ajax", (req, res) =>
     }
     )
 })
+
+// My APIs for registering and authenticating a user
+
+var User = require('./user');
+
+// app.post('/register', function (req, res)
+// {
+//     var new_user = new User({
+//         username: req.body.username
+//     });
+
+//     new_user.password = new_user.generateHash(req.body.password);
+//     new_user.save();
+// });
+
+app.post("/", (req, res) =>
+{
+    let ID = req.body.ID;
+    let data = req.body.data;
+    let password = req.body.password
+    var password_h = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    if (data)
+    {
+        data = JSON.parse(data);
+    }
+
+    collection.find({ ID: ID }).then((doc) =>
+    {
+        if (doc.length === 0)
+        {
+            // var new_user = new User({
+            //     username: req.body.username
+            // });
+            // new_user.save();
+            collection.insert({ ID: ID, password: password_h, data: data }).then(() => { res.send("Success") })
+            collection.findOne({ ID: req.body.ID }, function (err, user)
+            {
+                console.log("User does not exist", user);
+            })
+        } else
+        {
+            collection.findOne({ ID: req.body.ID }, function (err, user)
+            {
+
+                if (bcrypt.compareSync(password, user.password))
+                {
+                    //password did not match
+                    console.log("Passwords match", user)
+                } else
+                {
+                    // password matched. proceed forward
+                    console.log("password do not match", user, password_h)
+                    console.log("password do not match", password_h)
+                }
+            });
+        }
+    }
+    )
+})
+
+
 
 
 
