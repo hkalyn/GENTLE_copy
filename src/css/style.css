@@ -241,17 +241,27 @@ body {
   margin-top: 50px;
 }
 
-.loginForm h1 {
+.loginForm h1,
+p {
   color: white;
 }
 
+.loginForm a {
+  text-decoration: underline;
+}
+
+/* .loginForm p{
+  color:
+} */
 .loginForm label {
   color: white;
+  /* margin: 15px auto; */
+  width: 90%;
 }
 .loginInput {
   display: block;
   width: 90%;
-  margin: 15px;
+  margin: 15px auto;
   padding: 5px;
   border: 1px solid grey;
   border-radius: 0.25rem;

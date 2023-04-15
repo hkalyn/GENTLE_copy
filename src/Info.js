@@ -1,21 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import Welcome from "./Welcome.js";
+import { Link } from 'react-router-dom'
+// import Welcome from "./Welcome.js";
 
 class Info extends Component
 {
-
-    // constructor(props)
-    // {
-    //     super(props);
-    // }
-
-    renderWELCOME = () =>
-    {
-        ReactDOM.render(<Welcome />,
-            document.getElementById("root"))
-    }
-
     render()
     {
         return (
@@ -25,13 +14,12 @@ class Info extends Component
                     <h3>Welcome to the GENTLE questionnaire!</h3>
                     <p>{this.props.textDescription}</p>
                 </div>
-                <button id="confirm_next" onClick={this.renderWELCOME}>Back</button>
+                <Link to="/"><button id="confirm_next">Back</button></Link>
 
             </div>
 
         )
     }
-
 }
 
 export default Info;
