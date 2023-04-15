@@ -350,7 +350,7 @@ class Graph extends Component
    * (cools down force in networkif no changes were made) or dynamically 
    * (lets nodes take on positions freely).
    * Additionally assigns individual node properties for the network screen 
-   * using properties definded by network callback (see main).
+   * using properties definded by network callback (see Survey).
    *************************************************************************/
   componentDidUpdate()
   {

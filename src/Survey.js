@@ -74,7 +74,7 @@ import
 const STORAGEURL = "/ajax";
 
 /*************************************************************************
- * Main class, acting as the router and logical interface between
+ * Survey class, acting as the router and logical interface between
  * the different components.
  * 
  * Here callbacks are defined and passed down to the different components.
@@ -83,7 +83,7 @@ const STORAGEURL = "/ajax";
  * Screen layouts are partially inspired from and based on:
  * http://www.tobiasstark.nl/GENSI/GENSI.htm
  *************************************************************************/
-class Main extends Component
+class Survey extends Component
 {
 
   /*************************************************************************
@@ -113,7 +113,7 @@ class Main extends Component
   }
   componentDidUpdate()
   {
-    console.log("Main Update", this.state.nodes)
+    console.log("Survey Update", this.state.nodes)
   }
   //Callback functions
 
@@ -357,28 +357,28 @@ class Main extends Component
     }
   }
 
-    /*************************************************************************
-   * Changes specific category key of a node
-   * @param {string} key key of node property
-   * @param {object} categories object containing categories and colors  
-   * @param {number} counter that identifies node
-   * @param {number} id of category
-   * @param {string} category category name
-   *************************************************************************/
-    changeAgeCategoryButtonCallback = (key, keyColor, categories, counter, id, category) =>
+  /*************************************************************************
+ * Changes specific category key of a node
+ * @param {string} key key of node property
+ * @param {object} categories object containing categories and colors  
+ * @param {number} counter that identifies node
+ * @param {number} id of category
+ * @param {string} category category name
+ *************************************************************************/
+  changeAgeCategoryButtonCallback = (key, keyColor, categories, counter, id, category) =>
+  {
+    //updates background associated with node
+    if (counter >= this.state.nodes.length)
     {
-      //updates background associated with node
-      if (counter >= this.state.nodes.length)
-      {
-        alert(CATEGORY_WARNING);
-      } else
-      {
-        let nodes = JSON.parse(JSON.stringify(this.state.nodes));
-        nodes[counter][key] = category;
-        // nodes[counter][keyColor] = categories[id].color;
-        this.setState({ nodes: nodes, correction: 0 });
-      }
+      alert(CATEGORY_WARNING);
+    } else
+    {
+      let nodes = JSON.parse(JSON.stringify(this.state.nodes));
+      nodes[counter][key] = category;
+      // nodes[counter][keyColor] = categories[id].color;
+      this.setState({ nodes: nodes, correction: 0 });
     }
+  }
   /*************************************************************************
    * Changes specific continuous key of a node
    * @param {string} key key of node property
@@ -771,7 +771,7 @@ class Main extends Component
                 {/* Question 3 has been re-done to use the category components to assign age, rather than an input field. 
                   Now matches the question format for GENTLE_question_format_v5
                 */}
-                  <Route exact path="/Question_3" component={
+                <Route exact path="/Question_3" component={
                   () =>
                     <NodeCategoriesComponent nodes={this.state.nodes.slice(1)}
                       route={"/Question_4_a"}
@@ -1446,4 +1446,4 @@ class Main extends Component
   }
 }
 
-export default Main;
+export default Survey;

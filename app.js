@@ -84,7 +84,7 @@ var User = require('./user');
 //     new_user.save();
 // });
 
-app.post("/", (req, res) =>
+app.post("/login", (req, res) =>
 {
     let ID = req.body.ID;
     let data = req.body.data;
@@ -103,11 +103,13 @@ app.post("/", (req, res) =>
             //     username: req.body.username
             // });
             // new_user.save();
-            collection.insert({ ID: ID, password: password_h, data: data }).then(() => { res.send("Success") })
-            collection.findOne({ ID: req.body.ID }, function (err, user)
-            {
-                console.log("User does not exist", user);
-            })
+            //collection.insert({ ID: ID, password: password_h, data: data }).then(() => { res.send("Success") })
+            //collection.findOne({ ID: req.body.ID }, function (err, user)
+            // {
+            //     console.log("User does not exist", user);
+            // })
+            console.log("User does not exist");
+            return res.status(500).json({ status: "User Not Found" })
         } else
         {
             collection.findOne({ ID: req.body.ID }, function (err, user)
@@ -117,11 +119,13 @@ app.post("/", (req, res) =>
                 {
                     //password did not match
                     console.log("Passwords match", user)
+                    return res.status(200).json({ status: "success", data: user.data })
                 } else
                 {
                     // password matched. proceed forward
                     console.log("password do not match", user, password_h)
                     console.log("password do not match", password_h)
+                    return res.status(500).json({ status: "password mismatch" })
                 }
             });
         }

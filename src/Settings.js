@@ -57,7 +57,7 @@ export const GENDER_SETTINGS = {
  * A constant object that defines the on-screen questions for the survey.
  * To add additional questions, simply create a new <div></div> containing 
  * the question, and add it to the array. It is important to know the 
- * location of a div when you add it to a route in main.
+ * location of a div when you add it to a route in Survey.
  * For Example, SURVEYQUESTIONS[1] would be the second div in the array, 
  * since arrays are 0 based.
  *************************************************************************/

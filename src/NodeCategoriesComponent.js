@@ -21,7 +21,7 @@ class NodeCategoriesComponent extends Component
   }
 
   /*************************************************************************
-   * Calls back to main component to store data.
+   * Calls back to Survey component to store data.
   *************************************************************************/
   transferCallBack()
   {

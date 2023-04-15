@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, Link } from 'react-router-dom'
-import Main from "./Main";
+import Survey from "./Survey";
 import ReactDOM from "react-dom";
 import "./css/bootstrap.css";
 import "./css/style.css";
@@ -50,7 +50,7 @@ class Welcome extends Component
             document.getElementById("root"))
     }
 
-    login = (username, password, data) =>
+    register = (username, password, data) =>
     {
         //   sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
         $.ajax({
@@ -79,14 +79,14 @@ class Welcome extends Component
                 let data = JSON.parse(sessionStorage.getItem("nodeData"));
                 console.log(data)
                 this.login(this.state.id, this.state.password, data)
-                ReactDOM.render(<Main ID={this.state.id} nodes={data.nodes} links={data.links} foci={data.foci} />,
-                    document.getElementById("root"))
+                // ReactDOM.render(<Survey ID={this.state.id} nodes={data.nodes} links={data.links} foci={data.foci} />,
+                //     document.getElementById("root"))
             } else
             {
                 console.log("New Session")
                 this.login(this.state.id, this.state.password, null)
-                ReactDOM.render(<Main ID={this.state.id} nodes={[]} links={[]} foci={[]} />,
-                    document.getElementById("root"))
+                // ReactDOM.render(<Survey ID={this.state.id} nodes={[]} links={[]} foci={[]} />,
+                //     document.getElementById("root"))
             }
         } else
         {
@@ -138,7 +138,7 @@ class Welcome extends Component
                             checked={this.state.consent}
                             onChange={this.handleChange} />
                     </label>
-                    <input className="loginInput" type="submit" value="Submit" onClick={() => this.handleSubmit} />
+                    <input className="loginInput" type="submit" value="Complete Registration" onClick={() => this.handleSubmit} />
                     <p>Already a participant? Please <Link to="/">login</Link>.</p>
                 </form>
             </div>
