@@ -119,7 +119,7 @@ app.post("/login", (req, res) =>
                 {
                     //password did not match
                     console.log("Passwords match", user)
-                    return res.status(200).json({ status: "success", data: user.data })
+                    return res.status(200).json({ status: "success", ID: ID, password: password_h, data: user.data })
                 } else
                 {
                     // password matched. proceed forward

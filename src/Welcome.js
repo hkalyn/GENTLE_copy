@@ -17,7 +17,7 @@ class Welcome extends Component
     constructor(props)
     {
         super(props);
-        this.state = { id: "", consent: false, password: "", auth: false, nodes: [], links: [], foci: [] };
+        this.state = { id: "", consent: false, password: "", password_h: "", surveyReady: false, auth: false, data: null, nodes: [], links: [], foci: [] };
         // this.handleChange = this.handleChange.bind(this)
         // this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -33,17 +33,42 @@ class Welcome extends Component
             success: this.loginSuccess,
             error: this.loginFailure
         })
-
+            .done()
         // this.resolveLoginAttempt()
     }
 
     loginSuccess = (res) =>
     {
-        console.log("Login Successful", res)
-        this.setState({ auth: true })
+        sessionStorage.setItem("authData", JSON.stringify({ id: res.ID, password: res.password, auth: true }))
 
+        var sessionNodeData = JSON.parse(sessionStorage.getItem('nodeData'));
+        var sessionAuthData = JSON.parse(sessionStorage.getItem('authData'));
+        console.log("sessionNodeData: ", sessionNodeData)
+        console.log("sessionAuthData: ", sessionAuthData)
+
+        if (sessionNodeData === null)
+        {
+            console.log("sessionNodeData == null")
+            if (res.data === null)
+            {
+                console.log("res.data == null")
+                sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
+                // this.setState({ id: res.id, consent: this.state.consent, password_h: res.password, auth: true, data: null, nodes: [], links: [], foci: [] })
+            }
+            //there are values in the DB to use
+            else
+            {
+                console.log("res.data is not null")
+                sessionStorage.setItem("nodeData", JSON.stringify({ nodes: res.data.nodes, links: res.data.links, foci: this.state.foci }));
+            }
+        }
+        sessionNodeData = JSON.parse(sessionStorage.getItem('nodeData'));
+        sessionAuthData = JSON.parse(sessionStorage.getItem('authData'));
+        console.log("sessionNodeData 2: ", sessionNodeData)
+        console.log("sessionAuthData 2: ", sessionAuthData)
+        this.setState({ id: sessionAuthData.id, consent: this.state.consent, password_h: sessionAuthData.password, auth: true, data: sessionNodeData, nodes: sessionNodeData.nodes, links: sessionNodeData.links, foci: sessionNodeData.foci, surveyReady: true })
         // TODO: Parse res.data here if there is any, set it into sessionStorage otherwise, set sessionstorage to empty.
-        // sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci, auth: this. }));
+        // sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci, auth: this.state.auth }));
     }
 
     loginFailure = (res) =>
@@ -84,7 +109,7 @@ class Welcome extends Component
         // TODO: If there is any session storage, it should be read as a priority. Users may be mid session.
         // Otherwise, pull From DB if you can
         //Else, set nodes as empty
-        if (this.state.auth === false)
+        if (this.state.surveyReady === false)
         {
             return <Login
                 handleLoginCallback={this.handleLoginCallback}
