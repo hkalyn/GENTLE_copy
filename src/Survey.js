@@ -3,7 +3,8 @@ import
 {
   Route,
   NavLink,
-  HashRouter
+  HashRouter,
+  Router
 } from "react-router-dom";
 import NodeButtonComponent from "./NodeButtonComponent";
 import NodeComponent from "./NodeComponent";
@@ -109,7 +110,6 @@ class Survey extends Component
     };
     this.prevNodes = [];
     this.prevFoci = [];
-
   }
   componentDidUpdate()
   {
@@ -117,6 +117,10 @@ class Survey extends Component
   }
   //Callback functions
 
+  componentDidMount()
+  {
+    console.log("SurveyState: ", this.state)
+  }
   /**************************************************************************
    * Transfer callback. Called by the individual components once a screen is complet ed.
    *************************************************************************/
@@ -616,92 +620,92 @@ class Survey extends Component
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <NavItem title="Question 1">
-                  <NavLink className="nav-link" exact to="/">
+                  <NavLink className="nav-link" exact to="/survey/Question_1">
                     Q1. Name generation example screen.
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 2" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_2" style={{ color: "red !important" }}>
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_2" style={{ color: "red !important" }}>
                     Q2. Select a Gender For Each Individual
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 3" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_3">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_3">
                     Q3. Assign an Age for Each Individual
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 4a" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_4_a">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_4_a">
                     Q4. a) Assign Alters Academic or Non-academic
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 4b" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_4_b">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_4_b">
                     Q4. b) Assign Categories for Academics
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 4c" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_4_c">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_4_c">
                     Q4. c) Assign Categories for Non-Academics
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 5" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_5">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_5">
                     Q5. Select Lab Members
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 6" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_6">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_6">
                     Q6. Select Collaborators
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 7" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_7">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_7">
                     Q7. Select Individuals That Provide You With Technical Support
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 8" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_8">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_8">
                     Q8. Select Individuals Who You Would Like More Technical Support From
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 9" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_9">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_9">
                     Q9. Select Individuals Who You Provide Technical Support For
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 10" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_10">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_10">
                     Q10. Who Do You Feel Comfortable Talking To About Personal Failure, Disappointment, or Struggle in Your Academic Work?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 11" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_11">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_11">
                     Q11. Do You Provide Support To Individuals About Personal Failure, Disappointment, or Struggle in Their Academic Work?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 12" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_12">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_12">
                     Q12. Is There Anyone You Feel Comfortable Talking With About Personal Non-Academic Matters?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 13" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_13">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_13">
                     Q13. Do You Provide Support To Help Others With Personal Non-Academic Matters?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 14" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_14">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_14">
                     Q14. Who Do You Feel Uncomfortable Interacting With?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 15" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_15">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_15">
                     Q15. Who Do You Think Would Closely Match Your Responses To This Survey?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 16" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_16">
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/survey/Question_16">
                     Q16. Assign Social Network Connections
                   </NavLink>
                 </NavItem>
@@ -710,9 +714,9 @@ class Survey extends Component
           </Navbar>
           <div id="content" className="content container">
             {/* Route for question 1: Creating alters */}
-            <Route exact path="/" component={
+            <Route exact path="/survey/Question_1" component={
               () => <NodeButtonComponent nodes={this.state.nodes.slice(1)}
-                route={"/Question_2"}
+                // route={"/survey/Question_2"}
                 max={MAX_ALTERS}
                 prevNodes={this.prevNodes}
                 counter={this.state.nodes.length}
@@ -731,9 +735,9 @@ class Survey extends Component
             */}
             {this.state.nodes.length > MIN_ALTERS ?
               <div>
-                <Route exact path="/Question_2" component={
+                <Route exact path="/survey/Question_2" component={
                   () => <NodeComponent nodes={this.state.nodes.slice(1)}
-                    route={"/Question_3"}
+                    route={"/survey/Question_3"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     links={[]}
@@ -751,9 +755,9 @@ class Survey extends Component
                   />
                 } />
                 {/* Route for Question 3: Assigning Age */}
-                {/* <Route exact path="/Question_3" component={
+                {/* <Route exact path="/survey/Question_3" component={
                   () => <NodeSliderComponent nodes={this.state.nodes.slice(1)}
-                    route={"/Question_4_a"}
+                    route={"/survey/Question_4_a"}
                     prevNodes={this.prevNodes}
                     counter={this.determineCounterReturn(this.state.nodes.slice(1), "age", "")}
                     sliderUpdateValue={this.sliderUpdateValue("age", 1)}
@@ -771,10 +775,10 @@ class Survey extends Component
                 {/* Question 3 has been re-done to use the category components to assign age, rather than an input field. 
                   Now matches the question format for GENTLE_question_format_v5
                 */}
-                <Route exact path="/Question_3" component={
+                <Route exact path="/survey/Question_3" component={
                   () =>
                     <NodeCategoriesComponent nodes={this.state.nodes.slice(1)}
-                      route={"/Question_4_a"}
+                      route={"/survey/Question_4_a"}
                       prevNodes={this.prevNodes}
                       counter={this.determineCounterReturn(this.state.nodes.slice(1), "age", "")}
                       sliderUpdateValue={this.sliderUpdateValue("age", 1)}
@@ -792,7 +796,7 @@ class Survey extends Component
                     />
                 } />
                 {/* Route for Question 4a: Assigning academic/non-academic */}
-                <Route exact path="/Question_4_a" component={
+                <Route exact path="/survey/Question_4_a" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -810,7 +814,7 @@ class Survey extends Component
                         y: node.academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_4_b"}
+                    route={"/survey/Question_4_b"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -828,10 +832,10 @@ class Survey extends Component
                   />
                 } />
                 {/* Route for Question 4 b, Academic Subcategory */}
-                <Route exact path="/Question_4_b" component={
+                <Route exact path="/survey/Question_4_b" component={
                   () =>
                     <NodeCategoriesComponent nodes={filterNodes(this.state.nodes, 'academic', "academic")}
-                      route={"/Question_4_c"}
+                      route={"/survey/Question_4_c"}
                       prevNodes={this.prevNodes}
                       counter={this.determineCounterReturn(filterNodes(this.state.nodes, 'academic', "academic"), "academicSubCategory", "")}
                       links={[]}
@@ -847,9 +851,9 @@ class Survey extends Component
                     />
                 } />
                 {/* Route for Question 4 c, non-academic subcategory */}
-                <Route exact path="/Question_4_c" component={
+                <Route exact path="/survey/Question_4_c" component={
                   () => <NodeCategoriesComponent nodes={filterNodes(this.state.nodes, 'academic', "non-academic")}
-                    route={"/Question_5"}
+                    route={"/survey/Question_5"}
                     prevNodes={this.prevNodes}
                     counter={this.determineCounterReturn(filterNodes(this.state.nodes, 'academic', "non-academic"), "nonAcademicSubCategory", "")}
                     links={[]}
@@ -865,7 +869,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Route for Question 5: Assigning Lab Members */}
-                <Route exact path="/Question_5" component={
+                <Route exact path="/survey/Question_5" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -883,7 +887,7 @@ class Survey extends Component
                         y: node.isLabMember === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_6"}
+                    route={"/survey/Question_6"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -901,7 +905,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Route for Question 6: Who would you like to colaborate with */}
-                <Route exact path="/Question_6" component={
+                <Route exact path="/survey/Question_6" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -919,7 +923,7 @@ class Survey extends Component
                         y: node.collaboration === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_7"}
+                    route={"/survey/Question_7"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -938,7 +942,7 @@ class Survey extends Component
                 } />
 
                 {/* Question 7: Who Provides you with Technical Support */}
-                <Route exact path="/Question_7" component={
+                <Route exact path="/survey/Question_7" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -956,7 +960,7 @@ class Survey extends Component
                         y: node.providesMeSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_8"}
+                    route={"/survey/Question_8"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -974,7 +978,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 8: Who would you like more support from? */}
-                <Route exact path="/Question_8" component={
+                <Route exact path="/survey/Question_8" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -992,7 +996,7 @@ class Survey extends Component
                         y: node.iWouldLikeMoreTechnicalSupport === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_9"}
+                    route={"/survey/Question_9"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1010,7 +1014,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 9: Who do you provide technical support for? */}
-                <Route exact path="/Question_9" component={
+                <Route exact path="/survey/Question_9" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1028,7 +1032,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_10"}
+                    route={"/survey/Question_10"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1046,7 +1050,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 10: Do you feel comfortable talking with anyone below about personal failure, disappointment, or struggle in your academic work?  */}
-                <Route exact path="/Question_10" component={
+                <Route exact path="/survey/Question_10" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1064,7 +1068,7 @@ class Survey extends Component
                         y: node.iAmComfortable_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_11"}
+                    route={"/survey/Question_11"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1083,7 +1087,7 @@ class Survey extends Component
                 } />
                 {/* Question 11: Do you provide support for individuals regarding personal failure, disappointment, or struggle in their
             academic work? */}
-                <Route exact path="/Question_11" component={
+                <Route exact path="/survey/Question_11" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1101,7 +1105,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_12"}
+                    route={"/survey/Question_12"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1119,7 +1123,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 12: Is there anyone below that you feel comfortable talking with about personal, non-academic matters? */}
-                <Route exact path="/Question_12" component={
+                <Route exact path="/survey/Question_12" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1137,7 +1141,7 @@ class Survey extends Component
                         y: node.iAmComfortable_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_13"}
+                    route={"/survey/Question_13"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1155,7 +1159,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 13: Do you provide (or would be willing to provide) support to help others with personal, non-academic matters? */}
-                <Route exact path="/Question_13" component={
+                <Route exact path="/survey/Question_13" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1173,7 +1177,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_14"}
+                    route={"/survey/Question_14"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1191,7 +1195,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 14: Is there anyone below with whom you find it difficult to interact? */}
-                <Route exact path="/Question_14" component={
+                <Route exact path="/survey/Question_14" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1209,7 +1213,7 @@ class Survey extends Component
                         y: node.difficultToInteractWith === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_15"}
+                    route={"/survey/Question_15"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1228,7 +1232,7 @@ class Survey extends Component
                 } />
 
                 {/* Question 15: If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you? */}
-                <Route exact path="/Question_15" component={
+                <Route exact path="/survey/Question_15" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1246,7 +1250,7 @@ class Survey extends Component
                         y: node.wouldAnswerSimilarToMe === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_16"}
+                    route={"/survey/Question_16"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1356,7 +1360,7 @@ class Survey extends Component
             } /> */}
 
 
-                <Route exact path="/Question_16" component={
+                <Route exact path="/survey/Question_16" component={
                   () => (MOBILE ? <NodeComponent nodes={this.state.nodes.slice(1).map((node, i) => (
                     {
                       key: node.key,

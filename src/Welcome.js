@@ -33,7 +33,6 @@ class Welcome extends Component
             success: this.loginSuccess,
             error: this.loginFailure
         })
-            .done()
         // this.resolveLoginAttempt()
     }
 
@@ -68,6 +67,7 @@ class Welcome extends Component
         console.log("sessionAuthData 2: ", sessionAuthData)
         this.setState({ id: sessionAuthData.id, consent: this.state.consent, password_h: sessionAuthData.password, auth: true, data: sessionNodeData, nodes: sessionNodeData.nodes, links: sessionNodeData.links, foci: sessionNodeData.foci, surveyReady: false })
         console.log("State: ", this.state)
+        this.setState({ surveyReady: true })
         // TODO: Parse res.data here if there is any, set it into sessionStorage otherwise, set sessionstorage to empty.
         // sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci, auth: this.state.auth }));
     }
@@ -142,6 +142,7 @@ class Welcome extends Component
                     <Route exact path="/survey" render={(props) => (
                         <ProtectedRoute auth={this.state.auth} redirectPath={"/"}>
                             <Survey ID={this.state.id} nodes={this.state.nodes} links={this.state.links} foci={this.state.foci} />
+                            {/* <div>Hello World</div> */}
                         </ProtectedRoute>
                     )}>
                     </Route>
