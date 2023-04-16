@@ -66,7 +66,8 @@ class Welcome extends Component
         sessionAuthData = JSON.parse(sessionStorage.getItem('authData'));
         console.log("sessionNodeData 2: ", sessionNodeData)
         console.log("sessionAuthData 2: ", sessionAuthData)
-        this.setState({ id: sessionAuthData.id, consent: this.state.consent, password_h: sessionAuthData.password, auth: true, data: sessionNodeData, nodes: sessionNodeData.nodes, links: sessionNodeData.links, foci: sessionNodeData.foci, surveyReady: true })
+        this.setState({ id: sessionAuthData.id, consent: this.state.consent, password_h: sessionAuthData.password, auth: true, data: sessionNodeData, nodes: sessionNodeData.nodes, links: sessionNodeData.links, foci: sessionNodeData.foci, surveyReady: false })
+        console.log("State: ", this.state)
         // TODO: Parse res.data here if there is any, set it into sessionStorage otherwise, set sessionstorage to empty.
         // sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci, auth: this.state.auth }));
     }
