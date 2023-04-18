@@ -65,6 +65,7 @@ class Graph extends Component
     });
     this.lastClickedNode = 0
     // window.addEventListener("resize", this.handleCanvasResize)
+    console.log("Mounting Graph", this.props)
   }
 
   // handleCanvasResize = () =>

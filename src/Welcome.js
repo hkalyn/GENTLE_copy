@@ -7,7 +7,7 @@ import Info from "./Info.js";
 import Login from "./Login"
 import Register from "./Register"
 import ProtectedRoute from "./ProtectedRoute"
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect, HashRouter } from 'react-router-dom'
 import { INFORMATION } from "./Settings.js";
 import $ from "jquery";
 
@@ -107,50 +107,65 @@ class Welcome extends Component
 
     conditionalRender = () =>
     {
-        // TODO: If there is any session storage, it should be read as a priority. Users may be mid session.
-        // Otherwise, pull From DB if you can
-        //Else, set nodes as empty
-        if (this.state.surveyReady === false)
+        if(this.state.surveyReady === true)
         {
-            return <Login
-                handleLoginCallback={this.handleLoginCallback}
-            />
+            return <Survey ID={this.state.id} nodes={this.state.nodes} links={this.state.links} foci={this.state.foci} />
         }
         else
         {
-            return <Redirect to={"/survey"} replace />
+            return  <HashRouter>
+                 {/* <Switch> */}
+                 <Route exact path="/" render={(props)=> (
+                    <Login handleLoginCallback={this.handleLoginCallback}/>
+                 )}/>
+                     <Route exact path="/register" render={(props) => (
+                         <Register />
+                     )} />
+                     <Route exact path="/consent" render={(props) => (
+                         <Info />
+                     )} />
+      
+                     {/* <Route exact path="/survey" render={(props) => (
+                         <ProtectedRoute auth={this.state.auth} redirectPath={"/"}>
+                             <Survey ID={this.state.id} nodes={this.state.nodes} links={this.state.links} foci={this.state.foci} />
+                         </ProtectedRoute>
+                     )}>
+                     </Route>  */}
+                 {/* </Switch> */}
+             </HashRouter>
         }
     }
+
     render()
     {
-        return (
-            <Router>
-                <Switch>
-                    <Route exact path="/" render={(props) => (
-                        // <Login
-                        //     handleLoginCallback={this.handleLoginCallback}
-                        // />
-                        this.conditionalRender()
-                    )} />
-                    <Route exact path="/register" render={(props) => (
-                        <Register />
-                    )} />
-                    <Route exact path="/consent" render={(props) => (
-                        <Info />
-                    )} />
-                    {/* <ProtectedRoute auth={this.state.auth} redirectPath={"/"}> */}
-                    <Route exact path="/survey" render={(props) => (
-                        <ProtectedRoute auth={this.state.auth} redirectPath={"/"}>
-                            <Survey ID={this.state.id} nodes={this.state.nodes} links={this.state.links} foci={this.state.foci} />
-                            {/* <div>Hello World</div> */}
-                        </ProtectedRoute>
-                    )}>
-                    </Route>
-                    {/* </ProtectedRoute> */}
-                </Switch>
-            </Router>
-        );
-    }
+        // return this.conditionalRender()
+        return this.conditionalRender()
+        //     this.state.surveyReady && (
+        //     <HashRouter>
+        //         {/* <Switch> */}
+        //             <Route exact path="/" render={(props) => (
+        //                 // <Login
+        //                 //     handleLoginCallback={this.handleLoginCallback}
+        //                 // />
+        //                 this.conditionalRender()
+        //             )} />
+        //             <Route exact path="/register" render={(props) => (
+        //                 <Register />
+        //             )} />
+        //             <Route exact path="/consent" render={(props) => (
+        //                 <Info />
+        //             )} />
+      
+        //             {/* <Route exact path="/survey" render={(props) => (
+        //                 <ProtectedRoute auth={this.state.auth} redirectPath={"/"}>
+        //                     <Survey ID={this.state.id} nodes={this.state.nodes} links={this.state.links} foci={this.state.foci} />
+        //                 </ProtectedRoute>
+        //             )}>
+        //             </Route>  */}
+        //         {/* </Switch> */}
+        //     </HashRouter>) 
+        // )
 
+    }
 }
 export default Welcome;
