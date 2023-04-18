@@ -57,7 +57,18 @@ class Welcome extends Component
             //there are values in the DB to use
             else
             {
+                var f_array=[];
                 console.log("res.data is not null")
+                for(var i = 0; i< res.data.nodes.length; i++)
+                {
+                    var f = {
+                        key: i,
+                        x: 0,
+                        y: 0
+                    }
+                    f_array.push(f)
+                }
+                this.setState({foci: f_array})
                 sessionStorage.setItem("nodeData", JSON.stringify({ nodes: res.data.nodes, links: res.data.links, foci: this.state.foci }));
             }
         }

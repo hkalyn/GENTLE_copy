@@ -119,7 +119,7 @@ class Survey extends Component
 
   componentDidMount()
   {
-    console.log("SurveyState: ", this.state)
+    console.log("Survey Mounted: ", this.state)
   }
   /**************************************************************************
    * Transfer callback. Called by the individual components once a screen is complet ed.
@@ -716,7 +716,7 @@ class Survey extends Component
             {/* Route for question 1: Creating alters */}
             <Route exact path="/Question_1" component={
               () => <NodeButtonComponent nodes={this.state.nodes.slice(1)}
-                // route={"/survey/Question_2"}
+                route={"/Question_2"}
                 max={MAX_ALTERS}
                 prevNodes={this.prevNodes}
                 counter={this.state.nodes.length}
