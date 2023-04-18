@@ -98,12 +98,15 @@ class Survey extends Component
   constructor(props)
   {
     super(props);
-    this.ID = this.props.ID;
+    // this.ID = this.props.ID;
     this.state = {
-      nodes: (this.props.nodes.length === 0 ? [returnYouTemplate()] :
-        recalculate_nodes(this.props.nodes, recalculate_foci(this.props.foci))),
-      links: this.props.links,
-      foci: (this.props.foci.length === 0 ? [{ key: 0, x: SVG_WIDTH / 2, y: SVG_HEIGHT / 2 }] : recalculate_foci(this.props.foci)),
+      // nodes: (this.props.nodes.length === 0 ? [returnYouTemplate()] :
+      //   recalculate_nodes(this.props.nodes, recalculate_foci(this.props.foci))),
+      // links: this.props.links,
+      // foci: (this.props.foci.length === 0 ? [{ key: 0, x: SVG_WIDTH / 2, y: SVG_HEIGHT / 2 }] : recalculate_foci(this.props.foci)),
+      nodes: [],
+      links: [],
+      foci: [],
       source: -1,
       correction: 0,
       lastClickedNode: 1
@@ -120,6 +123,26 @@ class Survey extends Component
   componentDidMount()
   {
     console.log("Survey Mounted: ", this.state)
+    var sessionNodeData = JSON.parse(sessionStorage.getItem('nodeData'));
+    var sessionAuthData = JSON.parse(sessionStorage.getItem('authData'));
+    if(!sessionNodeData===null)
+    {
+      this.setState({
+        ID: sessionAuthData.id, 
+        nodes: sessionNodeData.nodes, 
+        links: sessionNodeData.links, 
+        foci: sessionNodeData.foci
+      })
+    }
+    else{
+      this.setState({
+        nodes: (this.props.nodes.length === 0 ? [returnYouTemplate()] :
+        recalculate_nodes(this.props.nodes, recalculate_foci(this.props.foci))),
+        links: this.props.links,
+        foci: (this.props.foci.length === 0 ? [{ key: 0, x: SVG_WIDTH / 2, y: SVG_HEIGHT / 2 }] : recalculate_foci(this.props.foci)),
+      })
+    }
+
   }
   /**************************************************************************
    * Transfer callback. Called by the individual components once a screen is complet ed.

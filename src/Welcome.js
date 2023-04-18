@@ -36,6 +36,12 @@ class Welcome extends Component
         // this.resolveLoginAttempt()
     }
 
+    componentDidMount(){
+        // TODO: setting the survey ready state to true here solves the issue that occurs when reloading the survey mis way through.
+        // We need to do a check here that will look for sessionNodeData/sessionAuthData and if it exists pull it in and set the component state with it.
+        // this will pass the existing nodes down the tree into the survey component.
+        this.setState({surveyReady: true})
+    }
     loginSuccess = (res) =>
     {
         sessionStorage.setItem("authData", JSON.stringify({ id: res.ID, password: res.password, auth: true }))
