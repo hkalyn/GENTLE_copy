@@ -98,8 +98,9 @@ class Survey extends Component
   constructor(props)
   {
     super(props);
-    // this.ID = this.props.ID;
+    //  this.ID = this.props.ID;
     this.state = {
+       id: this.props.ID,
       // nodes: (this.props.nodes.length === 0 ? [returnYouTemplate()] :
       //   recalculate_nodes(this.props.nodes, recalculate_foci(this.props.foci))),
       // links: this.props.links,
@@ -116,7 +117,8 @@ class Survey extends Component
   }
   componentDidUpdate()
   {
-    console.log("Survey Update", this.state.nodes)
+    console.log("Survey Update", this.state)
+    this.transferData()
   }
   //Callback functions
 
@@ -128,7 +130,7 @@ class Survey extends Component
     if(!sessionNodeData===null)
     {
       this.setState({
-        ID: sessionAuthData.id, 
+        id: sessionAuthData.id, 
         nodes: sessionNodeData.nodes, 
         links: sessionNodeData.links, 
         foci: sessionNodeData.foci
@@ -153,7 +155,7 @@ class Survey extends Component
     $.ajax({
       url: STORAGEURL,
       method: "Post",
-      data: { "ID": this.ID, "data": JSON.stringify({ nodes: this.state.nodes, links: this.state.links }) },
+      data: { "ID": this.state.id, "data": JSON.stringify({ nodes: this.state.nodes, links: this.state.links }) },
     })
   }
 
@@ -401,7 +403,7 @@ class Survey extends Component
     } else
     {
       let nodes = JSON.parse(JSON.stringify(this.state.nodes));
-      nodes[counter][key] = category;
+      nodes[counter]["age"] = category;
       // nodes[counter][keyColor] = categories[id].color;
       this.setState({ nodes: nodes, correction: 0 });
     }
@@ -804,13 +806,13 @@ class Survey extends Component
                       route={"/Question_4_a"}
                       prevNodes={this.prevNodes}
                       counter={this.determineCounterReturn(this.state.nodes.slice(1), "age", "")}
-                      sliderUpdateValue={this.sliderUpdateValue("age", 1)}
+                      // sliderUpdateValue={this.sliderUpdateValue("age", 1)}
                       links={[]}
                       categories={AGE_CATEGORIES}
                       foci={this.state.foci.slice(1)}
                       prevFoci={this.prevFoci}
                       callBackNodes={this.genericNodesCallback.bind(this)}
-                      callBackButton={[this.changeAgeCategoryButtonCallback.bind(this), "age", AGE_CATEGORIES]}
+                      callBackButton={[this.changeAgeCategoryButtonCallback.bind(this), "age", null, AGE_CATEGORIES]}
                       // callBackButton={[this.changeSliderButtonCallback.bind(this), "age"]}
                       collectHistory={this.collectHistory.bind(this)}
                       textDescription={SURVEY_QUESTIONS[2]}
@@ -1458,8 +1460,8 @@ class Survey extends Component
                       callBackNodes={this.networkNodesCallback.bind(this)}
                       collectHistory={this.collectHistory.bind(this)}
                       textDescription={SURVEY_QUESTIONS[17]}
-                      transferCallBack={this.transferData.bind(this)} />)
-                } />
+                      transferCallBack={this.transferData.bind(this)} />
+                      )} />
 
                 <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SURVEY_QUESTIONS[18]} transferCallBack={this.transferData.bind(this)} />} />
               </div>

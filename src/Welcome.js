@@ -40,11 +40,31 @@ class Welcome extends Component
         // TODO: setting the survey ready state to true here solves the issue that occurs when reloading the survey mis way through.
         // We need to do a check here that will look for sessionNodeData/sessionAuthData and if it exists pull it in and set the component state with it.
         // this will pass the existing nodes down the tree into the survey component.
-        this.setState({surveyReady: true})
+        var isAuthorized=this.reAuthorizeUserSession()
+        if(isAuthorized === true)
+        {
+            var sessionAuthData = JSON.parse(sessionStorage.getItem('authData'));
+            var sessionNodeData = JSON.parse(sessionStorage.getItem('nodeData'));
+            this.setState({ id: sessionAuthData.id,  nodes: sessionNodeData.nodes, links: sessionNodeData.links, foci: sessionNodeData.foci, surveyReady: false })
+
+        }
+        this.setState({surveyReady: isAuthorized})
+        // this.setState({surveyReady: true})
     }
+
+    reAuthorizeUserSession=()=>{
+        var sessionAuthData=JSON.parse(sessionStorage.getItem('authData'));
+        if(sessionAuthData!==null)
+        {
+            var authToken = sessionAuthData.auth;
+        }   
+        
+        return authToken;
+    }
+
     loginSuccess = (res) =>
     {
-        sessionStorage.setItem("authData", JSON.stringify({ id: res.ID, password: res.password, auth: true }))
+        sessionStorage.setItem("authData", JSON.stringify({ id: res.ID, auth: true }))
 
         var sessionNodeData = JSON.parse(sessionStorage.getItem('nodeData'));
         var sessionAuthData = JSON.parse(sessionStorage.getItem('authData'));
