@@ -71,18 +71,66 @@ app.post("/ajax", (req, res) =>
 })
 
 // My APIs for registering and authenticating a user
+app.post("/register", (req, res) =>
+{
+    let ID = req.body.ID;
+    let data = req.body.data;
+    let password = req.body.password
+    let passwordConfirm = req.body.passwordConfirm
 
-var User = require('./user');
+    var password_h = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    if (data)
+    {
+        data = JSON.parse(data);
+    }
+    
+    collection.find({ ID: ID }).then((doc) =>
+    {
+        //first failure case, if a user already exists
+        if (doc.length !== 0)
+        {
+            console.log("User already exists.");
+            return res.status(500).json({ status: "User Not Found" })
+        }
 
-// app.post('/register', function (req, res)
-// {
-//     var new_user = new User({
-//         username: req.body.username
-//     });
+        //second failure case, if the passwrords dont't match
+        //better to double check surver side.
+        else if(password!==passwordConfirm)
+        {
+            console.log("password do not match", password_h)
+            return res.status(500).json({ status: "password mismatch" })
+        }
 
-//     new_user.password = new_user.generateHash(req.body.password);
-//     new_user.save();
-// });
+        //add a new user
+        else
+        {
+            var newUser = {
+                ID: ID,
+                password: password_h,
+                data: {}
+            }
+
+            collection.insert(newUser).then(() => {
+                return res.status(200).send("Success") })
+            // collection.insertOne({ ID: req.body.ID }, function (err, user)
+            // {
+    
+            //     if (bcrypt.compareSync(password, user.password))
+            //     {
+            //         //password did not match
+            //         console.log("Passwords match", user)
+            //         return res.status(200).json({ status: "success", ID: ID, password: password_h, data: user.data })
+            //     } else
+            //     {
+            //         // password matched. proceed forward
+            //         console.log("password do not match", user, password_h)
+            //         console.log("password do not match", password_h)
+            //         return res.status(500).json({ status: "password mismatch" })
+            //     }
+            // });
+        }
+    })
+})
 
 app.post("/login", (req, res) =>
 {
@@ -99,15 +147,6 @@ app.post("/login", (req, res) =>
     {
         if (doc.length === 0)
         {
-            // var new_user = new User({
-            //     username: req.body.username
-            // });
-            // new_user.save();
-            //collection.insert({ ID: ID, password: password_h, data: data }).then(() => { res.send("Success") })
-            //collection.findOne({ ID: req.body.ID }, function (err, user)
-            // {
-            //     console.log("User does not exist", user);
-            // })
             console.log("User does not exist");
             return res.status(500).json({ status: "User Not Found" })
         } else

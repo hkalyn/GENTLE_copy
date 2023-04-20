@@ -9,7 +9,7 @@ import Register from "./Register"
 import ProtectedRoute from "./ProtectedRoute"
 import { BrowserRouter as Router, Switch, Route, Redirect, HashRouter } from 'react-router-dom'
 import { INFORMATION } from "./Settings.js";
-import $ from "jquery";
+import $, { data } from "jquery";
 
 class Welcome extends Component
 {
@@ -20,20 +20,6 @@ class Welcome extends Component
         this.state = { id: "", consent: false, password: "", password_h: "", surveyReady: false, auth: false, data: null, nodes: [], links: [], foci: [] };
         // this.handleChange = this.handleChange.bind(this)
         // this.handleSubmit = this.handleSubmit.bind(this)
-    }
-
-    login = (username, password, data) =>
-    {
-        //   sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
-        $.ajax({
-            url: "/login",
-            method: "Post",
-            data: { "ID": username, "password": password, "data": data },
-            res: { status: null },
-            success: this.loginSuccess,
-            error: this.loginFailure
-        })
-        // this.resolveLoginAttempt()
     }
 
     componentDidMount(){
@@ -60,6 +46,35 @@ class Welcome extends Component
         }   
         
         return authToken;
+    }
+
+    /************************************************************************ 
+    * The username submit function.
+    * Once clicked, the submit function checks if the session already exists, 
+    * and if it does, it returns it from session storage. Otherwise a new 
+    * session is created and added to storage.
+    *************************************************************************/
+    handleLoginCallback = (username, password, consent) =>
+    {
+        if (consent)
+        {
+            this.login(username, password, consent)
+        }
+        // this.loginSuccess()
+    }
+
+    login = (username, password, data) =>
+    {
+        //   sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
+        $.ajax({
+            url: "/login",
+            method: "Post",
+            data: { "ID": username, "password": password, "data": data },
+            res: { status: null },
+            success: this.loginSuccess,
+            error: this.loginFailure
+        })
+        // this.resolveLoginAttempt()
     }
 
     loginSuccess = (res) =>
@@ -123,23 +138,43 @@ class Welcome extends Component
         }
     }
 
-    /************************************************************************ 
-    * The username submit function.
-    * Once clicked, the submit function checks if the session already exists, 
-    * and if it does, it returns it from session storage. Otherwise a new 
-    * session is created and added to storage.
-    *************************************************************************/
-    handleLoginCallback = (username, password, consent) =>
+    handleRegisterCallback=(username, password, passwordConfirm, consent) => 
     {
-        console.log("Handling Login Callback")
-        console.log("Username: ", username)
-        console.log("Password: ", password)
-        console.log("Consent: ", consent)
-        if (consent)
+        if(consent)
         {
-            this.login(username, password, consent)
+            if(password === passwordConfirm)
+            {
+                console.log("Passwords match")
+                this.register(username, password, passwordConfirm, consent)
+            }
+            else
+            {
+                alert("The passwords you have entered do not match. Please check them and try again.")
+            }
+            
         }
-        // this.loginSuccess()
+    }
+
+    register = (username, password, passwordConfirm, data) =>
+    {
+        $.ajax({
+            url: "/register",
+            method: "Post",
+            data: { "ID": username, "password": password, "passwordConfirm": passwordConfirm, "data": data },
+            res: { status: null },
+            success: this.registerSuccess,
+            error: this.registerFailure,
+        })
+    }
+
+    registerSuccess=(res)=>
+    {
+        console.log("resgister success handler triggered: ", res)
+    }
+
+    registerFailure=(res)=>
+    {
+        console.log("register failure handlertriggered: ", res)
     }
 
     conditionalRender = () =>
@@ -156,7 +191,7 @@ class Welcome extends Component
                     <Login handleLoginCallback={this.handleLoginCallback}/>
                  )}/>
                      <Route exact path="/register" render={(props) => (
-                         <Register />
+                         <Register handleRegisterCallback={this.handleRegisterCallback}/>
                      )} />
                      <Route exact path="/consent" render={(props) => (
                          <Info />

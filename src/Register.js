@@ -22,7 +22,7 @@ class Welcome extends Component
     constructor(props)
     {
         super(props);
-        this.state = { id: "", consent: false, password: "" };
+        this.state = { id: "", consent: false, password: "", passwordConfirm: "" };
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -65,30 +65,18 @@ class Welcome extends Component
     * and if it does, it returns it from session storage. Otherwise a new 
     * session is created and added to starage.
     *************************************************************************/
-    handleSubmit = () =>
+    handleSubmit = (e) =>
     {
 
         // console.log("handling submit.", event)
-        // event.preventDefault();
-        if (this.state.consent)
+         e.preventDefault();
+        // 
+        if (this.state.consent == true)
         {
-            console.log("Session Data: ", sessionStorage.getItem("nodeData"))
-            if (sessionStorage.getItem("nodeData"))
-            {
-                console.log("existing session")
-                let data = JSON.parse(sessionStorage.getItem("nodeData"));
-                console.log(data)
-                this.login(this.state.id, this.state.password, data)
-                // ReactDOM.render(<Survey ID={this.state.id} nodes={data.nodes} links={data.links} foci={data.foci} />,
-                //     document.getElementById("root"))
-            } else
-            {
-                console.log("New Session")
-                this.login(this.state.id, this.state.password, null)
-                // ReactDOM.render(<Survey ID={this.state.id} nodes={[]} links={[]} foci={[]} />,
-                //     document.getElementById("root"))
-            }
-        } else
+            console.log("Registering")
+            this.props.handleRegisterCallback(this.state.id, this.state.password, this.state.passwordConfirm, this.state.consent)
+        } 
+        else
         {
             alert("Please provide consent.")
         }
@@ -103,7 +91,7 @@ class Welcome extends Component
                     <h1>Register</h1>
                     <input
                         className="loginInput"
-                        type="text"
+                        type="email"
                         name="id"
                         placeholder="Enter Email"
                         value={this.state.id}
@@ -123,10 +111,10 @@ class Welcome extends Component
                     <input
                         className="loginInput"
                         type="password"
-                        name="password"
+                        name="passwordConfirm"
                         secureTextEntry={true}
                         placeholder="Confirm Password"
-                        value={this.state.password}
+                        value={this.state.passwordConfirm}
                         onChange={this.handleChange}
                         required
                     />
@@ -138,7 +126,7 @@ class Welcome extends Component
                             checked={this.state.consent}
                             onChange={this.handleChange} />
                     </label>
-                    <input className="loginInput" type="submit" value="Complete Registration" onClick={() => this.handleSubmit} />
+                    <input className="loginInput" type="submit" value="Complete Registration" />
                     <p>Already a participant? Please <Link to="/">login</Link>.</p>
                 </form>
             </div>

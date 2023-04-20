@@ -97,8 +97,14 @@ class Login extends Component
     handleSubmit = (e) =>
     {
         e.preventDefault()
-        console.log("Submitting")
-        this.props.handleLoginCallback(this.state.id, this.state.password, this.state.consent)
+        if(this.state.consent === true)
+        {
+            console.log("Submitting")
+            this.props.handleLoginCallback(this.state.id, this.state.password, this.state.consent)
+        }
+        else{
+            alert("Please provide consent by checking the box.")
+        }
     }
 
     render()
