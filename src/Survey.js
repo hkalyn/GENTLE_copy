@@ -739,7 +739,7 @@ class Survey extends Component
           </Navbar>
           <div id="content" className="content container">
             {/* Route for question 1: Creating alters */}
-            <Route exact path="/Question_1" component={
+            <Route exact path="/" component={
               () => <NodeButtonComponent nodes={this.state.nodes.slice(1)}
                 route={"/Question_2"}
                 max={MAX_ALTERS}

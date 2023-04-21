@@ -50,15 +50,15 @@ class Welcome extends Component
             document.getElementById("root"))
     }
 
-    register = (username, password, data) =>
-    {
-        //   sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
-        $.ajax({
-            url: "/",
-            method: "Post",
-            data: { "ID": username, "password": password, "data": data },
-        })
-    }
+    // register = (username, password, data) =>
+    // {
+    //     //   sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
+    //     $.ajax({
+    //         url: "/",
+    //         method: "Post",
+    //         data: { "ID": username, "password": password, "data": data },
+    //     })
+    // }
     /************************************************************************ 
     * The username submit function.
     * Once clicked, the submit function checks if the session already exists, 

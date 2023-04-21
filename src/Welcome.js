@@ -169,12 +169,22 @@ class Welcome extends Component
 
     registerSuccess=(res)=>
     {
-        console.log("resgister success handler triggered: ", res)
+        console.log("register success handler triggered: ", res)
+        window.location = '/'
     }
 
     registerFailure=(res)=>
     {
-        console.log("register failure handlertriggered: ", res)
+        var failureMessage = res.responseJSON.status;
+        if(failureMessage === "User exists")
+        {
+            alert("There is already a participant using this email address.")
+        }
+        else if(failureMessage === "password mismatch")
+        {
+            alert("The passwords you have entered do not match. Please check them and try again.")
+        }
+        console.log("register failure handler triggered: ", res)
     }
 
     conditionalRender = () =>
@@ -196,48 +206,13 @@ class Welcome extends Component
                      <Route exact path="/consent" render={(props) => (
                          <Info />
                      )} />
-      
-                     {/* <Route exact path="/survey" render={(props) => (
-                         <ProtectedRoute auth={this.state.auth} redirectPath={"/"}>
-                             <Survey ID={this.state.id} nodes={this.state.nodes} links={this.state.links} foci={this.state.foci} />
-                         </ProtectedRoute>
-                     )}>
-                     </Route>  */}
-                 {/* </Switch> */}
              </HashRouter>
         }
     }
 
     render()
     {
-        // return this.conditionalRender()
         return this.conditionalRender()
-        //     this.state.surveyReady && (
-        //     <HashRouter>
-        //         {/* <Switch> */}
-        //             <Route exact path="/" render={(props) => (
-        //                 // <Login
-        //                 //     handleLoginCallback={this.handleLoginCallback}
-        //                 // />
-        //                 this.conditionalRender()
-        //             )} />
-        //             <Route exact path="/register" render={(props) => (
-        //                 <Register />
-        //             )} />
-        //             <Route exact path="/consent" render={(props) => (
-        //                 <Info />
-        //             )} />
-      
-        //             {/* <Route exact path="/survey" render={(props) => (
-        //                 <ProtectedRoute auth={this.state.auth} redirectPath={"/"}>
-        //                     <Survey ID={this.state.id} nodes={this.state.nodes} links={this.state.links} foci={this.state.foci} />
-        //                 </ProtectedRoute>
-        //             )}>
-        //             </Route>  */}
-        //         {/* </Switch> */}
-        //     </HashRouter>) 
-        // )
-
     }
 }
 export default Welcome;

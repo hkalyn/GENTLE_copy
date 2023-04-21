@@ -90,7 +90,7 @@ app.post("/register", (req, res) =>
         if (doc.length !== 0)
         {
             console.log("User already exists.");
-            return res.status(500).json({ status: "User Not Found" })
+            return res.status(500).json({ status: "User exists" })
         }
 
         //second failure case, if the passwrords dont't match
@@ -107,7 +107,7 @@ app.post("/register", (req, res) =>
             var newUser = {
                 ID: ID,
                 password: password_h,
-                data: {}
+                data: null
             }
 
             collection.insert(newUser).then(() => {
