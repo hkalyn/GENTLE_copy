@@ -5,6 +5,7 @@ import
   NavLink,
   HashRouter
 } from "react-router-dom";
+import { MAX_ALTERS } from "./Settings";
 
 /*************************************************************************
  * Screen design to generate names for nodes/alters.
@@ -79,8 +80,21 @@ class NodeButtonComponent extends Component
   {
     this.setState(this.state);
     // see: https://reactjs.org/docs/refs-and-the-dom.html
-    this.input.current.focus()
+     this.input.current.focus()
     document.addEventListener("keydown", this.keypress_handler);
+    if(this.props.nodes.length>25)
+    {
+
+      console.log("More than 25 nodes")
+      for(var i = 0; i<= (this.props.nodes.length-MAX_ALTERS); i++)
+      {
+        this.props.nodes.pop()
+      }
+    }
+    else
+    {
+      this.input.current.focus()
+    }
   }
 
   /*************************************************************************
@@ -89,6 +103,31 @@ class NodeButtonComponent extends Component
   componentWillUnmount()
   {
     document.removeEventListener("keydown", this.keypress_handler);
+  }
+
+  conditionalRender=()=>
+  {
+    if(this.props.nodes.length>=MAX_ALTERS)
+    {
+      return  <div className="container" id="userInputStd" style={{position: "relative", }}>
+      <input id="usr" style={{visibility: "hidden"}}type="text" placeholder="Name" ref={this.input} />
+      <NavLink id="confirm_link"
+      style={{position: "absolute", width: "250px", left: "50%", transform: "translateX(-50%)"}}
+      exact to={this.props.route}>
+      <button id="confirm" style={{width: "100%"}}>{"Confirm and Next"}</button>
+    </NavLink>
+    </div>
+    }
+    else{
+      return  <div className="container" id="userInputStd">
+      <input id="usr" type="text" placeholder="Name" ref={this.input} />
+      <NavLink id="confirm_link"
+        exact to={this.props.route}
+        onClick={this.checkCondition.bind(this)}>
+        <button id="confirm" >{this.props.nodes.length <= (MAX_ALTERS-1) ? "Confirm and Next" : "Add an Individual"}</button>
+      </NavLink>
+    </div>
+    }
   }
 
   render()
@@ -109,14 +148,15 @@ class NodeButtonComponent extends Component
             callBack={this.props.callBackNodes}
             collectHistory={this.props.collectHistory} />
 
-          <div className="container" id="userInputStd">
+          {/* <div className="container" id="userInputStd">
             <input id="usr" type="text" placeholder="Name" ref={this.input} />
             <NavLink id="confirm_link"
               exact to={this.props.route}
               onClick={this.checkCondition.bind(this)}>
-              <button id="confirm" >{this.props.counter > (this.props.max - 1) ? "Confirm and Next" : "Add an Individual"}</button>
+              <button id="confirm" >{this.props.nodes.length <= (MAX_ALTERS-1) ? "Confirm and Next" : "Add an Individual"}</button>
             </NavLink>
-          </div>
+          </div> */}
+          {this.conditionalRender()}
         </div>
       </HashRouter>
     );
