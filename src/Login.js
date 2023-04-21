@@ -23,8 +23,6 @@ class Login extends Component
     {
         super(props);
         this.state = { id: "", consent: false, password: "" };
-        // this.handleChange = this.handleChange.bind(this)
-        // this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     /************************************************************************
@@ -41,59 +39,12 @@ class Login extends Component
         });
     }
 
-    /************************************************************************ 
-     * Renders informed consent page.
-    *************************************************************************/
-    // renderIFC = () =>
-    // {
-    //     ReactDOM.render(<Info textDescription={INFORMATION} />,
-    //         document.getElementById("root"))
-    // }
-
-    // login = (username, password, data) =>
-    // {
-    //     //   sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
-    //     $.ajax({
-    //         url: "/",
-    //         method: "Post",
-    //         data: { "ID": username, "password": password, "data": data },
-    //     })
-    // }
     // /************************************************************************ 
     // * The username submit function.
     // * Once clicked, the submit function checks if the session already exists, 
     // * and if it does, it returns it from session storage. Otherwise a new 
     // * session is created and added to starage.
     // *************************************************************************/
-    // handleSubmit = () =>
-    // {
-    //     // console.log("handling submit.", event)
-    //     // event.preventDefault();
-    //     if (this.state.consent)
-    //     {
-    //         console.log("Session Data: ", sessionStorage.getItem("nodeData"))
-    //         if (sessionStorage.getItem("nodeData"))
-    //         {
-    //             console.log("existing session")
-    //             let data = JSON.parse(sessionStorage.getItem("nodeData"));
-    //             console.log(data)
-    //             this.login(this.state.id, this.state.password, data)
-    //             // ReactDOM.render(<Survey ID={this.state.id} nodes={data.nodes} links={data.links} foci={data.foci} />,
-    //             //     document.getElementById("root"))
-    //         } else
-    //         {
-    //             console.log("New Session")
-    //             this.login(this.state.id, this.state.password, null)
-    //             // ReactDOM.render(<Survey ID={this.state.id} nodes={[]} links={[]} foci={[]} />,
-    //             //     document.getElementById("root"))
-    //         }
-    //     } else
-    //     {
-    //         alert("Please provide consent.")
-    //     }
-
-    // }
-
     handleSubmit = (e) =>
     {
         e.preventDefault()
@@ -140,7 +91,6 @@ class Login extends Component
                             checked={this.state.consent}
                             onChange={this.handleChange} />
                     </label>
-                    {/* <input className="loginInput" value="Submit" onClick={() => this.props.handleLoginCallback(this.state.id, this.state.password, this.state.consent)} /> */}
                     <input className="loginInput" value="Submit" type="submit" />
                     <p>New participant? Please <Link to="/register">register here</Link>.</p>
                 </form>
@@ -148,6 +98,5 @@ class Login extends Component
             </div>
         );
     }
-
 }
 export default Login;

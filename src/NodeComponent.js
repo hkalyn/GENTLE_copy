@@ -35,7 +35,6 @@ class NodeComponent extends Component
   componentDidMount()
   {
     this.setState(this.state);
-    // this.props.lastClickedNodeCallback(2)
   }
 
   render()

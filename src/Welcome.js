@@ -1,15 +1,12 @@
 import React, { Component } from "react";
 import Survey from "./Survey";
-import ReactDOM from "react-dom";
 import "./css/bootstrap.css";
 import "./css/style.css";
 import Info from "./Info.js";
 import Login from "./Login"
 import Register from "./Register"
-import ProtectedRoute from "./ProtectedRoute"
-import { BrowserRouter as Router, Switch, Route, Redirect, HashRouter } from 'react-router-dom'
-import { INFORMATION } from "./Settings.js";
-import $, { data } from "jquery";
+import { Route, HashRouter } from 'react-router-dom'
+import $ from "jquery";
 
 class Welcome extends Component
 {
@@ -120,8 +117,7 @@ class Welcome extends Component
         this.setState({ id: sessionAuthData.id, consent: this.state.consent, password_h: sessionAuthData.password, auth: true, data: sessionNodeData, nodes: sessionNodeData.nodes, links: sessionNodeData.links, foci: sessionNodeData.foci, surveyReady: false })
         console.log("State: ", this.state)
         this.setState({ surveyReady: true })
-        // TODO: Parse res.data here if there is any, set it into sessionStorage otherwise, set sessionstorage to empty.
-        // sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci, auth: this.state.auth }));
+
     }
 
     loginFailure = (res) =>
@@ -183,6 +179,10 @@ class Welcome extends Component
         else if(failureMessage === "password mismatch")
         {
             alert("The passwords you have entered do not match. Please check them and try again.")
+        }
+        else
+        {
+            alert(failureMessage)
         }
         console.log("register failure handler triggered: ", res)
     }

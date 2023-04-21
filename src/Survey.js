@@ -4,7 +4,6 @@ import
   Route,
   NavLink,
   HashRouter,
-  Router
 } from "react-router-dom";
 import NodeButtonComponent from "./NodeButtonComponent";
 import NodeComponent from "./NodeComponent";
@@ -22,7 +21,6 @@ import
   MOBILE,
   NODE_RADIUS,
   AVB_WIDTH,
-  NODE_SIZE,
 } from "./Graph";
 
 // Descriptions & Layout functions
@@ -100,11 +98,7 @@ class Survey extends Component
     super(props);
     //  this.ID = this.props.ID;
     this.state = {
-       id: this.props.ID,
-      // nodes: (this.props.nodes.length === 0 ? [returnYouTemplate()] :
-      //   recalculate_nodes(this.props.nodes, recalculate_foci(this.props.foci))),
-      // links: this.props.links,
-      // foci: (this.props.foci.length === 0 ? [{ key: 0, x: SVG_WIDTH / 2, y: SVG_HEIGHT / 2 }] : recalculate_foci(this.props.foci)),
+      id: this.props.ID,
       nodes: [],
       links: [],
       foci: [],
@@ -645,7 +639,7 @@ class Survey extends Component
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
                 <NavItem title="Question 1">
-                  <NavLink className="nav-link" exact to="/Question_1">
+                  <NavLink className="nav-link" exact to="/">
                     Q1. Name generation example screen.
                   </NavLink>
                 </NavItem>
@@ -1383,8 +1377,6 @@ class Survey extends Component
                 textDescription={SURVEY_QUESTIONS[6]}
                 transferCallBack={this.transferData.bind(this)} />
             } /> */}
-
-
                 <Route exact path="/Question_16" component={
                   () => (MOBILE ? <NodeComponent nodes={this.state.nodes.slice(1).map((node, i) => (
                     {
@@ -1470,7 +1462,7 @@ class Survey extends Component
             }
           </div>
         </div>
-      // </HashRouter>
+       </HashRouter>
     );
   }
 }

@@ -70,6 +70,47 @@ app.post("/ajax", (req, res) =>
     )
 })
 
+validatePassword=(pw)=>{
+
+    var error="Your password must:  "
+    var result = true;
+    if(!/[A-Z]/       .test(pw))
+    {
+        error+="contain at least one capitol letter, "  
+        result=false;
+    }
+    if(!/[a-z]/       .test(pw))
+    {
+        error+="contain at least one lowercase letter, "
+        result=false;
+    }
+    if(!/[0-9]/       .test(pw))
+    {
+        error+="contain at least one number, "
+        result=false;
+    }
+    if(!/[^A-Za-z0-9]/.test(pw))
+    {
+        error+="contain at least one symbol, "
+        result=false;
+    }
+    if(pw.length<8)
+    {
+        error +="be at least 8 characters long."
+        result=false; 
+    }
+    
+    var lastChar = error.slice(-2);
+    if (lastChar == ', ') {
+        error = error.slice(0, -2);
+        error+="."
+    }
+
+    return {
+        error: error,
+        result: result
+    }
+}
 // My APIs for registering and authenticating a user
 app.post("/register", (req, res) =>
 {
@@ -78,6 +119,11 @@ app.post("/register", (req, res) =>
     let password = req.body.password
     let passwordConfirm = req.body.passwordConfirm
 
+    valid = validatePassword(password)
+    if(valid.result===false)
+    {
+        return res.status(500).json({ status: valid.error })
+    }
     var password_h = bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
     if (data)
     {

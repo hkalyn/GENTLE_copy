@@ -64,7 +64,6 @@ class Graph extends Component
       this.virtualD3.call(this.updateVirtualD3, JSON.parse(JSON.stringify(this.props.foci)));
     });
     this.lastClickedNode = 0
-    // window.addEventListener("resize", this.handleCanvasResize)
     console.log("Mounting Graph", this.props)
   }
 
@@ -104,7 +103,6 @@ class Graph extends Component
   {
     let nodes = JSON.parse(JSON.stringify(this.force.nodes()));
     this.force.alpha(0.2);
-    // additional key parameter for boolean node callback
     let callbackKey = this.props.callBack[1];
     if (typeof callbackKey === 'undefined' || callbackKey === null)
     {
@@ -198,14 +196,8 @@ class Graph extends Component
 
   nodeClicked = (props) =>
   {
-    // var node = vd3.select(this)
-    // console.log("clicked node", node[0][0].virtualD3)
     console.log("clicked node", d3.event.target.id)
     var nodeID = d3.event.target.id
-    // this.setState({ lastClickedNode: nodeID })asd
-    // this.lastClickedNode = nodeID
-    // this.state.lastClickedNode = nodeID
-    // console.log("this", this.state)
     if (props.lastClickedNodeCallback)
     {
       props.lastClickedNodeCallback(nodeID)

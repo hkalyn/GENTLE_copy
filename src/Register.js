@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import { NavLink, Link } from 'react-router-dom'
-import Survey from "./Survey";
+import { Link } from 'react-router-dom'
 import ReactDOM from "react-dom";
 import "./css/bootstrap.css";
 import "./css/style.css";
 import Info from "./Info.js";
 import { INFORMATION } from "./Settings.js";
-import $ from "jquery";
 
 class Welcome extends Component
 {
@@ -50,15 +48,6 @@ class Welcome extends Component
             document.getElementById("root"))
     }
 
-    // register = (username, password, data) =>
-    // {
-    //     //   sessionStorage.setItem("nodeData", JSON.stringify({ nodes: this.state.nodes, links: this.state.links, foci: this.state.foci }));
-    //     $.ajax({
-    //         url: "/",
-    //         method: "Post",
-    //         data: { "ID": username, "password": password, "data": data },
-    //     })
-    // }
     /************************************************************************ 
     * The username submit function.
     * Once clicked, the submit function checks if the session already exists, 
@@ -67,20 +56,17 @@ class Welcome extends Component
     *************************************************************************/
     handleSubmit = (e) =>
     {
-
-        // console.log("handling submit.", event)
          e.preventDefault();
-        // 
-        if (this.state.consent == true)
-        {
-            console.log("Registering")
-            this.props.handleRegisterCallback(this.state.id, this.state.password, this.state.passwordConfirm, this.state.consent)
-        } 
-        else
-        {
-            alert("Please provide consent.")
-        }
-
+        // Adding some password restriction rules.
+            if (this.state.consent == true)
+            {
+                console.log("Registering")
+                this.props.handleRegisterCallback(this.state.id, this.state.password, this.state.passwordConfirm, this.state.consent)
+            } 
+            else
+            {
+                alert("Please provide consent.")
+            }
     }
 
     render()
@@ -132,6 +118,5 @@ class Welcome extends Component
             </div>
         );
     }
-
 }
 export default Welcome;

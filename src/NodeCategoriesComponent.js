@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import Graph from "./Graph";
 import
 {
-  // Route,
   NavLink,
   HashRouter
 } from "react-router-dom";

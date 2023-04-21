@@ -189,7 +189,7 @@ export function hasLinkAt(links, source, current)
 
 /*************************************************************************
  * Recalculates the render-properties for nodes
- * @param {[nodes]]} nodes 
+ * @param {[nodes]} nodes 
  * @param {[nodes]} forceNodes 
  *************************************************************************/
 export function updateNodeRenderProps(nodes, forceNodes)

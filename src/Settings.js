@@ -32,7 +32,7 @@ export const MAX_ALTERS = 25
 // The minimum number of alters that participants can add. Having this value higher than 0 will prevent users from 
 //navigating the site and skipping the name generation screen. Participants MUST add 
 //<MIN_ALTERS> individuals in order to proceed to subsequent questions.
-export const MIN_ALTERS = 0
+export const MIN_ALTERS = 25
 
 /*************************************************************************
  * Object contains the settings for Gender. You can add additional values
@@ -1031,17 +1031,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
-        },
-        // {
-        //     key: 3,
-        //     text: "I'm not sure about these individuals:",
-        //     value: "not sure",
-        //     color: BOX_COLORS[3],
-        //     x: ((SVG_WIDTH / 4) * 3 + 15),
-        //     y: (window.innerHeight - window.innerHeight * 0.17 - 30),
-        //     width: ((SVG_WIDTH / 4) - 30),
-        //     height: window.innerHeight * 0.17
-        // }
+        }
     ] :
     // Mobile Considerations. If the screensize is less than 700px, return the bollowing boxes
     [
@@ -1072,16 +1062,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
-        },
-        // {
-        //     key: 3,
-        //     text: "I'm not sure about these individuals:",
-        //     value: "not sure",
-        //     color: BOX_COLORS[3],
-        //     x: 15,
-        //     y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
-        //     width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
-        // },
+        }
     ]
 )
 
@@ -1118,17 +1099,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             y: (window.innerHeight - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
-        },
-        // {
-        //     key: 3,
-        //     text: "I'm not sure about these individuals:",
-        //     value: "not sure",
-        //     color: BOX_COLORS[3],
-        //     x: ((SVG_WIDTH / 4) * 3 + 15),
-        //     y: (window.innerHeight - window.innerHeight * 0.17 - 30),
-        //     width: ((SVG_WIDTH / 4) - 30),
-        //     height: window.innerHeight * 0.17
-        // }
+        }
     ] :
     // Mobile Considerations. If the screensize is less than 700px, return the bollowing boxes
     [
@@ -1159,16 +1130,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
             width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
-        },
-        // {
-        //     key: 3,
-        //     text: "I'm not sure about these individuals:",
-        //     value: "not sure",
-        //     color: BOX_COLORS[3],
-        //     x: 15,
-        //     y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
-        //     width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
-        // },
+        }
     ]
 )
 
