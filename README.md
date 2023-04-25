@@ -5,7 +5,7 @@ For steps on how to install React, follow [this guide](https://legacy.reactjs.or
 
 For steps on how to install Node.js, [this guide](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac) is a good resource for doing so.
 
-#Running the built version of the project (recemmended) 
+#Running the built version of the project (recommended) 
 
 How to run the build version of Gentle.
 
