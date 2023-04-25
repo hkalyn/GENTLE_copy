@@ -1,7 +1,7 @@
 # Welcome to the Gentle Survey ReadMe
 Below, you will find all of the steps necessary to get the built version of the project up and running on your local machine. These steps assume that you have both ReactJS and Node.js installed and configured on your computer.
 
-For steps on how to install React, follow [this guide](https://legacy.reactjs.org/docs/getting-started.html)
+For steps on how to install React, follow [this guide](https://legacy.reactjs.org/docs/getting-started.html).
 
 For steps on how to install Node.js, [this guide](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac) is a good resource for doing so.
 
