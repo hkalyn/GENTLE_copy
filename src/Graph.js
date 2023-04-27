@@ -173,16 +173,47 @@ class Graph extends Component
       .attr("pointer-events", "none")
       .text((d) => d.name);
 
-    v3d.append("text")
+      if(this.props.multiText === true)
+      {
+        for(var i = 0; i< this.props.textToApply.length; i++)
+        {
+          v3d.append("text")
+          .attr("class", "float_text multi")
+          .attr("text-anchor", "middle")
+          .attr("dx", (MOBILE ? "1em" : "1.25em"))
+          .attr("dy", (MOBILE ? "1.5em" : "1.25em"))
+          .attr("pointer-events", "none")
+          .attr("y", 10+(i*11))
+          .text((d) => this.applyTextArray(d, this.props.textToApply, i));
+        }
+      }
+      else{
+            v3d.append("text")
       .attr("class", "float_text")
       .attr("text-anchor", "middle")
       .attr("dx", (MOBILE ? "1em" : "1.25em"))
       .attr("dy", (MOBILE ? "1.5em" : "1.25em"))
       .attr("pointer-events", "none")
-      .text((d) => d.age);
+      .text((d) => this.applyText(d, this.props.textToApply, i));
+      }
+    // v3d.append("text")
+    //   .attr("class", "float_text")
+    //   .attr("text-anchor", "middle")
+    //   .attr("dx", (MOBILE ? "1em" : "1.25em"))
+    //   .attr("dy", (MOBILE ? "1.5em" : "1.25em"))
+    //   .attr("pointer-events", "none")
+    //   .text((d) => this.applyText(d, this.props.textToApply));
 
   };
 
+  applyTextArray = (d, key='age', i)=>
+  {
+    return d[key][i]
+  }
+  applyText = (d, key='age',) =>
+  {
+    return d[key]
+  }
   /*************************************************************************
    * Enter cycle for links (see d3.js docs)
    * @param {*} v3d: virtual dom object

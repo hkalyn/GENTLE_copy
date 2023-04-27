@@ -99,13 +99,24 @@ export const SURVEY_QUESTIONS = [
             Q3. Please enter an age for each individual. If you are unsure, an approximate is acceptable.
         </p>
         <p>
-            You can do this by clicking an individual and entering an age below.
+            You can do this by clicking an individual and selecting an age bracket.
         </p>
     </div>,
-    // Question 4a Instructions
+        // Question 4 Instructions
     <div>
         <p>
-            Q4a. Please place everyone into either the 'academic' or 'non-academic' box.
+            Q4. What is each individual's cultural background?
+        </p>
+        <p>
+            Select an individual, and select the culture that best describes them. 
+            If you would like, you can select multiple options for an individual by clicking them and selecting an aditional category. 
+            If you want to remove a category from an individual, simply click them and select the option again to remove it.
+        </p>
+    </div>,
+    // Question 5a Instructions
+    <div>
+        <p>
+            Q5a. Please place everyone into either the 'academic' or 'non-academic' box.
         </p>
         <p>
             You can do this by clicking on an individual and dragging them into
@@ -113,35 +124,35 @@ export const SURVEY_QUESTIONS = [
             also an academic and you're not sure in which bubble to place them)
         </p>
     </div>,
-    //Question 4b Instructions and message 
+    //Question 5b Instructions and message 
     <div>
         <p>
-            Q4b. Here are the individuals you placed in the academic box. Can you tell me more about each of their positions?
+            Q5b. Here are the individuals you placed in the academic box. Can you tell me more about each of their positions?
         </p>
         <p>
             You can do this by clicking an individual and then selecting the appropriate position below.
         </p>
     </div>,
-    //Question 4c Instructions message
+    //Question 5c Instructions message
     <div>
         <p>
-            Q4c. Here are the individuals you placed in the non-academic box. Can you tell me more about each of their positions?
+            Q5c. Here are the individuals you placed in the non-academic box. Can you tell me more about each of their positions?
         </p>
         <p>
             You can do this by clicking an individual and then selecting the appropriate position below.
         </p>
     </div>,
-    //Question 5 Instructions and message
+    //Question 6 Instructions and message
     <div>
         <p>
-            Q5. Place all individuals that are YOUR lab mates in the box below.
+            Q6. Place all individuals that are YOUR lab mates in the box below.
         </p>
     </div>,
     // Question 6 (Network linking supposed to go here, but I want to move it ot the end.)
-    //Question 7 (now 6)
+    //Question 7
     <div>
         <p>
-            Q6. Do you collaborate with anyone below on research?
+            Q7. Do you collaborate with anyone below on research?
         </p>
         <p>
             Next, please indicate if there is anyone that you would like to collaborate with?
@@ -150,10 +161,10 @@ export const SURVEY_QUESTIONS = [
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 8 (now 7)
+    // Question 8
     <div>
         <p>
-            Q7. Does anyone below <b>provide technical support</b> that helps you develop your skills as a researcher or student?
+            Q8. Does anyone below <b>provide technical support</b> that helps you develop your skills as a researcher or student?
         </p>
         <p>
             For example, this could be help with things like developing research skills, field or lab work, writing, reading, class work, or statistics.
@@ -162,19 +173,19 @@ export const SURVEY_QUESTIONS = [
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 9 (now 8)
+    // Question 9
     <div>
         <p>
-            Q8. Is there anyone you would like more technical support from?
+            Q9. Is there anyone you would like more technical support from?
         </p>
         <p>
             You can do this by clicking and dragging relevant individuals into the box.
         </p>
     </div>,
-    // Question 10 (now 9)
+    // Question 10
     <div>
         <p>
-            Q9. <b>Do you provide</b> (or would be willing to provide) technical support to help others develop their skills as a researcher or student?
+            Q10. <b>Do you provide</b> (or would be willing to provide) technical support to help others develop their skills as a researcher or student?
         </p>
         <p>
             For example, this could be things like help with developing research skills, field or lab work, writing, reading, class work, or statistics.
@@ -183,64 +194,64 @@ export const SURVEY_QUESTIONS = [
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 11 (now 10)
+    // Question 11
     <div>
         <p>
-            Q10. Do you feel comfortable talking with anyone below about <b>failure, disappointment, or struggle in your academic work</b>?
+            Q11. Do you feel comfortable talking with anyone below about <b>failure, disappointment, or struggle in your academic work</b>?
         </p>
         <p>
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 12 (now 11)
+    // Question 12
     <div>
         <p>
-            Q11. <b>Do you provide</b> (or would be willing to provide) support to any individuals below about <b>failure, disappointment, or struggle in their academic work</b>?
+            Q12. <b>Do you provide</b> (or would be willing to provide) support to any individuals below about <b>failure, disappointment, or struggle in their academic work</b>?
         </p>
         <p>
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 13 (now 12)
+    // Question 13
     <div>
         <p>
-            Q12. Is there anyone below that you feel comfortable talking with about <b>personal, non-academic matters</b>?
+            Q13. Is there anyone below that you feel comfortable talking with about <b>personal, non-academic matters</b>?
         </p>
         <p>
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 14 (now 13)
+    // Question 14
     <div>
         <p>
-            Q13. <b>Do you provide</b> (or would be willing to provide) support to help others with <b>personal, non-academic matters</b>?
+            Q14. <b>Do you provide</b> (or would be willing to provide) support to help others with <b>personal, non-academic matters</b>?
         </p>
         <p>
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 15 (now 14)
+    // Question 15
     <div>
         <p>
-            Q14. Is there anyone below with whom you find it difficult to interact?
+            Q15. Is there anyone below with whom you find it difficult to interact?
         </p>
         <p>
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 16 (now 15)
+    // Question 16
     <div>
         <p>
-            Q15. If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you?
+            Q16. If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you?
         </p>
         <p>
             Click and drag individuals into the appropriate box.
         </p>
     </div>,
-    // Question 6 (now 16)
+    // Question 17
     <div>
         <p>
-            Q16. Create a detailed social network by linking individuals that know eachother by face or name. It's ok if you have
+            Q17. Create a detailed social network by linking individuals that know eachother by face or name. It's ok if you have
             individuals that cannot identify anyone else.
         </p>
         <p>
@@ -286,6 +297,7 @@ export function returnTemplateNode(counter, name)
         color: "grey",
         sex: "",
         age: "",
+        culture: [],
         // box: "",
         academic: -1,
         academicSubCategory: "",
@@ -384,6 +396,19 @@ export const AGE_CATEGORIES = [
     { key: 7, text: "50-59", color: "#FFE699" },
     { key: 8, text: "60+", color: "#FFE699" },
     { key: 9, text: "Other", color: "#FFE699" }
+
+];
+
+export const CULTURAL_CATEGORIES = [
+    { key: 0, text: "African", color: "#FFE699" },
+    { key: 1, text: "South East Asian", color: "#FFE699" },
+    { key: 2, text: "European", color: "#FFE699" },
+    { key: 3, text: "First Nations or Indigenous", color: "#FFE699" },
+    { key: 4, text: "East Asian", color: "#FFE699" },
+    { key: 5, text: "Latin, Central, and South American", color: "#FFE699" },
+    { key: 6, text: "South Asian", color: "#FFE699" },
+    { key: 7, text: "Middle Eastern", color: "#FFE699" },
+    { key: 8, text: "Other", color: "#FFE699" }
 
 ];
 

@@ -56,6 +56,7 @@ import
   CATEGORY_WARNING,
   ACADEMIC_SUBCATEGORIES,
   AGE_CATEGORIES,
+  CULTURAL_CATEGORIES,
   NONACADEMIC_SUBCATEGORIES,
   COLLABORATOR_BOXES,
   PROVIDES_ME_TECHNICAL_SUPPORT,
@@ -397,11 +398,48 @@ class Survey extends Component
     } else
     {
       let nodes = JSON.parse(JSON.stringify(this.state.nodes));
-      nodes[counter]["age"] = category;
+      nodes[counter][key] = category;
       // nodes[counter][keyColor] = categories[id].color;
       this.setState({ nodes: nodes, correction: 0 });
     }
   }
+
+    /*************************************************************************
+ * Changes specific category key of a node
+ * @param {string} key key of node property
+ * @param {object} categories object containing categories and colors  
+ * @param {number} counter that identifies node
+ * @param {number} id of category
+ * @param {string} category category name
+ *************************************************************************/
+    multiCategoryButtonCallback = (key, keyColor, categories, counter, id, category) =>
+    {
+      //updates background associated with node
+      if (counter >= this.state.nodes.length)
+      {
+        alert(CATEGORY_WARNING);
+      } else
+      {
+        let nodes = JSON.parse(JSON.stringify(this.state.nodes));
+        if(nodes[counter][key] !== undefined)
+        {
+          if(nodes[counter][key].includes(category))
+          {
+            var index = nodes[counter][key].indexOf(category);
+            if (index !== -1) {
+              nodes[counter][key].splice(index, 1);
+            }
+          }
+          else{
+            var temp = nodes[counter][key]
+            temp.push(category);
+            nodes[counter][key] = temp
+          }
+        }
+        // nodes[counter][keyColor] = categories[id].color;
+        this.setState({ nodes: nodes, correction: 0 });
+      }
+    }
   /*************************************************************************
    * Changes specific continuous key of a node
    * @param {string} key key of node property
@@ -653,79 +691,84 @@ class Survey extends Component
                     Q3. Assign an Age for Each Individual
                   </NavLink>
                 </NavItem>
-                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 4a" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_4_a">
-                    Q4. a) Assign Alters Academic or Non-academic
+                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 4" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_4">
+                    Q4. Assign individual's cultural background
                   </NavLink>
                 </NavItem>
-                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 4b" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_4_b">
-                    Q4. b) Assign Categories for Academics
+                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 5a" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_5_a">
+                    Q5. a) Assign Alters Academic or Non-academic
                   </NavLink>
                 </NavItem>
-                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 4c" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_4_c">
-                    Q4. c) Assign Categories for Non-Academics
+                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 5b" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_5_b">
+                    Q5. b) Assign Categories for Academics
                   </NavLink>
                 </NavItem>
-                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 5" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_5">
-                    Q5. Select Lab Members
+                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 5c" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_5_c">
+                    Q5. c) Assign Categories for Non-Academics
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 6" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_6">
-                    Q6. Select Collaborators
+                    Q6. Select Lab Members
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 7" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_7">
-                    Q7. Select Individuals That Provide You With Technical Support
+                    Q7. Select Collaborators
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 8" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_8">
-                    Q8. Select Individuals Who You Would Like More Technical Support From
+                    Q8. Select Individuals That Provide You With Technical Support
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 9" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_9">
-                    Q9. Select Individuals Who You Provide Technical Support For
+                    Q9. Select Individuals Who You Would Like More Technical Support From
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 10" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_10">
-                    Q10. Who Do You Feel Comfortable Talking To About Personal Failure, Disappointment, or Struggle in Your Academic Work?
+                    Q10. Select Individuals Who You Provide Technical Support For
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 11" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_11">
-                    Q11. Do You Provide Support To Individuals About Personal Failure, Disappointment, or Struggle in Their Academic Work?
+                    Q11. Who Do You Feel Comfortable Talking To About Personal Failure, Disappointment, or Struggle in Your Academic Work?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 12" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_12">
-                    Q12. Is There Anyone You Feel Comfortable Talking With About Personal Non-Academic Matters?
+                    Q12. Do You Provide Support To Individuals About Personal Failure, Disappointment, or Struggle in Their Academic Work?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 13" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_13">
-                    Q13. Do You Provide Support To Help Others With Personal Non-Academic Matters?
+                    Q13. Is There Anyone You Feel Comfortable Talking With About Personal Non-Academic Matters?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 14" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_14">
-                    Q14. Who Do You Feel Uncomfortable Interacting With?
+                    Q14. Do You Provide Support To Help Others With Personal Non-Academic Matters?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 15" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_15">
-                    Q15. Who Do You Think Would Closely Match Your Responses To This Survey?
+                    Q15. Who Do You Feel Uncomfortable Interacting With?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 16" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_16">
-                    Q16. Assign Social Network Connections
+                    Q16. Who Do You Think Would Closely Match Your Responses To This Survey?
+                  </NavLink>
+                </NavItem>
+                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 17" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_17">
+                    Q17. Assign Social Network Connections
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -791,13 +834,10 @@ class Survey extends Component
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                   />
                 } /> */}
-                {/* Question 3 has been re-done to use the category components to assign age, rather than an input field. 
-                  Now matches the question format for GENTLE_question_format_v5
-                */}
                 <Route exact path="/Question_3" component={
                   () =>
                     <NodeCategoriesComponent nodes={this.state.nodes.slice(1)}
-                      route={"/Question_4_a"}
+                      route={"/Question_4"}
                       prevNodes={this.prevNodes}
                       counter={this.determineCounterReturn(this.state.nodes.slice(1), "age", "")}
                       // sliderUpdateValue={this.sliderUpdateValue("age", 1)}
@@ -812,10 +852,37 @@ class Survey extends Component
                       textDescription={SURVEY_QUESTIONS[2]}
                       transferCallBack={this.transferData.bind(this)}
                       lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                      textToApply={'age'}
+                    />
+                } />
+                {/* Question 3 has been re-done to use the category components to assign age, rather than an input field. 
+                  Now matches the question format for GENTLE_question_format_v5
+                */}
+                <Route exact path="/Question_4" component={
+                  () =>
+                    <NodeCategoriesComponent nodes={this.state.nodes.slice(1)}
+                      route={"/Question_5_a"}
+                      prevNodes={this.prevNodes}
+                      counter={this.determineCounterReturn(this.state.nodes.slice(1), "culture", "")}
+                      sliderUpdateValue={this.sliderUpdateValue("culture", 1)}
+                      links={[]}
+                      categories={CULTURAL_CATEGORIES}
+                      foci={this.state.foci.slice(1)}
+                      prevFoci={this.prevFoci}
+                      callBackNodes={this.genericNodesCallback.bind(this)}
+                      callBackButton={[this.multiCategoryButtonCallback.bind(this), "culture", null, CULTURAL_CATEGORIES]}
+                      // callBackButton={[this.changeSliderButtonCallback.bind(this), "age"]}
+                      collectHistory={this.collectHistory.bind(this)}
+                      textDescription={SURVEY_QUESTIONS[3]}
+                      transferCallBack={this.transferData.bind(this)}
+                      lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                      textToApply={'culture'}
+                      multiText={true}
+                      // graphMultiCategory={true}
                     />
                 } />
                 {/* Route for Question 4a: Assigning academic/non-academic */}
-                <Route exact path="/Question_4_a" component={
+                <Route exact path="/Question_5_a" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -833,7 +900,7 @@ class Survey extends Component
                         y: node.academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_4_b"}
+                    route={"/Question_5_b"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -842,7 +909,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['academic', ACADEMIC_BOXES, ["academicSubCategory"]]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[3]}
+                    textDescription={SURVEY_QUESTIONS[4]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={ACADEMIC_BOXES}
@@ -851,10 +918,10 @@ class Survey extends Component
                   />
                 } />
                 {/* Route for Question 4 b, Academic Subcategory */}
-                <Route exact path="/Question_4_b" component={
+                <Route exact path="/Question_5_b" component={
                   () =>
                     <NodeCategoriesComponent nodes={filterNodes(this.state.nodes, 'academic', "academic")}
-                      route={"/Question_4_c"}
+                      route={"/Question_5_c"}
                       prevNodes={this.prevNodes}
                       counter={this.determineCounterReturn(filterNodes(this.state.nodes, 'academic', "academic"), "academicSubCategory", "")}
                       links={[]}
@@ -864,15 +931,15 @@ class Survey extends Component
                       callBackNodes={this.genericNodesCallback.bind(this)}
                       callBackButton={[this.changeCategoryButtonCallback.bind(this), "academicSubCategory", "categoryColor", ACADEMIC_SUBCATEGORIES]}
                       collectHistory={this.collectHistory.bind(this)}
-                      textDescription={SURVEY_QUESTIONS[4]}
+                      textDescription={SURVEY_QUESTIONS[5]}
                       transferCallBack={this.transferData.bind(this)}
                       lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                     />
                 } />
                 {/* Route for Question 4 c, non-academic subcategory */}
-                <Route exact path="/Question_4_c" component={
+                <Route exact path="/Question_5_c" component={
                   () => <NodeCategoriesComponent nodes={filterNodes(this.state.nodes, 'academic', "non-academic")}
-                    route={"/Question_5"}
+                    route={"/Question_6"}
                     prevNodes={this.prevNodes}
                     counter={this.determineCounterReturn(filterNodes(this.state.nodes, 'academic', "non-academic"), "nonAcademicSubCategory", "")}
                     links={[]}
@@ -882,13 +949,13 @@ class Survey extends Component
                     callBackNodes={this.genericNodesCallback.bind(this)}
                     callBackButton={[this.changeCategoryButtonCallback.bind(this), "nonAcademicSubCategory", "categoryColor", NONACADEMIC_SUBCATEGORIES]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[5]}
+                    textDescription={SURVEY_QUESTIONS[6]}
                     transferCallBack={this.transferData.bind(this)}
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                   />
                 } />
                 {/* Route for Question 5: Assigning Lab Members */}
-                <Route exact path="/Question_5" component={
+                <Route exact path="/Question_6" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -906,7 +973,7 @@ class Survey extends Component
                         y: node.isLabMember === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_6"}
+                    route={"/Question_7"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -915,7 +982,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['isLabMember', LAB_MEMBER_BOX, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[6]}
+                    textDescription={SURVEY_QUESTIONS[7]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={LAB_MEMBER_BOX}
@@ -924,7 +991,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Route for Question 6: Who would you like to colaborate with */}
-                <Route exact path="/Question_6" component={
+                <Route exact path="/Question_7" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -942,7 +1009,7 @@ class Survey extends Component
                         y: node.collaboration === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_7"}
+                    route={"/Question_8"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -951,7 +1018,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['collaboration', COLLABORATOR_BOXES, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[7]}
+                    textDescription={SURVEY_QUESTIONS[8]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={COLLABORATOR_BOXES}
@@ -961,7 +1028,7 @@ class Survey extends Component
                 } />
 
                 {/* Question 7: Who Provides you with Technical Support */}
-                <Route exact path="/Question_7" component={
+                <Route exact path="/Question_8" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -979,7 +1046,7 @@ class Survey extends Component
                         y: node.providesMeSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_8"}
+                    route={"/Question_9"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -988,7 +1055,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['providesMeSupport_Technical', PROVIDES_ME_TECHNICAL_SUPPORT, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[8]}
+                    textDescription={SURVEY_QUESTIONS[9]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
@@ -997,7 +1064,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 8: Who would you like more support from? */}
-                <Route exact path="/Question_8" component={
+                <Route exact path="/Question_9" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1015,7 +1082,7 @@ class Survey extends Component
                         y: node.iWouldLikeMoreTechnicalSupport === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_9"}
+                    route={"/Question_10"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1024,7 +1091,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['iWouldLikeMoreTechnicalSupport', WOULD_LIKE_MORE_TECHNICAL_SUPPORT, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[9]}
+                    textDescription={SURVEY_QUESTIONS[10]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={WOULD_LIKE_MORE_TECHNICAL_SUPPORT}
@@ -1033,7 +1100,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 9: Who do you provide technical support for? */}
-                <Route exact path="/Question_9" component={
+                <Route exact path="/Question_10" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1051,7 +1118,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_10"}
+                    route={"/Question_11"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1060,7 +1127,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['iProvideSupport_Technical', I_PROVIDE_TECHNICAL_SUPPORT, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[10]}
+                    textDescription={SURVEY_QUESTIONS[11]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={I_PROVIDE_TECHNICAL_SUPPORT}
@@ -1069,7 +1136,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 10: Do you feel comfortable talking with anyone below about personal failure, disappointment, or struggle in your academic work?  */}
-                <Route exact path="/Question_10" component={
+                <Route exact path="/Question_11" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1087,7 +1154,7 @@ class Survey extends Component
                         y: node.iAmComfortable_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_11"}
+                    route={"/Question_12"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1096,7 +1163,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['iAmComfortable_Failure_Disappointment_Struggle_Academic', PROVIDES_ME_SUPPORT_ACADEMIC, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[11]}
+                    textDescription={SURVEY_QUESTIONS[12]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={PROVIDES_ME_SUPPORT_ACADEMIC}
@@ -1106,7 +1173,7 @@ class Survey extends Component
                 } />
                 {/* Question 11: Do you provide support for individuals regarding personal failure, disappointment, or struggle in their
             academic work? */}
-                <Route exact path="/Question_11" component={
+                <Route exact path="/Question_12" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1124,7 +1191,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_12"}
+                    route={"/Question_13"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1133,7 +1200,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['iProvideSupport_Failure_Disappointment_Struggle_Academic', I_PROVIDE_SUPPORT_ACADEMIC, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[12]}
+                    textDescription={SURVEY_QUESTIONS[13]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={I_PROVIDE_SUPPORT_ACADEMIC}
@@ -1142,7 +1209,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 12: Is there anyone below that you feel comfortable talking with about personal, non-academic matters? */}
-                <Route exact path="/Question_12" component={
+                <Route exact path="/Question_13" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1160,7 +1227,7 @@ class Survey extends Component
                         y: node.iAmComfortable_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_13"}
+                    route={"/Question_14"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1169,7 +1236,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['iAmComfortable_Personal_NonAcademic', I_AM_COMFORTABLE_NONACADEMIC, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[13]}
+                    textDescription={SURVEY_QUESTIONS[14]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={I_AM_COMFORTABLE_NONACADEMIC}
@@ -1178,7 +1245,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 13: Do you provide (or would be willing to provide) support to help others with personal, non-academic matters? */}
-                <Route exact path="/Question_13" component={
+                <Route exact path="/Question_14" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1196,7 +1263,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_14"}
+                    route={"/Question_15"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1205,7 +1272,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['iProvideSupport_Personal_NonAcademic', I_PROVIDE_SUPPORT_NONACADEMIC, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[14]}
+                    textDescription={SURVEY_QUESTIONS[15]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={I_PROVIDE_SUPPORT_NONACADEMIC}
@@ -1214,7 +1281,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 14: Is there anyone below with whom you find it difficult to interact? */}
-                <Route exact path="/Question_14" component={
+                <Route exact path="/Question_15" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1232,7 +1299,7 @@ class Survey extends Component
                         y: node.difficultToInteractWith === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_15"}
+                    route={"/Question_16"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1241,7 +1308,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['difficultToInteractWith', DIFFICULT_INTERACTION_BOXES, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[15]}
+                    textDescription={SURVEY_QUESTIONS[16]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={DIFFICULT_INTERACTION_BOXES}
@@ -1251,7 +1318,7 @@ class Survey extends Component
                 } />
 
                 {/* Question 15: If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you? */}
-                <Route exact path="/Question_15" component={
+                <Route exact path="/Question_16" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1269,7 +1336,7 @@ class Survey extends Component
                         y: node.wouldAnswerSimilarToMe === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_16"}
+                    route={"/Question_17"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1278,7 +1345,7 @@ class Survey extends Component
                     prevFoci={this.prevFoci}
                     callBackNodes={[this.placeBoxDragCallback.bind(this), ['wouldAnswerSimilarToMe', SIMILAR_ANSWER_BOXES, []]]}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[16]}
+                    textDescription={SURVEY_QUESTIONS[17]}
                     transferCallBack={this.transferData.bind(this)}
                     legend={null}
                     categories={SIMILAR_ANSWER_BOXES}
@@ -1377,7 +1444,7 @@ class Survey extends Component
                 textDescription={SURVEY_QUESTIONS[6]}
                 transferCallBack={this.transferData.bind(this)} />
             } /> */}
-                <Route exact path="/Question_16" component={
+                <Route exact path="/Question_17" component={
                   () => (MOBILE ? <NodeComponent nodes={this.state.nodes.slice(1).map((node, i) => (
                     {
                       key: node.key,
@@ -1409,7 +1476,7 @@ class Survey extends Component
                     lastClickedNode={this.state.lastClickedNode}
                     callBackNodes={this.networkNodesCallback.bind(this)}
                     collectHistory={this.collectHistory.bind(this)}
-                    textDescription={SURVEY_QUESTIONS[17]}
+                    textDescription={SURVEY_QUESTIONS[18]}
                     transferCallBack={this.transferData.bind(this)} />
 
                     :
@@ -1451,11 +1518,11 @@ class Survey extends Component
                       prevFoci={this.prevFoci}
                       callBackNodes={this.networkNodesCallback.bind(this)}
                       collectHistory={this.collectHistory.bind(this)}
-                      textDescription={SURVEY_QUESTIONS[17]}
+                      textDescription={SURVEY_QUESTIONS[18]}
                       transferCallBack={this.transferData.bind(this)} />
                       )} />
 
-                <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SURVEY_QUESTIONS[18]} transferCallBack={this.transferData.bind(this)} />} />
+                <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SURVEY_QUESTIONS[19]} transferCallBack={this.transferData.bind(this)} />} />
               </div>
               :
               <></>

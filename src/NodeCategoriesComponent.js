@@ -97,7 +97,10 @@ class NodeCategoriesComponent extends Component
               prevFoci={this.props.prevFoci}
               callBack={this.props.callBackNodes}
               collectHistory={this.props.collectHistory}
-              categories={[]} />
+              categories={[]} 
+              textToApply={this.props.textToApply}
+              multiText = {this.props.multiText}
+              />
 
             <div className="container" id="userInputStd">
               {this.props.categories.map((category, i) => (
