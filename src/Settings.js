@@ -102,14 +102,14 @@ export const SURVEY_QUESTIONS = [
             You can do this by clicking an individual and selecting an age bracket.
         </p>
     </div>,
-        // Question 4 Instructions
+    // Question 4 Instructions
     <div>
         <p>
             Q4. What is each individual's cultural background?
         </p>
         <p>
-            Select an individual, and select the culture that best describes them. 
-            If you would like, you can select multiple options for an individual by clicking them and selecting an aditional category. 
+            Select an individual, and select the culture that best describes them.
+            If you would like, you can select multiple options for an individual by clicking them and selecting an aditional category.
             If you want to remove a category from an individual, simply click them and select the option again to remove it.
         </p>
     </div>,
@@ -458,6 +458,7 @@ export var ACADEMIC_BOXES = (window.innerWidth > 700 ?
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
             y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
     ] :
@@ -465,7 +466,7 @@ export var ACADEMIC_BOXES = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "Acedemic",
+            text: "Acedemic:",
             color: BOX_COLORS[0],
             x: 15,
             y: (window.innerHeight * 0.9 - 250 - window.innerHeight * 0.20),
@@ -474,11 +475,12 @@ export var ACADEMIC_BOXES = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "Non-Acedemic",
+            text: "Non-Acedemic:",
             color: BOX_COLORS[1],
             x: 15,
             y: (window.innerHeight * 0.9 - 10 - window.innerHeight * 0.20),
-            width: window.innerWidth * 0.725, height: window.innerHeight * 0.20
+            width: window.innerWidth * 0.725, height: window.innerHeight * 0.20,
+            height: window.innerHeight * 0.20
         }
     ]
 )
@@ -489,7 +491,7 @@ export const LAB_MEMBER_BOX = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "Lab Members",
+            text: "Lab Members:",
             value: "true",
             color: BOX_COLORS[0],
             x: 15,
@@ -502,7 +504,7 @@ export const LAB_MEMBER_BOX = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "Lab Members",
+            text: "Lab Members:",
             value: "true",
             color: BOX_COLORS[0],
             x: 15,
@@ -519,7 +521,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "Supervisor(s)",
+            text: "Supervisor(s):",
             value: "supervisors",
             color: BOX_COLORS[0],
             x: 15,
@@ -529,7 +531,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "Committee Member(s)",
+            text: "Committee Member(s):",
             value: "committee member",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 2) + 15),
@@ -568,7 +570,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
     [
         {
             key: 0,
-            text: "A lot of technical support ever:",
+            text: "A lot of technical support:",
             value: "a lot",
             color: BOX_COLORS[0],
             x: 15,
@@ -578,7 +580,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
         },
         {
             key: 1,
-            text: "A little technical support ever:",
+            text: "A little technical support:",
             value: "a little",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
@@ -588,7 +590,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "No technical support ever:",
+            text: "No technical support at all:",
             value: "none",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
@@ -620,7 +622,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "No technical support ever:",
+            text: "No technical support at all:",
             value: "none",
             color: BOX_COLORS[2],
             x: 15,
@@ -686,7 +688,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "No technical support for:",
+            text: "No technical support at all:",
             value: "none",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
@@ -718,7 +720,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "No technical support ever:",
+            text: "No technical support at all:",
             value: "none",
             color: BOX_COLORS[2],
             x: 15,
@@ -854,7 +856,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
         },
         {
             key: 2,
-            text: "Not Comfortable at all:",
+            text: "Not comfortable at all:",
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: 15,
