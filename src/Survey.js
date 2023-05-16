@@ -245,6 +245,54 @@ class Survey extends Component
     }
   }
 
+  deleteNodeCallback = () =>
+  {
+    console.log("Deleting Node at ", this.state.lastClickedNode)
+    let nodes = JSON.parse(JSON.stringify(this.state.nodes));
+    let foci = JSON.parse(JSON.stringify(this.state.foci));
+    var name = nodes[this.state.lastClickedNode].name
+    if (this.state.correction !== 0)
+    {
+      let splicedObjs = removeNodeAt(nodes, foci, this.state.correction);
+      foci = splicedObjs.foci;
+      nodes = splicedObjs.nodes;
+      this.setState({ nodes: nodes, foci: foci, counter: this.state.nodes.length, correction: 0 });
+      this.pruneLinks(this.state.lastClickedNode)
+    }
+  }
+
+  pruneLinks=(nodeID)=>{
+    var oldLinks = this.state.links
+    var newLinks = [];
+    for(var i = 0; i<oldLinks.length; i++)
+    {
+      oldLinks[i].key = i+1;
+    }
+    for(var i = 0; i<oldLinks.length; i++ )
+    {
+      if(oldLinks[i].source!==nodeID && oldLinks[i].target!==nodeID)
+      {
+        newLinks.push(oldLinks[i])
+      }
+    }
+    for(var i = 0; i<newLinks.length; i++)
+    {
+      if(newLinks[i].source>nodeID)
+      {
+        newLinks[i].source = newLinks[i].source-1;
+      }
+      if(newLinks[i].target>nodeID)
+      {
+        newLinks[i].target = newLinks[i].target-1;
+      }
+    }
+    for(var i = 0; i<newLinks.length; i++)
+    {
+      newLinks[i].key = i+1;
+    }
+    this.setState({links: newLinks})
+  }
+
   /*************************************************************************
    * Receives name from lower components and creates a node
    * with all relevant properties
@@ -791,6 +839,8 @@ class Survey extends Component
                 textDescription={SURVEY_QUESTIONS[0]}
                 transferCallBack={this.transferData.bind(this)}
                 lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                lastClickedNode = {this.state.lastClickedNode}
+                deleteNodeCallback={this.deleteNodeCallback.bind(this)}
               />
             } />
             {/* Route for question 2: Selecting gender for your alters.

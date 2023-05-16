@@ -65,11 +65,15 @@ class NodeButtonComponent extends Component
   * To-Do: the example makes use of .code, which seems to be better.
   * @param {event} event 
   *************************************************************************/
-  keypress_handler(event)
+  keypress_handler=(event)=>
   {
     if (event.keyCode === 13)
     {
       document.getElementById("confirm_link").click()
+    }
+    else if(event.keyCode === 46)
+    {
+      this.props.deleteNodeCallback();
     }
   }
 
@@ -146,7 +150,9 @@ class NodeButtonComponent extends Component
             foci={this.props.foci}
             prevFoci={this.props.prevFoci}
             callBack={this.props.callBackNodes}
-            collectHistory={this.props.collectHistory} />
+            collectHistory={this.props.collectHistory} 
+            lastClickedNodeCallback = {this.props.lastClickedNodeCallback}
+            />
 
           {/* <div className="container" id="userInputStd">
             <input id="usr" type="text" placeholder="Name" ref={this.input} />
