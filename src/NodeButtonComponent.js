@@ -73,7 +73,8 @@ class NodeButtonComponent extends Component
     }
     else if(event.keyCode === 46)
     {
-      this.props.deleteNodeCallback();
+      // this.props.deleteNodeCallback();
+      this.toggleDeleteNodeDialog()
     }
   }
 
@@ -109,6 +110,10 @@ class NodeButtonComponent extends Component
     document.removeEventListener("keydown", this.keypress_handler);
   }
 
+  toggleDeleteNodeDialog=()=>{
+    document.getElementById('deleteNodeConfirmation').classList.toggle('hidden');
+  }
+
   conditionalRender=()=>
   {
     if(this.props.nodes.length>=MAX_ALTERS)
@@ -134,6 +139,21 @@ class NodeButtonComponent extends Component
     }
   }
 
+  getNameOfNode=()=>{
+    if(this.props.nodes === undefined || this.props.lastClickedNode === undefined)
+    {
+      return "a node"
+    }
+    else if(this.props.nodes[this.props.lastClickedNode-1]!==undefined)
+    {
+      return this.props.nodes[this.props.lastClickedNode-1].name
+    }
+    else
+    {
+      return "a node"
+    }
+  }
+
   render()
   {
     return (
@@ -142,6 +162,15 @@ class NodeButtonComponent extends Component
           {/* Instructions for this question/component. */}
           <div className="textBox expanded">
             {this.props.textDescription}
+          </div>
+          <div className="popupDialog hidden" id="deleteNodeConfirmation">
+            <h2>Attention!</h2>
+            <p>You are about to delete {this.getNameOfNode()} from your network. Are you sure you wish to proceed?</p>
+            <div className="choiceBox">
+              <button onClick={()=>this.props.deleteNodeCallback()}>Delete</button>
+              <button onClick={()=>this.toggleDeleteNodeDialog()}>Cancel</button>
+            </div>
+            
           </div>
           <Graph counter={this.props.counter}
             nodes={this.props.nodes}

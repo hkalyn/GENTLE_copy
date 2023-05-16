@@ -291,6 +291,7 @@ class Survey extends Component
       newLinks[i].key = i+1;
     }
     this.setState({links: newLinks})
+    this.transferData();
   }
 
   /*************************************************************************
