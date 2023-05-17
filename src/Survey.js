@@ -7,7 +7,7 @@ import
 } from "react-router-dom";
 import NodeButtonComponent from "./NodeButtonComponent";
 import NodeComponent from "./NodeComponent";
-import NodeSliderComponent from "./NodeSliderComponent";
+// import NodeSliderComponent from "./NodeSliderComponent";
 import NodeCategoriesComponent from "./NodeCategoriesComponent";
 import Thanks from "./Thanks";
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
@@ -46,7 +46,7 @@ import
   LAB_MEMBER_BOX,
   GENDER_SETTINGS,
   // CATEGORIES,
-  SEPARATOR,
+  // SEPARATOR,
   MAX_ALTERS,
   MIN_ALTERS,
   SURVEY_QUESTIONS,
@@ -250,7 +250,7 @@ class Survey extends Component
     console.log("Deleting Node at ", this.state.lastClickedNode)
     let nodes = JSON.parse(JSON.stringify(this.state.nodes));
     let foci = JSON.parse(JSON.stringify(this.state.foci));
-    var name = nodes[this.state.lastClickedNode].name
+    // var name = nodes[this.state.lastClickedNode].name
     if (this.state.correction !== 0)
     {
       let splicedObjs = removeNodeAt(nodes, foci, this.state.correction);
@@ -259,6 +259,27 @@ class Survey extends Component
       this.setState({ nodes: nodes, foci: foci, counter: this.state.nodes.length, correction: 0 });
       this.pruneLinks(this.state.lastClickedNode)
     }
+  }
+
+  renameNodeCallback = (newName) =>
+  {
+    console.log("Renaming: ", newName)
+    let nodes = JSON.parse(JSON.stringify(this.state.nodes));
+    if (this.state.correction !== 0)
+    {
+      if (doesNameOverlap(newName, nodes))
+      {
+        alert(DUPLICATE_WARNING);
+      }
+      else if(newName === "")
+      {
+        alert("A node's name cannot be empty. Please try a valid name.")
+      }
+      else{
+        nodes[this.state.lastClickedNode].name = newName
+      }
+    }
+    this.setState({ nodes: nodes, correction: 0 });
   }
 
   pruneLinks=(nodeID)=>{
@@ -303,17 +324,18 @@ class Survey extends Component
   {
     let nodes = JSON.parse(JSON.stringify(this.state.nodes));
     let foci = JSON.parse(JSON.stringify(this.state.foci));
-    if (this.state.correction !== 0)
-    {
-      this.handleNodeChange(name, nodes, foci);
-    }
-    else
-    {
+    // if (this.state.correction !== 0)
+    // {
+    //   this.handleNodeChange(name, nodes, foci);
+    // }
+    // else
+    // {
       // Generate new node if name does not exist
       let counter = this.state.nodes.length;
       if (doesNameOverlap(name, nodes))
       {
         alert(DUPLICATE_WARNING);
+        return;
       }
       else
       {
@@ -328,7 +350,7 @@ class Survey extends Component
         // Push state
         this.setState({ nodes: nodes, foci: foci });
       }
-    }
+    // }
   }
 
   /*************************************************************************
@@ -842,6 +864,8 @@ class Survey extends Component
                 lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                 lastClickedNode = {this.state.lastClickedNode}
                 deleteNodeCallback={this.deleteNodeCallback.bind(this)}
+                renameNodeCallback = {this.renameNodeCallback.bind(this)}
+                correction = {this.state.correction}
               />
             } />
             {/* Route for question 2: Selecting gender for your alters.

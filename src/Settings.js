@@ -69,11 +69,11 @@ export const SURVEY_QUESTIONS = [
             members, lab members, other fellow students/classmates, professors, instructors, teaching assistants, or staff members). Feel
             free to name individuals from non-academic environments if you interact with them as a student (e.g., professional affiliates,
             employers, community members, elders, family, friends, or partners).
-
         </p>
         <p>
             *You should be able to recognize all these individuals by face or name, and they should recognize you by face or name via inperson or online interactions.
         </p>
+        <p>If you need to modify a node (rename or delete), you can click the node and press delete on the keyboard, or click the Modify Selected Node button.</p>
     </div>,
     // Question 2 Instructions (appearing in text-box)
     <>

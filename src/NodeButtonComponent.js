@@ -46,7 +46,7 @@ class NodeButtonComponent extends Component
    *************************************************************************/
   checkCondition(event)
   {
-    if (this.props.counter > (this.props.max - 1))
+    if (this.props.nodes.length >= (this.props.max))
     {
       this.props.callBackButton(this.input.current.value);
       this.transferCallBack();
@@ -69,12 +69,36 @@ class NodeButtonComponent extends Component
   {
     if (event.keyCode === 13)
     {
-      document.getElementById("confirm_link").click()
+      // document.getElementById("confirm_link").click()
+      this.handleEnterKeydown()
     }
     else if(event.keyCode === 46)
     {
       // this.props.deleteNodeCallback();
       this.toggleDeleteNodeDialog()
+    }
+  }
+
+  handleEnterKeydown = ()=>{
+    if(this.isDialogBoxOpen())
+    {
+      this.handleNodeRename()
+      this.toggleDeleteNodeDialog()
+    }
+    else
+    {
+      document.getElementById("confirm_link").click()
+    }
+    
+  }
+
+  isDialogBoxOpen=()=>{
+    if(document.getElementById("popupDialog").classList.contains("hidden"))
+    {
+      return false;
+    }
+    else{
+      return true;
     }
   }
 
@@ -111,7 +135,7 @@ class NodeButtonComponent extends Component
   }
 
   toggleDeleteNodeDialog=()=>{
-    document.getElementById('deleteNodeConfirmation').classList.toggle('hidden');
+    document.getElementById('popupDialog').classList.toggle('hidden');
   }
 
   conditionalRender=()=>
@@ -125,6 +149,7 @@ class NodeButtonComponent extends Component
       exact to={this.props.route}>
       <button id="confirm" style={{width: "100%"}}>{"Confirm and Next"}</button>
     </NavLink>
+    <button className="modifyButton" style={{opacity: this.props.correction !== 0 ? '1' : '0.5', pointerEvents: this.props.correction !== 0 ? 'all' : 'none' }} onClick={()=>this.toggleDeleteNodeDialog()}>Modify Selected Node</button>
     </div>
     }
     else{
@@ -133,8 +158,9 @@ class NodeButtonComponent extends Component
       <NavLink id="confirm_link"
         exact to={this.props.route}
         onClick={this.checkCondition.bind(this)}>
-        <button id="confirm" >{this.props.nodes.length <= (MAX_ALTERS-1) ? "Confirm and Next" : "Add an Individual"}</button>
+        <button id="confirm" >{this.props.nodes.length < (MAX_ALTERS) ? "Confirm and Next" : "Add an Individual"}</button>
       </NavLink>
+      <button className="modifyButton" style={{opacity: this.props.correction !== 0 ? '1' : '0.5', pointerEvents: this.props.correction !== 0 ? 'all' : 'none' }} onClick={()=>this.toggleDeleteNodeDialog()}>Modify Selected Node</button>
     </div>
     }
   }
@@ -154,6 +180,11 @@ class NodeButtonComponent extends Component
     }
   }
 
+  handleNodeRename=()=>{
+    this.props.renameNodeCallback(document.getElementById('node_rename').value)
+    this.toggleDeleteNodeDialog()
+  }
+
   render()
   {
     return (
@@ -163,9 +194,13 @@ class NodeButtonComponent extends Component
           <div className="textBox expanded">
             {this.props.textDescription}
           </div>
-          <div className="popupDialog hidden" id="deleteNodeConfirmation">
-            <h2>Attention!</h2>
-            <p>You are about to delete {this.getNameOfNode()} from your network. Are you sure you wish to proceed?</p>
+          <div id="popupDialog" className="popupDialog hidden">
+            <h2>Modify Network Node</h2>
+            <p>How would you like to modify {this.getNameOfNode()}?</p>
+            <div>
+              <input id="node_rename" type="text" placeholder={this.getNameOfNode()} ref={this.input} />
+              <button onClick={()=>this.handleNodeRename()}>Change Name</button>
+            </div>
             <div className="choiceBox">
               <button onClick={()=>this.props.deleteNodeCallback()}>Delete</button>
               <button onClick={()=>this.toggleDeleteNodeDialog()}>Cancel</button>
@@ -192,6 +227,7 @@ class NodeButtonComponent extends Component
             </NavLink>
           </div> */}
           {this.conditionalRender()}
+          {/* <button onClick={()=>this.toggleDeleteNodeDialog()}>Modify Selected Node</button> */}
         </div>
       </HashRouter>
     );
