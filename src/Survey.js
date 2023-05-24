@@ -67,7 +67,11 @@ import
   I_AM_COMFORTABLE_NONACADEMIC,
   DIFFICULT_INTERACTION_BOXES,
   I_PROVIDE_SUPPORT_NONACADEMIC,
-  SIMILAR_ANSWER_BOXES
+  SIMILAR_ANSWER_BOXES,
+  IS_LABMEMBER_SETTINGS,
+  COLLABORATION_SETTINGS,
+  WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS,
+  IS_DIFFICULT_TO_INTERACT_WITH
 
 } from "./Settings"
 
@@ -378,17 +382,108 @@ class Survey extends Component
     {
       nodes[counter].sex = GENDER_SETTINGS.male.name;
       nodes[counter].color = GENDER_SETTINGS.male.color;
-    } else if (nodes[counter].sex === GENDER_SETTINGS.male.name)
+    } 
+    else if (nodes[counter].sex === GENDER_SETTINGS.male.name)
     {
       nodes[counter].sex = GENDER_SETTINGS.other.name;
       nodes[counter].color = GENDER_SETTINGS.other.color;
-    } else
+    } 
+    else
     {
       nodes[counter].sex = GENDER_SETTINGS.female.name;
       nodes[counter].color = GENDER_SETTINGS.female.color;
     }
     this.setState({ nodes: nodes });
   }
+
+  assignLabMemberNodeCallback = (counter) =>
+  {
+    let nodes = this.state.nodes;
+
+    if (nodes[counter].isLabMember === IS_LABMEMBER_SETTINGS.notLabMember.name || nodes[counter].isLabMember === -1)
+    {
+      nodes[counter].isLabMember = IS_LABMEMBER_SETTINGS.isLabMember.name;
+      nodes[counter].labMemberColor = IS_LABMEMBER_SETTINGS.isLabMember.color;
+    }
+    else if(nodes[counter].isLabMember === IS_LABMEMBER_SETTINGS.isLabMember.name)
+    {
+      nodes[counter].isLabMember = IS_LABMEMBER_SETTINGS.notLabMember.name;
+      nodes[counter].labMemberColor = IS_LABMEMBER_SETTINGS.notLabMember.color;
+    }
+    this.setState({ nodes: nodes });
+  }
+
+  assignCollaboratorNodeCallback = (counter) =>
+  {
+    let nodes = this.state.nodes;
+
+    if (nodes[counter].collaboration === COLLABORATION_SETTINGS.supervisor.name)
+    {
+      nodes[counter].collaboration = COLLABORATION_SETTINGS.committeeMember.name;
+      nodes[counter].collaborationColor = COLLABORATION_SETTINGS.committeeMember.color;
+    } 
+    else if (nodes[counter].collaboration === COLLABORATION_SETTINGS.committeeMember.name)
+    {
+      nodes[counter].collaboration = COLLABORATION_SETTINGS.none.name;
+      nodes[counter].collaborationColor = COLLABORATION_SETTINGS.none.color;
+    } 
+    else
+    {
+      nodes[counter].collaboration = COLLABORATION_SETTINGS.supervisor.name;
+      nodes[counter].collaborationColor = COLLABORATION_SETTINGS.supervisor.color;
+    }
+    this.setState({ nodes: nodes });
+  }
+
+  similarAnswersNodeCallback = (counter) =>
+  {
+    let nodes = this.state.nodes;
+
+    if (nodes[counter].wouldAnswerSimilarToMe === WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.verySimilar.name)
+    {
+      nodes[counter].wouldAnswerSimilarToMe = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.somewhatSimilar.name;
+      nodes[counter].wouldAnswerSimilarToMeColor = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.somewhatSimilar.color;
+    } 
+    else if (nodes[counter].wouldAnswerSimilarToMe === WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.somewhatSimilar.name)
+    {
+      nodes[counter].wouldAnswerSimilarToMe = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.notSimilar.name;
+      nodes[counter].wouldAnswerSimilarToMeColor = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.notSimilar.color;
+    }
+    else if (nodes[counter].wouldAnswerSimilarToMe === WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.notSimilar.name)
+    {
+      nodes[counter].wouldAnswerSimilarToMe = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.noResponse.name;
+      nodes[counter].wouldAnswerSimilarToMeColor = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.noResponse.color;
+    }  
+    else
+    {
+      nodes[counter].wouldAnswerSimilarToMe = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.verySimilar.name;
+      nodes[counter].wouldAnswerSimilarToMeColor = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.verySimilar.color;
+    }
+    this.setState({ nodes: nodes });
+  }
+
+  difficultInteractionsNodeCallback = (counter) =>
+  {
+    let nodes = this.state.nodes;
+
+    if (nodes[counter].difficultToInteractWith === IS_DIFFICULT_TO_INTERACT_WITH.veryDifficult.name)
+    {
+      nodes[counter].difficultToInteractWith = IS_DIFFICULT_TO_INTERACT_WITH.aLittleDifficult.name;
+      nodes[counter].difficultToInteractWithColor = IS_DIFFICULT_TO_INTERACT_WITH.aLittleDifficult.color;
+    } 
+    else if (nodes[counter].difficultToInteractWith === IS_DIFFICULT_TO_INTERACT_WITH.aLittleDifficult.name)
+    {
+      nodes[counter].difficultToInteractWith = IS_DIFFICULT_TO_INTERACT_WITH.noResponse.name;
+      nodes[counter].difficultToInteractWithColor = IS_DIFFICULT_TO_INTERACT_WITH.noResponse.color;
+    } 
+    else
+    {
+      nodes[counter].difficultToInteractWith = IS_DIFFICULT_TO_INTERACT_WITH.veryDifficult.name;
+      nodes[counter].difficultToInteractWithColor = IS_DIFFICULT_TO_INTERACT_WITH.veryDifficult.color;
+    }
+    this.setState({ nodes: nodes });
+  }
+
 
   /************************************************************************
    * Determines value displayed next to node on slider screen
@@ -797,49 +892,49 @@ class Survey extends Component
                     Q8. Select Individuals That Provide You With Technical Support
                   </NavLink>
                 </NavItem>
-                <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 9" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
+                {/* <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 9" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
                   <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_9">
                     Q9. Select Individuals Who You Would Like More Technical Support From
                   </NavLink>
-                </NavItem>
+                </NavItem> */}
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 10" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_10">
-                    Q10. Select Individuals Who You Provide Technical Support For
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_9">
+                    Q9. Select Individuals Who You Provide Technical Support For
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 11" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_11">
-                    Q11. Who Do You Feel Comfortable Talking To About Personal Failure, Disappointment, or Struggle in Your Academic Work?
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_10">
+                    Q10. Who Do You Feel Comfortable Talking To About Personal Failure, Disappointment, or Struggle in Your Academic Work?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 12" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_12">
-                    Q12. Do You Provide Support To Individuals About Personal Failure, Disappointment, or Struggle in Their Academic Work?
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_11">
+                    Q11. Do You Provide Support To Individuals About Personal Failure, Disappointment, or Struggle in Their Academic Work?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 13" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_13">
-                    Q13. Is There Anyone You Feel Comfortable Talking With About Personal Non-Academic Matters?
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_12">
+                    Q12. Is There Anyone You Feel Comfortable Talking With About Personal Non-Academic Matters?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 14" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_14">
-                    Q14. Do You Provide Support To Help Others With Personal Non-Academic Matters?
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_13">
+                    Q13. Do You Provide Support To Help Others With Personal Non-Academic Matters?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 15" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_15">
-                    Q15. Who Do You Feel Uncomfortable Interacting With?
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_14">
+                    Q14. Who Do You Find It Difficult Interacting With?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 16" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_16">
-                    Q16. Who Do You Think Would Closely Match Your Responses To This Survey?
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_15">
+                    Q15. Who Do You Think Would Closely Match Your Responses To This Survey?
                   </NavLink>
                 </NavItem>
                 <NavItem title={this.state.nodes.length > MIN_ALTERS ? "Question 17" : "Please add " + MIN_ALTERS + " individuals to access this question."}>
-                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_17">
-                    Q17. Assign Social Network Connections
+                  <NavLink className={this.state.nodes.length > MIN_ALTERS ? "nav-link" : "nav-link unavailable"} exact to="/Question_16">
+                    Q16. Assign Social Network Connections
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -1030,7 +1125,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Route for Question 5: Assigning Lab Members */}
-                <Route exact path="/Question_6" component={
+                {/* <Route exact path="/Question_6" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1064,9 +1159,29 @@ class Survey extends Component
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                     lastClickedNode={this.state.lastClickedNode}
                   />
+                } /> */}
+                  <Route exact path="/Question_6" component={
+                  () => <NodeComponent nodes={this.state.nodes.slice(1)}
+                    route={"/Question_7"}
+                    prevNodes={this.prevNodes}
+                    counter={-1}
+                    links={[]}
+                    foci={this.state.foci.slice(1)}
+                    prevFoci={this.prevFoci}
+                    callBackNodes={this.assignLabMemberNodeCallback.bind(this)}
+                    collectHistory={this.collectHistory.bind(this)}
+                    textDescription={SURVEY_QUESTIONS[7]}
+                    transferCallBack={this.transferData.bind(this)}
+                    legend={
+                      null
+                    }
+                    colorOveride = {"labMemberColor"}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
+                  />
                 } />
                 {/* Route for Question 6: Who would you like to colaborate with */}
-                <Route exact path="/Question_7" component={
+                {/* <Route exact path="/Question_7" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1100,8 +1215,28 @@ class Survey extends Component
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                     lastClickedNode={this.state.lastClickedNode}
                   />
-                } />
+                } /> */}
 
+                <Route exact path="/Question_7" component={
+                  () => <NodeComponent nodes={this.state.nodes.slice(1)}
+                    route={"/Question_8"}
+                    prevNodes={this.prevNodes}
+                    counter={-1}
+                    links={[]}
+                    foci={this.state.foci.slice(1)}
+                    prevFoci={this.prevFoci}
+                    callBackNodes={this.assignCollaboratorNodeCallback.bind(this)}
+                    collectHistory={this.collectHistory.bind(this)}
+                    textDescription={SURVEY_QUESTIONS[8]}
+                    transferCallBack={this.transferData.bind(this)}
+                    legend={
+                      null
+                    }
+                    colorOveride = {"collaborationColor"}
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
+                  />
+                } />
                 {/* Question 7: Who Provides you with Technical Support */}
                 <Route exact path="/Question_8" component={
                   () => <NodeComponent fixed={1}
@@ -1121,7 +1256,7 @@ class Survey extends Component
                         y: node.providesMeSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_9"}
+                    route={"/Question_10"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1139,7 +1274,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 8: Who would you like more support from? */}
-                <Route exact path="/Question_9" component={
+                {/* <Route exact path="/Question_9" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1173,7 +1308,7 @@ class Survey extends Component
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                     lastClickedNode={this.state.lastClickedNode}
                   />
-                } />
+                } /> */}
                 {/* Question 9: Who do you provide technical support for? */}
                 <Route exact path="/Question_10" component={
                   () => <NodeComponent fixed={1}
@@ -1356,7 +1491,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 14: Is there anyone below with whom you find it difficult to interact? */}
-                <Route exact path="/Question_15" component={
+                {/* <Route exact path="/Question_15" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1390,10 +1525,30 @@ class Survey extends Component
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                     lastClickedNode={this.state.lastClickedNode}
                   />
+                } /> */}
+                <Route exact path="/Question_15" component={
+                  () => <NodeComponent nodes={this.state.nodes.slice(1)}
+                    route={"/Question_16"}
+                    prevNodes={this.prevNodes}
+                    counter={-1}
+                    links={[]}
+                    foci={this.state.foci.slice(1)}
+                    prevFoci={this.prevFoci}
+                    callBackNodes={this.difficultInteractionsNodeCallback.bind(this)}
+                    collectHistory={this.collectHistory.bind(this)}
+                    textDescription={SURVEY_QUESTIONS[16]}
+                    transferCallBack={this.transferData.bind(this)}
+                    colorOveride={"difficultToInteractWithColor"}
+                    legend={
+                      null
+                    }
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
+                  />
                 } />
 
-                {/* Question 15: If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you? */}
-                <Route exact path="/Question_16" component={
+                {/* Question 16: If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you? */}
+                {/* <Route exact path="/Question_16" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1426,6 +1581,26 @@ class Survey extends Component
                     categories={SIMILAR_ANSWER_BOXES}
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                     lastClickedNode={this.state.lastClickedNode}
+                  />
+                } /> */}
+                  <Route exact path="/Question_16" component={
+                  () => <NodeComponent nodes={this.state.nodes.slice(1)}
+                    route={"/Question_17"}
+                    prevNodes={this.prevNodes}similarAnswersNodeCallback
+                    counter={-1}
+                    links={[]}
+                    foci={this.state.foci.slice(1)}
+                    prevFoci={this.prevFoci}
+                    callBackNodes={this.similarAnswersNodeCallback.bind(this)}
+                    collectHistory={this.collectHistory.bind(this)}
+                    textDescription={SURVEY_QUESTIONS[17]}
+                    transferCallBack={this.transferData.bind(this)}
+                    legend={
+                      null
+                    }
+                    lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
+                    lastClickedNode={this.state.lastClickedNode}
+                    colorOveride={"wouldAnswerSimilarToMeColor"}
                   />
                 } />
                 {/* <Route exact path="/Boolean" component={

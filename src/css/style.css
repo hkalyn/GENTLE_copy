@@ -67,6 +67,8 @@ body {
 .legend .legendNode p {
   margin: auto;
   font-weight: bold;
+  font-size: 12px;
+  text-align: center;
 }
 .categoryButton,
 #confirm,

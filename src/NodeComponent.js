@@ -53,6 +53,7 @@ class NodeComponent extends Component
             counter={this.props.counter}
             nodes={this.props.nodes}
             prevNodes={this.props.prevNodes}
+            colorOveride = {this.props.colorOveride}
             links={this.props.links}
             foci={this.props.foci}
             prevFoci={this.props.prevFoci}

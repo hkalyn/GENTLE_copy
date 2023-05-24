@@ -27,12 +27,20 @@ export const CATEGORY_CHANGED = "You have changed the category for an individual
  * Constants for creating alters
  *************************************************************************/
 // The maximum number of individuals that participants can add.
-export const MAX_ALTERS = 25
+export const MAX_ALTERS = 20
 
 // The minimum number of alters that participants can add. Having this value higher than 0 will prevent users from 
 //navigating the site and skipping the name generation screen. Participants MUST add 
 //<MIN_ALTERS> individuals in order to proceed to subsequent questions.
-export const MIN_ALTERS = 25
+export const MIN_ALTERS = 20
+
+
+/*************************************************************************
+ * Defining Box Colors to avoid repetition
+ *************************************************************************/
+export const BOX_COLORS = [
+    "#E9621F", "#0795BB", "#F4E401", "#6D3A8A"
+]
 
 /*************************************************************************
  * Object contains the settings for Gender. You can add additional values
@@ -51,6 +59,66 @@ export const GENDER_SETTINGS = {
     other: {
         name: "other",
         color: "#80FED0"
+    }
+}
+
+export const COLLABORATION_SETTINGS = {
+    supervisor: {
+        name: "supervisor",
+        color: BOX_COLORS[0]
+    },
+    committeeMember: {
+        name: "committee member",
+        color: BOX_COLORS[1]
+    },
+    none: {
+        name: "no",
+        color: "grey"
+    }
+}
+
+export const IS_LABMEMBER_SETTINGS = {
+    isLabMember: {
+        name: "yes",
+        color: "#E9621F"
+    },
+    notLabMember: {
+        name: "no",
+        color: "grey"
+    }
+}
+
+export const WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS = {
+    verySimilar: {
+        name: "very similar",
+        color: BOX_COLORS[0]
+    },
+    somewhatSimilar: {
+        name: "somewhat similar",
+        color: BOX_COLORS[1]
+    },
+    notSimilar: {
+        name: "not similar",
+        color: BOX_COLORS[2]
+    },
+    noResponse: {
+        name: "NA",
+        color: "grey"
+    }
+}
+
+export const IS_DIFFICULT_TO_INTERACT_WITH = {
+    veryDifficult: {
+        name: "very difficult",
+        color: BOX_COLORS[0]
+    },
+    aLittleDifficult: {
+        name: "somewhat difficult",
+        color: BOX_COLORS[1]
+    },
+    noResponse: {
+        name: "NA",
+        color: "grey"
     }
 }
 /*************************************************************************
@@ -143,21 +211,36 @@ export const SURVEY_QUESTIONS = [
         </p>
     </div>,
     //Question 6 Instructions and message
+    <>
     <div>
         <p>
-            Q6. Place all individuals that are YOUR lab mates in the box below.
+            Q6. Select All YOUR lab members by clicking them.
         </p>
-    </div>,
+    </div>
+        <div className="legend">
+            <h3>Legend</h3>
+            <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Lab Member</p></div>
+        </div>
+        </>
+    ,
     // Question 6 (Network linking supposed to go here, but I want to move it ot the end.)
     //Question 7
+    <>
     <div>
         <p>
-            Q7. If listed, place your supervisor(s) and committee member(s) in the appropriate box.
+            Q7. If listed, select your supervisor(s) and committee member(s) by clicking them until their color matches the legend on the right.
         </p>
         <p>
             Click and drag individuals into the appropriate box.
         </p>
-    </div>,
+    </div>
+            <div className="legend">
+            <h3>Legend</h3>
+            <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Supervisor</p></div>
+            <div className="legendNode" style={{ backgroundColor: BOX_COLORS[1] }}><p>Committee Member</p></div>
+        </div>
+        </>
+    ,
     // Question 8
     <div>
         <p>
@@ -228,23 +311,40 @@ export const SURVEY_QUESTIONS = [
         </p>
     </div>,
     // Question 15
+    <>
     <div>
         <p>
             Q15. Is there anyone below with whom you find it difficult to interact?
         </p>
         <p>
-            Click and drag individuals into the appropriate box.
+            Click them until their color matches the legend on the right.
         </p>
-    </div>,
+    </div>
+                <div className="legend">
+                <h3>Legend</h3>
+                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Very Difficult</p></div>
+                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[1] }}><p>A Little Difficult</p></div>
+            </div>
+            </>
+    ,
     // Question 16
+    <>
     <div>
         <p>
             Q16. If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you?
         </p>
         <p>
-            Click and drag individuals into the appropriate box.
+            Click individuals until their color matches the legend on the right.
         </p>
-    </div>,
+    </div>
+                <div className="legend">
+                <h3>Legend</h3>
+                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Very Similar</p></div>
+                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[1] }}><p>Somewhat Similar</p></div>
+                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[2] }}><p>Not Similar</p></div>
+            </div>
+            </>
+    ,
     // Question 17
     <div>
         <p>
@@ -300,7 +400,9 @@ export function returnTemplateNode(counter, name)
         academicSubCategory: "",
         nonAcademicSubCategory: "",
         isLabMember: -1,
+        labMemberColor: "grey",
         collaboration: -1,
+        collaborationColor: "grey",
         providesMeSupport_Technical: -1,
         iWouldLikeMoreTechnicalSupport: -1,
         iProvideSupport_Technical: -1,
@@ -309,7 +411,9 @@ export function returnTemplateNode(counter, name)
         iAmComfortable_Personal_NonAcademic: -1,
         iProvideSupport_Personal_NonAcademic: -1,
         difficultToInteractWith: -1,
+        difficultToInteractWithColor: "grey",
         wouldAnswerSimilarToMe: -1,
+        wouldAnswerSimilarToMeColor: "grey",
         categoryColor: "white",
         border: "#FFFFFF"
     };
@@ -429,13 +533,6 @@ export const NONACADEMIC_SUBCATEGORIES = [
  * template, and give it a new name. Then reference that object in the 
  * callback 
  *************************************************************************/
-
-/*************************************************************************
- * Defining Box Colors to avoid repetition
- *************************************************************************/
-export const BOX_COLORS = [
-    "#E9621F", "#0795BB", "#F4E401", "#6D3A8A"
-]
 
 // Boxes for Q4a
 export var ACADEMIC_BOXES = (window.innerWidth > 700 ?

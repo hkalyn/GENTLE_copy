@@ -143,11 +143,13 @@ class Graph extends Component
         .style("opacity", (d) => (d.key === this.props.counter ? 0.65 : 1)); //current node has 0.65 opacity
     }
 
+    var color;
+
     v3d.append("circle")
       .attr("class", "Node_center")
       .attr("id", (d) => d.key)
       .attr("r", (d) => d.size)
-      .style("fill", (d) => d.color)
+      .style("fill", (d) => this.props.colorOveride === undefined || this.props.colorOveride === null ? d.color : d[this.props.colorOveride])
       .style("stroke", (d) => d.border)
       .style("stroke-width", "10px")
       //.on("touchstart", function(d){d3.event.preventDefault(); console.log(d)})
@@ -156,6 +158,7 @@ class Graph extends Component
       .on("touchend", (d) => { this.callback(d); })
       .on("click", (d) => { this.callback(d); });
 
+      console.log("Color Overide: ", this.props.colorOveride)
 
     v3d.append("circle")
       .attr("class", "Node_rel")
