@@ -32,7 +32,7 @@ class Welcome extends Component
 
         }
         this.setState({surveyReady: isAuthorized})
-        // this.setState({surveyReady: true})
+         this.setState({surveyReady: true})
     }
 
     reAuthorizeUserSession=()=>{

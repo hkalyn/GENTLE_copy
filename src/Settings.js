@@ -133,15 +133,14 @@ export const SURVEY_QUESTIONS = [
     // Question 1 Instructions (appearing in text-box)
     <div>
         <p>
-            Name <b>25 individuals</b> that you interact with <u>most frequently</u> in your academic program (e.g., supervisor(s), committee
-            members, lab members, other fellow students/classmates, professors, instructors, teaching assistants, or staff members). Feel
-            free to name individuals from non-academic environments if you interact with them as a student (e.g., professional affiliates,
-            employers, community members, elders, family, friends, or partners).
+            Q1. Name 20 individuals that you interact with most frequently in your academic program (e.g., supervisor(s), committee members, lab members, other fellow students/classmates, professors, instructors, teaching assistants, or staff members). Feel free to name individuals from non-academic environments if you interact with them as a student (e.g., professional affiliates, employers, community members, elders, family, friends, or partners).
         </p>
         <p>
-            *You should be able to recognize all these individuals by face or name, and they should recognize you by face or name via inperson or online interactions.
+            *You should be able to recognize all these individuals by face or name, and they should recognize you by face or name via in person or online interactions.
         </p>
-        <p>If you need to modify a node (rename or delete), you can click the node and press delete on the keyboard, or click the Modify Selected Node button.</p>
+        <p>
+            If you need to modify a node (rename or delete), you can click the node and press delete on the keyboard, or click the Modify Selected Node button.
+        </p>
     </div>,
     // Question 2 Instructions (appearing in text-box)
     <>
@@ -176,20 +175,16 @@ export const SURVEY_QUESTIONS = [
             Q4. What is each individual's cultural background?
         </p>
         <p>
-            Select an individual, and select the culture that best describes them.
-            If you would like, you can select multiple options for an individual by clicking them and selecting an aditional category.
-            If you want to remove a category from an individual, simply click them and select the option again to remove it.
+            Select an individual, and select the culture that best describes them. If you would like, you can select multiple options for an individual by clicking them and selecting an additional category. If you want to remove a category from an individual, simply click them and select the option again to remove it.
         </p>
     </div>,
     // Question 5a Instructions
     <div>
         <p>
-            Q5a. Please place everyone into either the 'academic' or 'non-academic' box.
+            Q5a. Where do you interact with these individuals, in an academic or non-academic environment? Place everyone into either the 'academic' or 'non-academic' box.
         </p>
         <p>
-            You can do this by clicking on an individual and dragging them into
-            the appropriate box. If needed, you can place individuals into the 'other' box, and then specify how they fit differently (e.g., maybe your partner is
-            also an academic and you're not sure in which bubble to place them)
+            You can do this by clicking on an individual and dragging them into the appropriate box. 
         </p>
     </div>,
     //Question 5b Instructions and message 
@@ -230,9 +225,6 @@ export const SURVEY_QUESTIONS = [
         <p>
             Q7. If listed, select your supervisor(s) and committee member(s) by clicking them until their color matches the legend on the right.
         </p>
-        <p>
-            Click and drag individuals into the appropriate box.
-        </p>
     </div>
             <div className="legend">
             <h3>Legend</h3>
@@ -250,7 +242,7 @@ export const SURVEY_QUESTIONS = [
             For example, this could be help with things like developing research skills, field or lab work, writing, reading, class work, or statistics.
         </p>
         <p>
-            Click and drag individuals into the appropriate box.
+            Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
         </p>
     </div>,
     // Question 9
@@ -259,62 +251,62 @@ export const SURVEY_QUESTIONS = [
             Q9. Is there anyone you would like more technical support from?
         </p>
         <p>
-            You can do this by clicking and dragging relevant individuals into the box.
+            You can do this by clicking and dragging relevant individuals into the box. If you are unsure you can leave individuals outside the boxes.
         </p>
     </div>,
     // Question 10
     <div>
         <p>
-            Q10. <b>Do you provide</b> (or would be willing to provide) technical support to help others develop their skills as a researcher or student?
+            Q9. <b>Do you provide</b> (or would be willing to provide) technical support to help others develop their skills as a researcher or student?
         </p>
         <p>
             For example, this could be things like help with developing research skills, field or lab work, writing, reading, class work, or statistics.
         </p>
         <p>
-            Click and drag individuals into the appropriate box.
+            Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
         </p>
     </div>,
     // Question 11
     <div>
         <p>
-            Q11. Do you feel comfortable talking with anyone below about <b>failure, disappointment, or struggle in your academic work</b>?
+            Q10. Do you feel comfortable talking with anyone below about <b>failure, disappointment, or struggle in your academic work</b>?
         </p>
         <p>
-            Click and drag individuals into the appropriate box.
+            Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
         </p>
     </div>,
     // Question 12
     <div>
         <p>
-            Q12. <b>Do you provide</b> (or would be willing to provide) support to any individuals below about <b>failure, disappointment, or struggle in their academic work</b>?
+            Q11. <b>Do you provide</b> (or would be willing to provide) support to any individuals below about <b>failure, disappointment, or struggle in their academic work</b>?
         </p>
         <p>
-            Click and drag individuals into the appropriate box.
+            Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
         </p>
     </div>,
     // Question 13
     <div>
         <p>
-            Q13. Is there anyone below that you feel comfortable talking with about <b>personal, non-academic matters</b>?
+            Q12. Is there anyone below that you feel comfortable talking with about <b>personal, non-academic matters</b>?
         </p>
         <p>
-            Click and drag individuals into the appropriate box.
+            Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
         </p>
     </div>,
     // Question 14
     <div>
         <p>
-            Q14. <b>Do you provide</b> (or would be willing to provide) support to help others with <b>personal, non-academic matters</b>?
+            Q13. <b>Do you provide</b> (or would be willing to provide) support to help others with <b>personal, non-academic matters</b>?
         </p>
         <p>
-            Click and drag individuals into the appropriate box.
+            Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
         </p>
     </div>,
     // Question 15
     <>
     <div>
         <p>
-            Q15. Is there anyone below with whom you find it difficult to interact?
+            Q14. Is there anyone below with whom you find it difficult to interact?
         </p>
         <p>
             Click them until their color matches the legend on the right.
@@ -331,7 +323,7 @@ export const SURVEY_QUESTIONS = [
     <>
     <div>
         <p>
-            Q16. If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you?
+            Q15. If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you?
         </p>
         <p>
             Click individuals until their color matches the legend on the right.
@@ -348,8 +340,10 @@ export const SURVEY_QUESTIONS = [
     // Question 17
     <div>
         <p>
-            Q17. Create a detailed social network by linking individuals that know eachother by face or name. It's ok if you have
-            individuals that cannot identify anyone else.
+            Q16. You've told us about who provides you with technical support. Now, link individuals from your network that provide technical support to each other. For example, individuals who collaborate on research together, help each other with field or lab work, or help each other with reading, writing, or statistics.
+        </p>
+        <p>
+            Create a link (or unlike) by clicking an individual, and then clicking another individual. Take your time to ensure the most complete network.
         </p>
         <p>
             Create links by clicking one individual, and then clicking another individual. Please take your time to ensure the most complete social network. You can also unlink individuals by clicking on one individual, and clicking another individual that they are already linked to.
@@ -544,7 +538,7 @@ export var ACADEMIC_BOXES = (window.innerWidth > 700 ?
             value: "academic",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -554,7 +548,7 @@ export var ACADEMIC_BOXES = (window.innerWidth > 700 ?
             value: "non-academic",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -592,7 +586,7 @@ export const LAB_MEMBER_BOX = (window.innerWidth > 700 ?
             value: "true",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: SVG_WIDTH - 30,
             height: window.innerHeight * 0.17
         }
@@ -622,7 +616,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             value: "supervisors",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 2) - 15),
             height: window.innerHeight * 0.17
         },
@@ -632,7 +626,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             value: "committee member",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 2) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 2) - 30),
             height: window.innerHeight * 0.17
         },
@@ -671,7 +665,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a lot",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -681,7 +675,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a little",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -691,7 +685,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "none",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -739,7 +733,7 @@ export const WOULD_LIKE_MORE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "true",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: SVG_WIDTH - 30,
             height: window.innerHeight * 0.17
         }
@@ -769,7 +763,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a lot",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -779,7 +773,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a little",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -789,7 +783,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "none",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -837,7 +831,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -847,7 +841,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -857,7 +851,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -905,7 +899,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -915,7 +909,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -925,7 +919,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -973,7 +967,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -983,7 +977,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -993,7 +987,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -1041,7 +1035,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1051,7 +1045,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1061,7 +1055,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -1109,7 +1103,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             value: "very difficult",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1119,7 +1113,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             value: "a little difficult",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -1158,7 +1152,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             value: "very similar",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1168,7 +1162,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             value: "somewhat similar",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1178,7 +1172,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             value: "not similar",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }

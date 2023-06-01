@@ -1256,7 +1256,7 @@ class Survey extends Component
                         y: node.providesMeSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_10"}
+                    route={"/Question_9"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1310,7 +1310,7 @@ class Survey extends Component
                   />
                 } /> */}
                 {/* Question 9: Who do you provide technical support for? */}
-                <Route exact path="/Question_10" component={
+                <Route exact path="/Question_9" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1328,7 +1328,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Technical === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_11"}
+                    route={"/Question_10"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1346,7 +1346,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 10: Do you feel comfortable talking with anyone below about personal failure, disappointment, or struggle in your academic work?  */}
-                <Route exact path="/Question_11" component={
+                <Route exact path="/Question_10" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1364,7 +1364,7 @@ class Survey extends Component
                         y: node.iAmComfortable_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_12"}
+                    route={"/Question_11"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1383,7 +1383,7 @@ class Survey extends Component
                 } />
                 {/* Question 11: Do you provide support for individuals regarding personal failure, disappointment, or struggle in their
             academic work? */}
-                <Route exact path="/Question_12" component={
+                <Route exact path="/Question_11" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1401,7 +1401,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Failure_Disappointment_Struggle_Academic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_13"}
+                    route={"/Question_12"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1419,7 +1419,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 12: Is there anyone below that you feel comfortable talking with about personal, non-academic matters? */}
-                <Route exact path="/Question_13" component={
+                <Route exact path="/Question_12" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1437,7 +1437,7 @@ class Survey extends Component
                         y: node.iAmComfortable_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_14"}
+                    route={"/Question_13"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1455,7 +1455,7 @@ class Survey extends Component
                   />
                 } />
                 {/* Question 13: Do you provide (or would be willing to provide) support to help others with personal, non-academic matters? */}
-                <Route exact path="/Question_14" component={
+                <Route exact path="/Question_13" component={
                   () => <NodeComponent fixed={1}
                     nodes={this.state.nodes.slice(1).map((node, i) => (
                       {
@@ -1473,7 +1473,7 @@ class Survey extends Component
                         y: node.iProvideSupport_Personal_NonAcademic === -1 ? ((Math.floor((node.key - 1) / 5) * (NODE_RADIUS * 2)) + (NODE_RADIUS)) : node.fixedPosY,
                       }
                     ))}
-                    route={"/Question_15"}
+                    route={"/Question_14"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     // counter={this.determineCounterReturn(this.state.nodes.slice(1), "academic", "")}
@@ -1526,9 +1526,9 @@ class Survey extends Component
                     lastClickedNode={this.state.lastClickedNode}
                   />
                 } /> */}
-                <Route exact path="/Question_15" component={
+                <Route exact path="/Question_14" component={
                   () => <NodeComponent nodes={this.state.nodes.slice(1)}
-                    route={"/Question_16"}
+                    route={"/Question_15"}
                     prevNodes={this.prevNodes}
                     counter={-1}
                     links={[]}
@@ -1583,9 +1583,9 @@ class Survey extends Component
                     lastClickedNode={this.state.lastClickedNode}
                   />
                 } /> */}
-                  <Route exact path="/Question_16" component={
+                  <Route exact path="/Question_15" component={
                   () => <NodeComponent nodes={this.state.nodes.slice(1)}
-                    route={"/Question_17"}
+                    route={"/Question_16"}
                     prevNodes={this.prevNodes}similarAnswersNodeCallback
                     counter={-1}
                     links={[]}
@@ -1694,7 +1694,7 @@ class Survey extends Component
                 textDescription={SURVEY_QUESTIONS[6]}
                 transferCallBack={this.transferData.bind(this)} />
             } /> */}
-                <Route exact path="/Question_17" component={
+                <Route exact path="/Question_16" component={
                   () => (MOBILE ? <NodeComponent nodes={this.state.nodes.slice(1).map((node, i) => (
                     {
                       key: node.key,
