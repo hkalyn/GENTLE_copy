@@ -184,7 +184,7 @@ export const SURVEY_QUESTIONS = [
             Q5a. Where do you interact with these individuals, in an academic or non-academic environment? Place everyone into either the 'academic' or 'non-academic' box.
         </p>
         <p>
-            You can do this by clicking on an individual and dragging them into the appropriate box. 
+            You can do this by clicking on an individual and dragging them into the appropriate box.
         </p>
     </div>,
     //Question 5b Instructions and message 
@@ -207,31 +207,31 @@ export const SURVEY_QUESTIONS = [
     </div>,
     //Question 6 Instructions and message
     <>
-    <div>
-        <p>
-            Q6. Select All YOUR lab members by clicking them.
-        </p>
-    </div>
+        <div>
+            <p>
+                Q6. Select All YOUR lab members by clicking them.
+            </p>
+        </div>
         <div className="legend">
             <h3>Legend</h3>
             <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Lab Member</p></div>
         </div>
-        </>
+    </>
     ,
     // Question 6 (Network linking supposed to go here, but I want to move it ot the end.)
     //Question 7
     <>
-    <div>
-        <p>
-            Q7. If listed, select your supervisor(s) and committee member(s) by clicking them until their color matches the legend on the right.
-        </p>
-    </div>
-            <div className="legend">
+        <div>
+            <p>
+                Q7. If listed, select your supervisor(s) and committee member(s) by clicking them until their color matches the legend on the right.
+            </p>
+        </div>
+        <div className="legend">
             <h3>Legend</h3>
             <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Supervisor</p></div>
             <div className="legendNode" style={{ backgroundColor: BOX_COLORS[1] }}><p>Committee Member</p></div>
         </div>
-        </>
+    </>
     ,
     // Question 8
     <div>
@@ -304,38 +304,38 @@ export const SURVEY_QUESTIONS = [
     </div>,
     // Question 15
     <>
-    <div>
-        <p>
-            Q14. Is there anyone below with whom you find it difficult to interact?
-        </p>
-        <p>
-            Click them until their color matches the legend on the right.
-        </p>
-    </div>
-                <div className="legend">
-                <h3>Legend</h3>
-                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Very Difficult</p></div>
-                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[1] }}><p>A Little Difficult</p></div>
-            </div>
-            </>
+        <div>
+            <p>
+                Q14. Is there anyone below with whom you find it difficult to interact?
+            </p>
+            <p>
+                Click them until their color matches the legend on the right.
+            </p>
+        </div>
+        <div className="legend">
+            <h3>Legend</h3>
+            <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Very Difficult</p></div>
+            <div className="legendNode" style={{ backgroundColor: BOX_COLORS[1] }}><p>A Little Difficult</p></div>
+        </div>
+    </>
     ,
     // Question 16
     <>
-    <div>
-        <p>
-            Q15. If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you?
-        </p>
-        <p>
-            Click individuals until their color matches the legend on the right.
-        </p>
-    </div>
-                <div className="legend">
-                <h3>Legend</h3>
-                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Very Similar</p></div>
-                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[1] }}><p>Somewhat Similar</p></div>
-                <div className="legendNode" style={{ backgroundColor: BOX_COLORS[2] }}><p>Not Similar</p></div>
-            </div>
-            </>
+        <div>
+            <p>
+                Q15. If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you?
+            </p>
+            <p>
+                Click individuals until their color matches the legend on the right.
+            </p>
+        </div>
+        <div className="legend">
+            <h3>Legend</h3>
+            <div className="legendNode" style={{ backgroundColor: BOX_COLORS[0] }}><p>Very Similar</p></div>
+            <div className="legendNode" style={{ backgroundColor: BOX_COLORS[1] }}><p>Somewhat Similar</p></div>
+            <div className="legendNode" style={{ backgroundColor: BOX_COLORS[2] }}><p>Not Similar</p></div>
+        </div>
+    </>
     ,
     // Question 17
     <div>
@@ -538,7 +538,7 @@ export var ACADEMIC_BOXES = (window.innerWidth > 700 ?
             value: "academic",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -548,7 +548,7 @@ export var ACADEMIC_BOXES = (window.innerWidth > 700 ?
             value: "non-academic",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -586,7 +586,7 @@ export const LAB_MEMBER_BOX = (window.innerWidth > 700 ?
             value: "true",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: SVG_WIDTH - 30,
             height: window.innerHeight * 0.17
         }
@@ -616,7 +616,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             value: "supervisors",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 2) - 15),
             height: window.innerHeight * 0.17
         },
@@ -626,7 +626,7 @@ export const COLLABORATOR_BOXES = (window.innerWidth > 700 ?
             value: "committee member",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 2) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 2) - 30),
             height: window.innerHeight * 0.17
         },
@@ -665,7 +665,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a lot",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -675,7 +675,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a little",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -685,7 +685,7 @@ export const PROVIDES_ME_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "none",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -733,7 +733,7 @@ export const WOULD_LIKE_MORE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "true",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: SVG_WIDTH - 30,
             height: window.innerHeight * 0.17
         }
@@ -763,7 +763,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a lot",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -773,7 +773,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "a little",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -783,7 +783,7 @@ export const I_PROVIDE_TECHNICAL_SUPPORT = (window.innerWidth > 700 ?
             value: "none",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -831,7 +831,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -841,7 +841,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -851,7 +851,7 @@ export const PROVIDES_ME_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -899,7 +899,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -909,7 +909,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -919,7 +919,7 @@ export const I_PROVIDE_SUPPORT_ACADEMIC = (window.innerWidth > 700 ?
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -967,7 +967,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -977,7 +977,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -987,7 +987,7 @@ export const I_AM_COMFORTABLE_NONACADEMIC = (window.innerWidth > 700 ?
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -1035,7 +1035,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             value: "very comfortable",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1045,7 +1045,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             value: "a little comfortable",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1055,7 +1055,7 @@ export const I_PROVIDE_SUPPORT_NONACADEMIC = (window.innerWidth > 700 ?
             value: "not comfortable",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -1103,7 +1103,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             value: "very difficult",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1113,7 +1113,7 @@ export const DIFFICULT_INTERACTION_BOXES = (window.innerWidth > 700 ?
             value: "a little difficult",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }
@@ -1152,7 +1152,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             value: "very similar",
             color: BOX_COLORS[0],
             x: 15,
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1162,7 +1162,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             value: "somewhat similar",
             color: BOX_COLORS[1],
             x: ((SVG_WIDTH / 3) + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         },
@@ -1172,7 +1172,7 @@ export const SIMILAR_ANSWER_BOXES = (window.innerWidth > 700 ?
             value: "not similar",
             color: BOX_COLORS[2],
             x: ((SVG_WIDTH / 3) * 2 + 15),
-            y: (window.innerHeight*0.7 - window.innerHeight * 0.17 - 30),
+            y: (window.innerHeight * 0.63 - window.innerHeight * 0.17 - 30),
             width: ((SVG_WIDTH / 3) - 30),
             height: window.innerHeight * 0.17
         }

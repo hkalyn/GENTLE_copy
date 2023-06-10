@@ -126,19 +126,20 @@ class Survey extends Component
     console.log("Survey Mounted: ", this.state)
     var sessionNodeData = JSON.parse(sessionStorage.getItem('nodeData'));
     var sessionAuthData = JSON.parse(sessionStorage.getItem('authData'));
-    if(!sessionNodeData===null)
+    if (!sessionNodeData === null)
     {
       this.setState({
-        id: sessionAuthData.id, 
-        nodes: sessionNodeData.nodes, 
-        links: sessionNodeData.links, 
+        id: sessionAuthData.id,
+        nodes: sessionNodeData.nodes,
+        links: sessionNodeData.links,
         foci: sessionNodeData.foci
       })
     }
-    else{
+    else
+    {
       this.setState({
         nodes: (this.props.nodes.length === 0 ? [returnYouTemplate()] :
-        recalculate_nodes(this.props.nodes, recalculate_foci(this.props.foci))),
+          recalculate_nodes(this.props.nodes, recalculate_foci(this.props.foci))),
         links: this.props.links,
         foci: (this.props.foci.length === 0 ? [{ key: 0, x: SVG_WIDTH / 2, y: SVG_HEIGHT / 2 }] : recalculate_foci(this.props.foci)),
       })
@@ -275,47 +276,49 @@ class Survey extends Component
       {
         alert(DUPLICATE_WARNING);
       }
-      else if(newName === "")
+      else if (newName === "")
       {
         alert("A node's name cannot be empty. Please try a valid name.")
       }
-      else{
+      else
+      {
         nodes[this.state.lastClickedNode].name = newName
       }
     }
     this.setState({ nodes: nodes, correction: 0 });
   }
 
-  pruneLinks=(nodeID)=>{
+  pruneLinks = (nodeID) =>
+  {
     var oldLinks = this.state.links
     var newLinks = [];
-    for(var i = 0; i<oldLinks.length; i++)
+    for (var i = 0; i < oldLinks.length; i++)
     {
-      oldLinks[i].key = i+1;
+      oldLinks[i].key = i + 1;
     }
-    for(var i = 0; i<oldLinks.length; i++ )
+    for (var i = 0; i < oldLinks.length; i++)
     {
-      if(oldLinks[i].source!==nodeID && oldLinks[i].target!==nodeID)
+      if (oldLinks[i].source !== nodeID && oldLinks[i].target !== nodeID)
       {
         newLinks.push(oldLinks[i])
       }
     }
-    for(var i = 0; i<newLinks.length; i++)
+    for (var i = 0; i < newLinks.length; i++)
     {
-      if(newLinks[i].source>nodeID)
+      if (newLinks[i].source > nodeID)
       {
-        newLinks[i].source = newLinks[i].source-1;
+        newLinks[i].source = newLinks[i].source - 1;
       }
-      if(newLinks[i].target>nodeID)
+      if (newLinks[i].target > nodeID)
       {
-        newLinks[i].target = newLinks[i].target-1;
+        newLinks[i].target = newLinks[i].target - 1;
       }
     }
-    for(var i = 0; i<newLinks.length; i++)
+    for (var i = 0; i < newLinks.length; i++)
     {
-      newLinks[i].key = i+1;
+      newLinks[i].key = i + 1;
     }
-    this.setState({links: newLinks})
+    this.setState({ links: newLinks })
     this.transferData();
   }
 
@@ -334,26 +337,26 @@ class Survey extends Component
     // }
     // else
     // {
-      // Generate new node if name does not exist
-      let counter = this.state.nodes.length;
-      if (doesNameOverlap(name, nodes))
-      {
-        alert(DUPLICATE_WARNING);
-        return;
-      }
-      else
-      {
-        nodes.push(returnTemplateNode(counter, name));
-        let coords = rect_layout(counter);
+    // Generate new node if name does not exist
+    let counter = this.state.nodes.length;
+    if (doesNameOverlap(name, nodes))
+    {
+      alert(DUPLICATE_WARNING);
+      return;
+    }
+    else
+    {
+      nodes.push(returnTemplateNode(counter, name));
+      let coords = rect_layout(counter);
 
-        foci.push({
-          key: counter,
-          x: coords[0],
-          y: coords[1]
-        })
-        // Push state
-        this.setState({ nodes: nodes, foci: foci });
-      }
+      foci.push({
+        key: counter,
+        x: coords[0],
+        y: coords[1]
+      })
+      // Push state
+      this.setState({ nodes: nodes, foci: foci });
+    }
     // }
   }
 
@@ -382,12 +385,12 @@ class Survey extends Component
     {
       nodes[counter].sex = GENDER_SETTINGS.male.name;
       nodes[counter].color = GENDER_SETTINGS.male.color;
-    } 
+    }
     else if (nodes[counter].sex === GENDER_SETTINGS.male.name)
     {
       nodes[counter].sex = GENDER_SETTINGS.other.name;
       nodes[counter].color = GENDER_SETTINGS.other.color;
-    } 
+    }
     else
     {
       nodes[counter].sex = GENDER_SETTINGS.female.name;
@@ -405,7 +408,7 @@ class Survey extends Component
       nodes[counter].isLabMember = IS_LABMEMBER_SETTINGS.isLabMember.name;
       nodes[counter].labMemberColor = IS_LABMEMBER_SETTINGS.isLabMember.color;
     }
-    else if(nodes[counter].isLabMember === IS_LABMEMBER_SETTINGS.isLabMember.name)
+    else if (nodes[counter].isLabMember === IS_LABMEMBER_SETTINGS.isLabMember.name)
     {
       nodes[counter].isLabMember = IS_LABMEMBER_SETTINGS.notLabMember.name;
       nodes[counter].labMemberColor = IS_LABMEMBER_SETTINGS.notLabMember.color;
@@ -421,12 +424,12 @@ class Survey extends Component
     {
       nodes[counter].collaboration = COLLABORATION_SETTINGS.committeeMember.name;
       nodes[counter].collaborationColor = COLLABORATION_SETTINGS.committeeMember.color;
-    } 
+    }
     else if (nodes[counter].collaboration === COLLABORATION_SETTINGS.committeeMember.name)
     {
       nodes[counter].collaboration = COLLABORATION_SETTINGS.none.name;
       nodes[counter].collaborationColor = COLLABORATION_SETTINGS.none.color;
-    } 
+    }
     else
     {
       nodes[counter].collaboration = COLLABORATION_SETTINGS.supervisor.name;
@@ -443,7 +446,7 @@ class Survey extends Component
     {
       nodes[counter].wouldAnswerSimilarToMe = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.somewhatSimilar.name;
       nodes[counter].wouldAnswerSimilarToMeColor = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.somewhatSimilar.color;
-    } 
+    }
     else if (nodes[counter].wouldAnswerSimilarToMe === WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.somewhatSimilar.name)
     {
       nodes[counter].wouldAnswerSimilarToMe = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.notSimilar.name;
@@ -453,7 +456,7 @@ class Survey extends Component
     {
       nodes[counter].wouldAnswerSimilarToMe = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.noResponse.name;
       nodes[counter].wouldAnswerSimilarToMeColor = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.noResponse.color;
-    }  
+    }
     else
     {
       nodes[counter].wouldAnswerSimilarToMe = WOULD_ANSWER_SIMILAR_TO_ME_SETTINGS.verySimilar.name;
@@ -470,12 +473,12 @@ class Survey extends Component
     {
       nodes[counter].difficultToInteractWith = IS_DIFFICULT_TO_INTERACT_WITH.aLittleDifficult.name;
       nodes[counter].difficultToInteractWithColor = IS_DIFFICULT_TO_INTERACT_WITH.aLittleDifficult.color;
-    } 
+    }
     else if (nodes[counter].difficultToInteractWith === IS_DIFFICULT_TO_INTERACT_WITH.aLittleDifficult.name)
     {
       nodes[counter].difficultToInteractWith = IS_DIFFICULT_TO_INTERACT_WITH.noResponse.name;
       nodes[counter].difficultToInteractWithColor = IS_DIFFICULT_TO_INTERACT_WITH.noResponse.color;
-    } 
+    }
     else
     {
       nodes[counter].difficultToInteractWith = IS_DIFFICULT_TO_INTERACT_WITH.veryDifficult.name;
@@ -570,42 +573,44 @@ class Survey extends Component
     }
   }
 
-    /*************************************************************************
- * Changes specific category key of a node
- * @param {string} key key of node property
- * @param {object} categories object containing categories and colors  
- * @param {number} counter that identifies node
- * @param {number} id of category
- * @param {string} category category name
- *************************************************************************/
-    multiCategoryButtonCallback = (key, keyColor, categories, counter, id, category) =>
+  /*************************************************************************
+* Changes specific category key of a node
+* @param {string} key key of node property
+* @param {object} categories object containing categories and colors  
+* @param {number} counter that identifies node
+* @param {number} id of category
+* @param {string} category category name
+*************************************************************************/
+  multiCategoryButtonCallback = (key, keyColor, categories, counter, id, category) =>
+  {
+    //updates background associated with node
+    if (counter >= this.state.nodes.length)
     {
-      //updates background associated with node
-      if (counter >= this.state.nodes.length)
+      alert(CATEGORY_WARNING);
+    } else
+    {
+      let nodes = JSON.parse(JSON.stringify(this.state.nodes));
+      if (nodes[counter][key] !== undefined)
       {
-        alert(CATEGORY_WARNING);
-      } else
-      {
-        let nodes = JSON.parse(JSON.stringify(this.state.nodes));
-        if(nodes[counter][key] !== undefined)
+        if (nodes[counter][key].includes(category))
         {
-          if(nodes[counter][key].includes(category))
+          var index = nodes[counter][key].indexOf(category);
+          if (index !== -1)
           {
-            var index = nodes[counter][key].indexOf(category);
-            if (index !== -1) {
-              nodes[counter][key].splice(index, 1);
-            }
-          }
-          else{
-            var temp = nodes[counter][key]
-            temp.push(category);
-            nodes[counter][key] = temp
+            nodes[counter][key].splice(index, 1);
           }
         }
-        // nodes[counter][keyColor] = categories[id].color;
-        this.setState({ nodes: nodes, correction: 0 });
+        else
+        {
+          var temp = nodes[counter][key]
+          temp.push(category);
+          nodes[counter][key] = temp
+        }
       }
+      // nodes[counter][keyColor] = categories[id].color;
+      this.setState({ nodes: nodes, correction: 0 });
     }
+  }
   /*************************************************************************
    * Changes specific continuous key of a node
    * @param {string} key key of node property
@@ -835,7 +840,7 @@ class Survey extends Component
   render()
   {
     return (
-       <HashRouter basename="/">
+      <HashRouter basename="/">
         <div>
           <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Navbar.Brand href="/">Gentle-1.1</Navbar.Brand>
@@ -957,10 +962,10 @@ class Survey extends Component
                 textDescription={SURVEY_QUESTIONS[0]}
                 transferCallBack={this.transferData.bind(this)}
                 lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
-                lastClickedNode = {this.state.lastClickedNode}
+                lastClickedNode={this.state.lastClickedNode}
                 deleteNodeCallback={this.deleteNodeCallback.bind(this)}
-                renameNodeCallback = {this.renameNodeCallback.bind(this)}
-                correction = {this.state.correction}
+                renameNodeCallback={this.renameNodeCallback.bind(this)}
+                correction={this.state.correction}
               />
             } />
             {/* Route for question 2: Selecting gender for your alters.
@@ -1048,7 +1053,7 @@ class Survey extends Component
                       lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                       textToApply={'culture'}
                       multiText={true}
-                      // graphMultiCategory={true}
+                    // graphMultiCategory={true}
                     />
                 } />
                 {/* Route for Question 4a: Assigning academic/non-academic */}
@@ -1160,7 +1165,7 @@ class Survey extends Component
                     lastClickedNode={this.state.lastClickedNode}
                   />
                 } /> */}
-                  <Route exact path="/Question_6" component={
+                <Route exact path="/Question_6" component={
                   () => <NodeComponent nodes={this.state.nodes.slice(1)}
                     route={"/Question_7"}
                     prevNodes={this.prevNodes}
@@ -1175,7 +1180,7 @@ class Survey extends Component
                     legend={
                       null
                     }
-                    colorOveride = {"labMemberColor"}
+                    colorOveride={"labMemberColor"}
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                     lastClickedNode={this.state.lastClickedNode}
                   />
@@ -1232,7 +1237,7 @@ class Survey extends Component
                     legend={
                       null
                     }
-                    colorOveride = {"collaborationColor"}
+                    colorOveride={"collaborationColor"}
                     lastClickedNodeCallback={this.setLastClickedNode.bind(this)}
                     lastClickedNode={this.state.lastClickedNode}
                   />
@@ -1583,10 +1588,10 @@ class Survey extends Component
                     lastClickedNode={this.state.lastClickedNode}
                   />
                 } /> */}
-                  <Route exact path="/Question_15" component={
+                <Route exact path="/Question_15" component={
                   () => <NodeComponent nodes={this.state.nodes.slice(1)}
                     route={"/Question_16"}
-                    prevNodes={this.prevNodes}similarAnswersNodeCallback
+                    prevNodes={this.prevNodes} similarAnswersNodeCallback
                     counter={-1}
                     links={[]}
                     foci={this.state.foci.slice(1)}
@@ -1712,7 +1717,7 @@ class Survey extends Component
                       float: false,
                       link: node.link,
                       floatX: node.floatX,
-                      floatY: node.floatY
+                      floatY: node.floatY,
                     }
                   ))}
                     route={"/End_of_Study"}
@@ -1727,6 +1732,7 @@ class Survey extends Component
                     callBackNodes={this.networkNodesCallback.bind(this)}
                     collectHistory={this.collectHistory.bind(this)}
                     textDescription={SURVEY_QUESTIONS[18]}
+                    extraHeight={true}
                     transferCallBack={this.transferData.bind(this)} />
 
                     :
@@ -1769,8 +1775,10 @@ class Survey extends Component
                       callBackNodes={this.networkNodesCallback.bind(this)}
                       collectHistory={this.collectHistory.bind(this)}
                       textDescription={SURVEY_QUESTIONS[18]}
-                      transferCallBack={this.transferData.bind(this)} />
-                      )} />
+                      transferCallBack={this.transferData.bind(this)}
+                      extraHeight={true}
+                    />
+                  )} />
 
                 <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SURVEY_QUESTIONS[19]} transferCallBack={this.transferData.bind(this)} />} />
               </div>
@@ -1779,7 +1787,7 @@ class Survey extends Component
             }
           </div>
         </div>
-       </HashRouter>
+      </HashRouter>
     );
   }
 }
