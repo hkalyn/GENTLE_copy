@@ -114,6 +114,10 @@ body {
   margin-left: auto;
 }
 
+svg {
+  overflow: visible !important;
+}
+
 .withBoxes {
   height: 63vh !important;
 }
