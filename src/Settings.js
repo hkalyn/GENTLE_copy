@@ -121,6 +121,30 @@ export const IS_DIFFICULT_TO_INTERACT_WITH = {
         color: "grey"
     }
 }
+
+export const INTRODUCTION_TEXT = <div className="introduction">
+    <h3>Thank you for participating in this research! Our work would not be possible without your time and thoughtful responses.</h3>
+    <p>In this survey, you will construct your own personal social network! We are interested in who you interact with most frequently in your current academic role and the types of support you might receive from these individuals.</p>
+    <p>Some instructions:</p>
+    <ul>
+        <li>
+            <p>For optimal functioning and enjoyability, this survey should be completed on a tablet, laptop, or desktop computer. It is not recommended for use on a mobile device. Maximize your browser size now for optimal viewing of the survey questions. You may have to scroll down the page to see the full question if your screen size is very small. </p>
+        </li>
+        <li>
+            <p>Once you begin, access any survey question through the menu icon at the top right corner of your page. This can be helpful if you need to go back to previous questions to make any changes. </p>
+        </li>
+        <li>
+            <p>This survey <b><u>does not have password retrieval</u></b>. Please ensure that you can remember or access your password later. Your correct password is necessary to update your responses in six months.</p>
+        </li>
+    </ul>
+    <p>We hope you enjoy building your personal social network!</p>
+</div>
+
+export const END_OF_SURVEY_STATEMENT = <div className="introduction">
+    <h3>Thank you very much for participating!</h3>
+    <p>We will contact you by email in six months to update your responses. Your GENTLE account will save all the responses you’ve recorded today, so updating responses should take minimal time.</p>
+    <p>PLEASE REMEMBER! This survey <u>does not have password retrieval</u>. Ensure that you can remember or access your password later. Your correct password is necessary to update your responses in six months.</p>
+</div>
 /*************************************************************************
  * A constant object that defines the on-screen questions for the survey.
  * To add additional questions, simply create a new <div></div> containing 

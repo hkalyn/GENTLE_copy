@@ -10,6 +10,7 @@ import NodeComponent from "./NodeComponent";
 // import NodeSliderComponent from "./NodeSliderComponent";
 import NodeCategoriesComponent from "./NodeCategoriesComponent";
 import Thanks from "./Thanks";
+import Introduction from "./Introduction"
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import $ from "jquery";
 
@@ -42,6 +43,8 @@ import
 {
   returnYouTemplate,
   returnTemplateNode,
+  INTRODUCTION_TEXT,
+  END_OF_SURVEY_STATEMENT,
   ACADEMIC_BOXES,
   LAB_MEMBER_BOX,
   GENDER_SETTINGS,
@@ -847,8 +850,13 @@ class Survey extends Component
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="mr-auto">
-                <NavItem title="Question 1">
+                <NavItem title="Introduction">
                   <NavLink className="nav-link" exact to="/">
+                    Introduction
+                  </NavLink>
+                </NavItem>
+                <NavItem title="Question 1">
+                  <NavLink className="nav-link" exact to="/Question_1">
                     Q1. Name generation example screen.
                   </NavLink>
                 </NavItem>
@@ -946,8 +954,13 @@ class Survey extends Component
             </Navbar.Collapse>
           </Navbar>
           <div id="content" className="content container">
-            {/* Route for question 1: Creating alters */}
             <Route exact path="/" component={
+              () => <Introduction textDescription={INTRODUCTION_TEXT}
+                route={"Question_1"}
+              />
+            } />
+            {/* Route for question 1: Creating alters */}
+            <Route exact path="/Question_1" component={
               () => <NodeButtonComponent nodes={this.state.nodes.slice(1)}
                 route={"/Question_2"}
                 max={MAX_ALTERS}
@@ -1780,7 +1793,7 @@ class Survey extends Component
                     />
                   )} />
 
-                <Route exact path="/End_of_Study" component={() => <Thanks textDescription={SURVEY_QUESTIONS[19]} transferCallBack={this.transferData.bind(this)} />} />
+                <Route exact path="/End_of_Study" component={() => <Thanks textDescription={END_OF_SURVEY_STATEMENT} transferCallBack={this.transferData.bind(this)} />} />
               </div>
               :
               <></>

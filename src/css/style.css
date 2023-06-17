@@ -34,6 +34,14 @@ body {
   margin: 0;
 }
 
+.introduction {
+  color: #212529;
+}
+
+.introduction p {
+  color: #212529;
+}
+
 .node {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
