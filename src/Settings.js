@@ -239,7 +239,7 @@ export const SURVEY_QUESTIONS = [
             Q8. Does anyone below <b>provide technical support</b> that helps you develop your skills as a researcher or student?
         </p>
         <p>
-            For example, this could be help with things like developing research skills, field or lab work, writing, reading, class work, or statistics.
+            For example, this could be collaborating on research together, or help with things like developing research skills, field or lab work, writing, reading, class work, coding, or statistics.
         </p>
         <p>
             Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
@@ -257,10 +257,10 @@ export const SURVEY_QUESTIONS = [
     // Question 10
     <div>
         <p>
-            Q9. <b>Do you provide</b> (or would be willing to provide) technical support to help others develop their skills as a researcher or student?
+            Q9. <b>Do you provide</b> (or would be willing to provide) <b>technical support</b> to help others develop their skills as a researcher or student?
         </p>
         <p>
-            For example, this could be things like help with developing research skills, field or lab work, writing, reading, class work, or statistics.
+            For example, this could be collaborating on research together, or help with things like developing research skills, field or lab work, writing, reading, class work, coding, or statistics.
         </p>
         <p>
             Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
@@ -326,7 +326,7 @@ export const SURVEY_QUESTIONS = [
                 Q15. If the individuals below also took the norm survey, do you think they would answer the norm statements in a similar way as you?
             </p>
             <p>
-                Click individuals until their color matches the legend on the right.
+                Click individuals until their colour matches the legend on the right. If you are unsure you can leave the individual unchanged.
             </p>
         </div>
         <div className="legend">
@@ -340,13 +340,10 @@ export const SURVEY_QUESTIONS = [
     // Question 17
     <div>
         <p>
-            Q16. You've told us about who provides you with technical support. Now, link individuals from your network that provide technical support to each other. For example, individuals who collaborate on research together, help each other with field or lab work, or help each other with reading, writing, or statistics.
+            You've told us about who provides you with technical support. Now, link individuals from your network that provide technical support to each other. For example, individuals who collaborate on research together, help each other with field or lab work, or help each other with reading, writing, or statistics.
         </p>
         <p>
-            Create a link (or unlike) by clicking an individual, and then clicking another individual. Take your time to ensure the most complete network.
-        </p>
-        <p>
-            Create links by clicking one individual, and then clicking another individual. Please take your time to ensure the most complete social network. You can also unlink individuals by clicking on one individual, and clicking another individual that they are already linked to.
+            Create a link (or unlink) by clicking an individual, and then clicking another individual. Take your time to ensure the most complete network.
         </p>
     </div>
 ];
