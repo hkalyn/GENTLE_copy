@@ -124,7 +124,7 @@ export const IS_DIFFICULT_TO_INTERACT_WITH = {
 
 export const INTRODUCTION_TEXT = <div className="introduction">
     <h3>Thank you for participating in this research! Our work would not be possible without your time and thoughtful responses.</h3>
-    <p>In this survey, you will construct your own personal social network! We are interested in who you interact with most frequently in your current academic role and the types of support you might receive from these individuals.</p>
+    <p>This survey contains <u>14 questions</u> that will help you construct your own personal social network! We are interested in who you interact with most frequently in your current academic role and the types of support you might receive from these individuals.</p>
     <p>Some instructions:</p>
     <ul>
         <li>
@@ -157,15 +157,16 @@ export const SURVEY_QUESTIONS = [
     // Question 1 Instructions (appearing in text-box)
     <div>
         <p>
-            Q1. Name 20 individuals that you interact with most frequently as a student or post-doctoral fellow. Think of individuals you interact with while conducting your research (e.g., field or lab work, lab meetings, reading clubs, seminars, classes, clubs, etc). These individuals might include supervisor(s), committee members, lab members, fellow students/classmates, summer students, professors, instructors, teaching assistants, technicians, lab managers, staff members, professional scientists, or others.
+        Q1. Excluding yourself, name 20 individuals that you interact with most frequently in your <u>current role</u> as a student or post-doctoral fellow. Think of individuals you interact with while conducting your research (e.g., field or lab work, lab meetings, reading clubs, seminars, classes, clubs, etc). These individuals might include supervisor(s), committee members, lab members, fellow students/classmates, summer students, professors, instructors, teaching assistants, technicians, lab managers, staff members, professional scientists, or others. 
         </p>
         <p>
-            *You should be able to recognize all these individuals by face or name, and they should recognize you by face or name via in person or online interactions.
+        *Name each person such that you can easily identify them later. Full names are not necessary. Hit ‘Confirm and Next’ after you’ve entered each individual name. If done correctly, each person will be visible on your screen in a small bubble. You should be able to recognize all these individuals by face or name, and they should recognize you by face or name via in person or online interactions.
         </p>
         <p>
-            If you need to modify a node (rename or delete), you can click the node and press delete on the keyboard or click the Modify Selected Node button.
+        If you need to modify a node (rename or delete), you can click the node and press delete on the keyboard or click the Modify Selected Node button.
         </p>
     </div>,
+
     // Question 2 Instructions (appearing in text-box)
     <>
         <div>
@@ -184,6 +185,7 @@ export const SURVEY_QUESTIONS = [
             <div className="legendNode" style={{ backgroundColor: GENDER_SETTINGS.other.color }}><p>Other</p></div>
         </div>
     </>,
+
     // Question 3 Instructions
     <div>
         <p>
@@ -193,6 +195,7 @@ export const SURVEY_QUESTIONS = [
             You can do this by clicking an individual and selecting an age bracket. If you want to remove a category from an individual, simply click them and select the option again to remove it.
         </p>
     </div>,
+
     // Question 4 Instructions
     <div>
         <p>
@@ -257,6 +260,7 @@ export const SURVEY_QUESTIONS = [
         </div>
     </>,
     // Question 13
+    //NOTE: OLD
     <div>
         <p>
             Q8. How comfortable are you discussing details about <u>your personal life</u> with these individuals?
@@ -266,6 +270,7 @@ export const SURVEY_QUESTIONS = [
         </p>
     </div>,
     // Question 14
+    //NOTE: OLD
     <div>
         <p>
             Q9. How comfortable are you listening to anyone below who wishes to discuss details about <u>their personal life</u> with you?
@@ -275,9 +280,10 @@ export const SURVEY_QUESTIONS = [
         </p>
     </div>,
     // Question 8
+
     <div>
         <p>
-            Q10. Does anyone below provide or would be willing to provide <u>academic support</u> to you?
+            Q8. Does anyone below provide or would be willing to provide <u>academic support</u> to you?
         </p>
         <p>
             <u>Academic support</u> might include things like research collaboration, offering training that develops your research skills, help with study design, field or lab work, writing, reading, class work, coding, data management, statistics, or other support related to research.
@@ -289,7 +295,7 @@ export const SURVEY_QUESTIONS = [
     // Question 9
     <div>
         <p>
-            Q11. Is there anyone you would like more technical support from?
+            Q9. Is there anyone you would like more technical support from?
         </p>
         <p>
             You can do this by clicking and dragging relevant individuals into the box. If you are unsure you can leave individuals outside the boxes.
@@ -298,7 +304,7 @@ export const SURVEY_QUESTIONS = [
     // Question 10
     <div>
         <p>
-            Q11. Do you provide or would be willing to provide <u>academic support</u> to anyone below?
+            Q9. Do you provide or would be willing to provide <u>academic support</u> to anyone below?
         </p>
         <p>
             <u>Academic support</u> might include things like research collaboration, offering training that develops your research skills, help with study design, field or lab work, writing, reading, class work, coding, data management, statistics, or other support related to research.
@@ -310,7 +316,7 @@ export const SURVEY_QUESTIONS = [
     // Question 11
     <div>
         <p>
-            Q12. Do you feel comfortable talking with anyone below about <u>failure, disappointment, or struggle in your academic work?</u>
+            Q10. Do you feel comfortable talking with anyone below about <u>failure, disappointment, or struggle in your academic work?</u>
         </p>
         <p>
             Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
@@ -319,7 +325,7 @@ export const SURVEY_QUESTIONS = [
     // Question 12
     <div>
         <p>
-            Q13. Do you feel comfortable providing support to anyone below about <u>failure, disappointment, or struggle in their academic work?</u>
+            Q11. Do you feel comfortable providing support to anyone below about <u>failure, disappointment, or struggle in their academic work?</u>
         </p>
         <p>
             Click and drag individuals into the appropriate box. If you are unsure you can leave individuals outside the boxes.
@@ -330,10 +336,10 @@ export const SURVEY_QUESTIONS = [
     <>
         <div>
             <p>
-                Q14. Do you find it difficult to interact with anyone below? 
+                Q12. Do you find it difficult to interact with anyone below?
             </p>
             <p>
-                If so, click those individuals until their color matches the legend on the right.
+                If no, leave the individuals unchanged. If yes, click those individuals until their color matches the legend on the right.
             </p>
         </div>
         <div className="legend">
@@ -347,7 +353,7 @@ export const SURVEY_QUESTIONS = [
     <>
         <div>
             <p>
-                Q15. How close are you to these individuals?
+                Q13. How close are you to these individuals?
             </p>
             <p>
                 Click individuals until their colour matches the legend on the right. If you are unsure you can leave the individual unchanged.
@@ -364,10 +370,10 @@ export const SURVEY_QUESTIONS = [
     // Question 17
     <div>
         <p>
-            Q16. Excluding yourself, now link individuals that <u>provide academic support to each other</u>. For example, collaborating on research, supervising students together, help with study design, field/lab work, writing, reading, class work, coding, data management, statistics, or other support related to research.
+            Q14. Excluding yourself, now make <u>20 links</u> between individuals that provide the most academic support to each other. For example, collaborating on research, supervising students together, help with study design, field/lab work, writing, reading, class work, coding, data management, statistics, or other support related to research.
         </p>
         <p>
-            Create a link (or unlink) by <u>clicking the center</u> of an individual, and then <u>clicking the center</u> of another individual. Existing ties will turn red for the current selection. <u>Click the 'Deselect Current Node'</u> button to cancel your current selection.
+        Create a link (or unlink) by <u>clicking the center</u> of an individual, and then <u>clicking the center</u> of another individual. Existing ties will turn red for your current selection. Look to the bottom left corner of your screen to keep track of the number of links you’ve made, or to click the 'Deselect Current Node' button to cancel your current selection. 
         </p>
     </div>
 ];
@@ -497,7 +503,7 @@ export const ACADEMIC_SUBCATEGORIES = [
     { key: 4, text: "Technician", color: "#F8CEB9" },
     { key: 5, text: "Instructor", color: "#F7C4BA" },
     { key: 6, text: "Professor", color: "#F6BBBB" },
-    { key: 7, text: "Professional - Scientist", color: "#fEB4E3" },
+    { key: 7, text: "Professional - Scientist (i.e., Scientist working outside academia)", color: "#fEB4E3" },
     { key: 8, text: "Professional - other", color: "#F2BFEA" },
     { key: 9, text: "Other", color: "#F1B6EC" }
 
@@ -517,14 +523,14 @@ export const AGE_CATEGORIES = [
 ];
 
 export const CULTURAL_CATEGORIES = [
-    { key: 0, text: "Black", color: "#FFE699" },
-    { key: 1, text: "East Asian", color: "#FFE699" },
-    { key: 2, text: "Indigenous (First Nations, Inuk/Inuit, Métis)", color: "#FFE699" },
-    { key: 3, text: "Latin American", color: "#FFE699" },
-    { key: 4, text: "Middle Eastern", color: "#FFE699" },
-    { key: 5, text: "South Asian", color: "#FFE699" },
-    { key: 6, text: "Southeast Asian", color: "#FFE699" },
-    { key: 7, text: "White", color: "#FFE699" },
+    { key: 0, text: "Black (e.g., African, African Canadian, Afro-Caribbean descent)", color: "#FFE699" },
+    { key: 1, text: "East Asian (e.g., Chinese, Japanese, Korean, Taiwanese descent)", color: "#FFE699" },
+    { key: 2, text: "Indigenous (e.g., First Nations, Inuk/Inuit, Métis descent)", color: "#FFE699" },
+    { key: 3, text: "Latin American (e.g., Hispanic or Latin American descent)", color: "#FFE699" },
+    { key: 4, text: "Middle Eastern (e.g., Arab, Persian, West Asian descent)", color: "#FFE699" },
+    { key: 5, text: "South Asian (e.g., Bangladeshi, Indian, Pakistani, Sri Lankan descent)", color: "#FFE699" },
+    { key: 6, text: "Southeast Asian (e.g., Filipino, Thai, Vietnamese descent)", color: "#FFE699" },
+    { key: 7, text: "White (e.g., European descent)", color: "#FFE699" },
     { key: 8, text: "Another race", color: "#FFE699" },
     { key: 9, text: "I'm not sure", color: "#FFE699" }
 ];
