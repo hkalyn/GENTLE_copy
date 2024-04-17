@@ -154,6 +154,7 @@ class Welcome extends Component
     {
         if (consent)
         {
+            console.log("Consent passed")
             if (password === passwordConfirm)
             {
                 console.log("Passwords match")
@@ -164,6 +165,9 @@ class Welcome extends Component
                 alert("The passwords you have entered do not match. Please check them and try again.")
             }
 
+        }
+        else{
+            console.log("Failed Consent with handleRegisterCallback")
         }
     }
 

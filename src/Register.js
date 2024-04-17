@@ -62,7 +62,7 @@ class Welcome extends Component
             if (this.props.getConsent() === true)
             {
                 console.log("Registering")
-                this.props.handleRegisterCallback(this.state.id, this.state.password, this.state.passwordConfirm, this.state.consent)
+                this.props.handleRegisterCallback(this.state.id, this.state.password, this.state.passwordConfirm, this.props.getConsent())
             } 
             else
             {
