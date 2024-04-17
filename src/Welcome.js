@@ -187,7 +187,8 @@ class Welcome extends Component
     registerSuccess = (res) =>
     {
         console.log("register success handler triggered: ", res)
-        window.location = '/'
+        // window.location = '/'
+        window.location.hash = '#Login';
     }
 
     registerFailure = (res) =>
