@@ -8,6 +8,7 @@ import Consent from "./Consent"
 import Register from "./Register"
 import { Route, HashRouter } from 'react-router-dom'
 import $ from "jquery";
+import { Redirect } from 'react-router-dom';
 
 class Welcome extends Component
 {
@@ -92,6 +93,7 @@ class Welcome extends Component
 
     loginSuccess = (res) =>
     {
+        <Redirect to="/" />
         sessionStorage.setItem("authData", JSON.stringify({ id: res.ID, auth: true }))
 
         var sessionNodeData = JSON.parse(sessionStorage.getItem('nodeData'));
