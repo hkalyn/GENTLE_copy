@@ -103,7 +103,7 @@ class Consent extends Component
                         </p>
 
                         <p>
-                            <b>Compensation: </b> We value your contribution to our research. Participants will receive an honorarium of $ 20.00 CAD after successfully completing the below social network survey. Additional honorariums of $15.00 CAD will be offered each time participants update their survey responses for the three scheduled sampling periods (October 2024, April 2025, and October 2025). Honorariums will be paid via an online e-transfer or e-gift card to the participating university email address. Participants who choose to withdraw from the study will not be asked to return their honorarium(s).
+                            <b>Compensation: </b> We value your contribution to our research. Participants will receive an honorarium of $ 20.00 CAD after successfully completing the below social network survey (wave 1 and 2) and $30.00 CAD will be offered each time participants update their survey responses (waves 3 and 4). Honorariums will be paid via an online e-transfer or e-gift card to the participating university email address. Participants who choose to withdraw from the study will not be asked to return their honorarium(s).
                         </p>
 
                         <p>
